@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+    android:background="@color/bg"
+    >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Technozion Registration"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Name: "
+        android:id="@+id/textViewName"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Ankit Chaurasia"
+        android:id="@+id/textViewNameValue"
+        android:layout_below="@+id/textView2"
+        android:layout_toRightOf="@+id/textViewName"
+        android:layout_toEndOf="@+id/textViewName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="College ID: "
+        android:id="@+id/textViewCollegeId"
+        android:layout_below="@+id/textViewName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="127106"
+        android:id="@+id/textViewCollegeIdValue"
+        android:layout_alignTop="@+id/textViewCollegeId"
+        android:layout_toRightOf="@+id/textViewCollegeId"
+        android:layout_toEndOf="@+id/textViewCollegeId" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="National Institute of Technology"
+        android:id="@+id/textViewCollege"
+        android:layout_below="@+id/textViewCollegeId"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registration ₹400"
+        android:id="@+id/checkBoxRegistration"
+        android:layout_below="@+id/textViewCollege"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="true"
+        android:enabled="false"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:id="@+id/buttonRegister"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hospitality ₹600"
+        android:id="@+id/checkBoxHospitality"
+        android:layout_below="@+id/checkBoxRegistration"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I agree to the "
+        android:id="@+id/checkBoxAgree"
+        android:layout_below="@+id/checkBoxHospitality"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
+    <TextView
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="terms and conditions"
+        android:id="@+id/textViewTerms"
+        android:layout_alignTop="@+id/checkBoxAgree"
+        android:layout_toRightOf="@+id/checkBoxAgree"
+        android:layout_toEndOf="@+id/checkBoxAgree"
+        android:textColor="@color/blue"
+        android:layout_alignBottom="@+id/checkBoxAgree" />
+
+    <TextView
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Registered for Technozion"
+        android:id="@+id/textViewRegistered"
+        android:layout_below="@+id/textViewCollege"
+        android:layout_toRightOf="@+id/checkBoxRegistration"
+        android:layout_toEndOf="@+id/checkBoxRegistration" />
+
+    <TextView
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Registered for hospitality"
+        android:id="@+id/textViewRegisteredHospitality"
+        android:layout_below="@+id/checkBoxRegistration"
+        android:layout_toRightOf="@+id/checkBoxHospitality"
+        android:layout_toEndOf="@+id/checkBoxHospitality" />
+</RelativeLayout>
