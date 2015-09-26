@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="blue">#0000FF</color>
+
+    <color name="myAccentColor">#CDDC39</color>
+
+    <color name="next_event">#ffdbdbdb</color>
+    <color name="next_event_time">#ffdbdbdb</color>
+
+    <color name="bg">#555577</color>
+</resources>

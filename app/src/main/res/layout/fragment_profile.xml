@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<RelativeLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+    android:background="@color/bg">
+
+
+    <ImageView
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageViewQrCode"
+        android:src="@drawable/default_qrcode"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Registration"
+        android:id="@+id/textViewTechnozionRegistration"
+        android:layout_below="@+id/imageViewQrCode"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/textViewTechnozionRegistrationPaid"
+        android:layout_toStartOf="@+id/textViewTechnozionRegistrationPaid" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="₹ 400 (unpaid)"
+        android:id="@+id/textViewTechnozionRegistrationPaid"
+        android:layout_below="@+id/imageViewQrCode"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Hospitality"
+        android:id="@+id/textViewHospitalityRegistration"
+        android:layout_alignTop="@+id/textViewHospitalityRegistrationPaid"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/textViewHospitalityRegistrationPaid"
+        android:layout_toStartOf="@+id/textViewHospitalityRegistrationPaid" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="₹ 600 (unpaid)"
+        android:id="@+id/textViewHospitalityRegistrationPaid"
+        android:layout_below="@+id/textViewTechnozionRegistration"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="TZ ID"
+        android:id="@+id/textViewTzId"
+        android:layout_below="@+id/textViewHospitalityRegistration"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="121323"
+        android:id="@+id/textViewTzIdValue"
+        android:layout_below="@+id/textViewHospitalityRegistration"
+        android:layout_toRightOf="@+id/textViewTzId"
+        android:layout_toEndOf="@+id/textViewTzId" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Ankit Chaurasia"
+        android:id="@+id/textViewName"
+        android:layout_below="@+id/textViewTzId"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="College ID:"
+        android:id="@+id/textViewCollegeId"
+        android:layout_below="@+id/textViewName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="127106"
+        android:id="@+id/textViewCollegeIdValue"
+        android:layout_alignTop="@+id/textViewCollegeId"
+        android:layout_toRightOf="@+id/textViewCollegeId"
+        android:layout_toEndOf="@+id/textViewCollegeId" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="National Institute of Technology, Warangal, Telangana"
+        android:id="@+id/textViewCollege"
+        android:layout_below="@+id/textViewCollegeId"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="8686411649"
+        android:id="@+id/textViewPhoneNumber"
+        android:layout_below="@+id/textViewCollege"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="sunank200@gmail.com"
+        android:id="@+id/textViewEmail"
+        android:layout_below="@+id/textViewPhoneNumber"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>
+</ScrollView>
