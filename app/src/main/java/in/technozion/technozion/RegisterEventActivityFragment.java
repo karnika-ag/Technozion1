@@ -274,6 +274,7 @@ public class RegisterEventActivityFragment extends Fragment implements AdapterVi
 
             try {
 
+
                 if (string==null) {
                     Log.d("enter in if","okk");
                     Toast.makeText(getActivity(),"Error, please try again",Toast.LENGTH_SHORT).show();

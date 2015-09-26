@@ -27,6 +27,10 @@ import in.technozion.technozion.MainActivity;
 import in.technozion.technozion.R;
 import in.technozion.technozion.adapters.EventsAdapter;
 
+import in.technozion.technozion.MainActivity;
+import in.technozion.technozion.R;
+
+
 
 public class HomeFragment extends Fragment {
     public static final String TAG = HomeFragment.class.getSimpleName();
@@ -49,7 +53,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         new GetNextEventsTask().execute();
+
     }
 
     @Override

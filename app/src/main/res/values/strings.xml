@@ -31,4 +31,5 @@
     <string name="placeholder_phone">8686411649</string>
     <string name="placeholder_email_id">sunank200@gmail.com</string>
 
+    <string name="title_activity_web_view">WebViewActivity</string>
 </resources>

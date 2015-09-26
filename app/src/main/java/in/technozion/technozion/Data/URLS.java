@@ -14,14 +14,15 @@ public class URLS {
     public static final String REGISTRATION_URL="http://bhuichalo.com/tz15/reg_data.json";
     public static final String REGISTRATION_CONFIRMATION_URL="";
 
-    public static final String REGISTERED_EVENTS_URL="http://bhuichalo.com/tz15/reg_events.json";
-    public static final String EVENT_LIST_URL="http://bhuichalo.com/tz15/events.json";
+    public static final String REGISTERED_EVENTS_URL="http://192.168.87.50/tz-registration-master/events/get_events_tzid_mobile";
+    public static final String EVENT_LIST_URL="http://192.168.87.50/tz-registration-master/events/get_all_events_mobile";
     public static final String EVENT_REGISTER_URL="http://192.168.87.50/tz-registration-master/events/registerteam_mobile";
     public static final String EVENT_REGISTER_CONFIRM_URL="http://192.168.87.50/tz-registration-master/events/registerteam_mobile";
 
-    public static final String REGISTERED_WORKSHOPS_URL="";
-    public static final String WORKSHOP_REGISTER_URL="";
-    public static final String WORKSHOP_REGISTER_CONFIRM_URL="";
+    public static final String REGISTERED_WORKSHOPS_URL="http://192.168.87.50/tz-registration-master/workshops/get_workshops_tzid_mobile";
+    public static final String WORKSHOP_LIST_URL="http://192.168.87.50/tz-registration-master/workshops/get_all_workshops_mobile";
+    public static final String WORKSHOP_REGISTER_URL="http://192.168.87.50/tz-registration-master/workshops/registerteam_mobile";
+    public static final String WORKSHOP_REGISTER_CONFIRM_URL="http://192.168.87.50/tz-registration-master/workshops/registerteampayment_mobile";
 
     public static final String T_SHIRT_URL="";
 }

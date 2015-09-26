@@ -24,6 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import in.technozion.technozion.Data.URLS;
 
 import in.technozion.technozion.Data.Util;
 
@@ -36,6 +37,12 @@ public class RegisterWorkshopActivityFragment extends Fragment implements Adapte
 
     public static final String eventlisturl = "http://bhuichalo.com/tz15/get_all_workshops_mobile.json";
     public static final String registerurl = "http://bhuichalo.com/tz15/workshop_checkdetails.json";
+
+    //public static final String eventlisturl = "http://192.168.87.50/tz-registration-master/workshops/get_all_workshops_mobile";
+    //public static final String registerurl = "http://192.168.87.50/tz-registration-master/workshops/registerteam_mobile";
+
+    //public static final String eventlisturl = "http://bhuichalo.com/tz15/get_all_workshops_mobile.json";
+    //public static final String registerurl = "http://bhuichalo.com/tz15/workshop_checkdetails.json";
 
 
     Spinner spinner;
@@ -100,6 +107,7 @@ public class RegisterWorkshopActivityFragment extends Fragment implements Adapte
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        index=i;
         Toast.makeText(getActivity(), "" + mins.get(i) + " - " + maxs.get(i), Toast.LENGTH_SHORT).show();
         min = mins.get(i);
         max = maxs.get(i);
@@ -110,7 +118,7 @@ public class RegisterWorkshopActivityFragment extends Fragment implements Adapte
         linearLayout.removeAllViews();
 
         View view2 = getActivity().getLayoutInflater().inflate(R.layout.edit_text_tz_id, null);
-        ((EditText) view2).setText("232332");
+        ((EditText) view2).setText("9346472");
         view2.setEnabled(false);
         linearLayout.addView(view2);
 
@@ -236,6 +244,7 @@ public class RegisterWorkshopActivityFragment extends Fragment implements Adapte
                 e.printStackTrace();
             }
 
+            String jsonstr = Util.getStringFromURL(URLS.WORKSHOP_REGISTER_URL, map);
             String jsonstr = Util.getStringFromURL(registerurl, map);
             if (jsonstr != null) {
                 Log.d("GOT FROM HTTP", jsonstr);

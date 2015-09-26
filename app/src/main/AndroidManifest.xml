@@ -64,12 +64,22 @@
             android:value="@string/google_maps_key" />
 
         <activity
+
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register"
             android:parentActivityName=".LoginActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.technozion.technozion.LoginActivity" />
+    </activity>
+        <activity
+            android:name=".WebViewActivity"
+            android:label="@string/title_activity_web_view"
+            android:parentActivityName=".WorkshopPaymentDetailsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.technozion.technozion.WorkshopPaymentDetailsActivity" />
+
         </activity>
     </application>
 

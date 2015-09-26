@@ -1,6 +1,7 @@
 package in.technozion.technozion;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -8,6 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +24,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import in.technozion.technozion.Data.URLS;
 import in.technozion.technozion.Data.Util;
+import in.technozion.technozion.R;
 import in.technozion.technozion.adapters.WorkshopsAdapter;
 
 /**
@@ -28,6 +34,7 @@ import in.technozion.technozion.adapters.WorkshopsAdapter;
  */
 public class WorkshopPaymentDetailsActivityFragment extends Fragment {
 
+    //public static final String registerurl="http://192.168.87.50/tz-registration-master/workshops/registerteampayment_mobile";
     public static final String registerurl="http://172.30.132.78/tz-registration-master/workshops/make_payment";
     private String string;
     ListView listViewWorkshopDetailsConfirmation;
@@ -90,7 +97,7 @@ public class WorkshopPaymentDetailsActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //new RegisterEventTask().execute(string);
+                new RegisterEventTask().execute(string);
 
             }
         });
@@ -107,7 +114,7 @@ public class WorkshopPaymentDetailsActivityFragment extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog=new ProgressDialog(getActivity());
-            progressDialog.setMessage("registering..");
+            progressDialog.setMessage("Redirecting to payu...");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
@@ -121,12 +128,9 @@ public class WorkshopPaymentDetailsActivityFragment extends Fragment {
             HashMap<String,String> map = new HashMap<String,String>();
 
             map.put("data", string[0]);
-            map.put("confirm","1");
-            Log.d("check sending data ",string[0]);
+            Log.d("check sending data",string[0]);
 
-
-
-            String jsonstr= Util.getStringFromURL(registerurl, map);
+            String jsonstr= Util.getStringFromURL(URLS.WORKSHOP_REGISTER_CONFIRM_URL, map);
             if (jsonstr!=null) {
                 Log.d("GOT FROM HTTP", jsonstr);
 
@@ -143,32 +147,30 @@ public class WorkshopPaymentDetailsActivityFragment extends Fragment {
             if (progressDialog.isShowing()) {
                 progressDialog.cancel();
             }
-
-            try {
-
-                if (string == null) {
-                    Log.d("enter in if", "okk");
-                    Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
+            if (string==null) {
+                Log.d("enter in if","okk");
+                Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
 
 
-                } else {
-                    JSONObject jsonObjectRec = new JSONObject(string);
-                    if (jsonObjectRec.getString("status").equals("success")) {
-                        Log.d("enter in else if", "okk");
-
-                        Toast.makeText(getActivity(), jsonObjectRec.getString("message"), Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        Log.d("enter in else part", "okk");
-                        Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-        }
+            else {
+
+
+                try {
+
+                    JSONObject jsonObjectRec = new JSONObject(string);
+                    Toast.makeText(getActivity(),"Going to launch webViewer", Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(getActivity(), WebViewActivity.class);
+                    i.putExtra("data", string);
+                    startActivity(i);
+                    Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
     }
+}
