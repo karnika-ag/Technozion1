@@ -245,7 +245,7 @@ public class RegisterWorkshopActivityFragment extends Fragment implements Adapte
             }
 
             String jsonstr = Util.getStringFromURL(URLS.WORKSHOP_REGISTER_URL, map);
-            String jsonstr = Util.getStringFromURL(registerurl, map);
+//            String jsonstr = Util.getStringFromURL(registerurl, map);
             if (jsonstr != null) {
                 Log.d("GOT FROM HTTP", jsonstr);
 

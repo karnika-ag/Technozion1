@@ -27,6 +27,7 @@ import java.util.HashMap;
 import in.technozion.technozion.Data.URLS;
 import in.technozion.technozion.Data.Util;
 import in.technozion.technozion.R;
+import in.technozion.technozion.RegisterConfirmationActivity;
 
 public class RegistrationFragment extends Fragment {
     public static final String TAG = RegistrationFragment.class.getSimpleName();
@@ -54,7 +55,7 @@ public class RegistrationFragment extends Fragment {
         getActivity().findViewById(R.id.buttonRegister).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                new RegisterTask().execute();
 
             }
         });
@@ -183,37 +184,37 @@ public class RegistrationFragment extends Fragment {
 
         @Override
         protected HashMap<String ,String> doInBackground(Void... voids) {
-
-            String jsonstr= Util.getStringFromURL(URLS.REGISTRATION_URL);
-            if (jsonstr!=null) {
-                Log.d("GOT FROM HTTP", jsonstr);
-                try {
-                    JSONObject jsonObject=new JSONObject(jsonstr);
 //
-                    HashMap<String,String> hashMap=new HashMap<>();
+//            String jsonstr= Util.getStringFromURL(URLS.REGISTRATION_URL);
+//            if (jsonstr!=null) {
+//                Log.d("GOT FROM HTTP", jsonstr);
+//                try {
+//                    JSONObject jsonObject=new JSONObject(jsonstr);
+////
+//                    HashMap<String,String> hashMap=new HashMap<>();
+////
+////                    hashMap.put("userid",jsonObject.getString("userid"));
+////                    if(jsonObject.getString("registration").equals("0")) {
+////                        hashMap.put("registration", "₹ 400 unpaid");
+////                    }else {
+////                        hashMap.put("registration", "paid");
+////                    }
+////                    if(jsonObject.getString("hospitality").equals("0")) {
+////                        hashMap.put("hospitality", "₹ 600 unpaid");
+////                    }else {
+////                        hashMap.put("hospitality", "paid");
+////                    }
+////                    hashMap.put("name",jsonObject.getString("name"));
+////                    hashMap.put("collegeid",jsonObject.getString("collegeid"));
+////                    hashMap.put("college",jsonObject.getString("college"));
+////                    hashMap.put("phone",jsonObject.getString("phone"));
+////                    hashMap.put("email",jsonObject.getString("email"));
 //
-//                    hashMap.put("userid",jsonObject.getString("userid"));
-//                    if(jsonObject.getString("registration").equals("0")) {
-//                        hashMap.put("registration", "₹ 400 unpaid");
-//                    }else {
-//                        hashMap.put("registration", "paid");
-//                    }
-//                    if(jsonObject.getString("hospitality").equals("0")) {
-//                        hashMap.put("hospitality", "₹ 600 unpaid");
-//                    }else {
-//                        hashMap.put("hospitality", "paid");
-//                    }
-//                    hashMap.put("name",jsonObject.getString("name"));
-//                    hashMap.put("collegeid",jsonObject.getString("collegeid"));
-//                    hashMap.put("college",jsonObject.getString("college"));
-//                    hashMap.put("phone",jsonObject.getString("phone"));
-//                    hashMap.put("email",jsonObject.getString("email"));
-
-                    return hashMap;
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
+//                    return hashMap;
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
 //            JSONObject jsonObject=new JSONObject(jsonstr);
             return null;
         }
@@ -247,7 +248,9 @@ public class RegistrationFragment extends Fragment {
 //                ((TextView)getActivity().findViewById(R.id.textViewCollege)).setText(hashMap.get("college"));
 //                ((TextView)getActivity().findViewById(R.id.textViewPhoneNumber)).setText(hashMap.get("phone"));
 //                ((TextView)getActivity().findViewById(R.id.textViewEmail)).setText(hashMap.get("email"));
+
             }
+            startActivity(new Intent(getActivity(), RegisterConfirmationActivity.class));
         }
     }
 }

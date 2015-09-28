@@ -1,1 +1,1 @@
-include ':app', ':apache-httpcomponents-httpcore'
+include ':apache-httpcomponents-httpcore', ':app'
