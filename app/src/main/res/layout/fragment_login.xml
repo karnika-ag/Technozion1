@@ -11,8 +11,8 @@
         android:text="Login"
         android:id="@+id/buttonLogin"
         android:layout_alignTop="@+id/buttonRegister"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText" />
+        android:layout_alignRight="@+id/editTextPassword"
+        android:layout_alignEnd="@+id/editTextPassword" />
 
     <EditText
         android:hint="password"
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/editTextPassword"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
@@ -30,8 +30,8 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_above="@+id/editText"
+        android:id="@+id/editTextEmail"
+        android:layout_above="@+id/editTextPassword"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -39,8 +39,8 @@
         android:layout_height="wrap_content"
         android:text="Register"
         android:id="@+id/buttonRegister"
-        android:layout_below="@+id/editText"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText" />
+        android:layout_below="@+id/editTextPassword"
+        android:layout_alignLeft="@+id/editTextPassword"
+        android:layout_alignStart="@+id/editTextPassword" />
 
 </RelativeLayout>

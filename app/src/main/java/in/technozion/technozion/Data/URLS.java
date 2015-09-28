@@ -6,6 +6,8 @@ package in.technozion.technozion.Data;
 public class URLS {
     public static final String TERMS_AND_CONDITIONS="http://bhuichalo.com/tz15/reg_data.json";
 
+    public static final String LOGIN_URL="http://bhuichalo.com/tz15/login_success.json";
+
     public static final String HOME_URL="";
 
     public static final String PROFILE_URL="http://bhuichalo.com/tz15/profile.json";
