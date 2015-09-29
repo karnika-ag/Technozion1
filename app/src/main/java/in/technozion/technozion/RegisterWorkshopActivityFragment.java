@@ -35,8 +35,8 @@ public class RegisterWorkshopActivityFragment extends Fragment implements Adapte
 // public static final String eventlisturl = "http://192.168.253.1/tz-registration-master/workshops/get_all_workshops_mobile";
     // public static final String registerurl = "http://192.168.253.1/tz-registration-master/workshops/registerteam_mobile";
 
-    public static final String eventlisturl = "http://bhuichalo.com/tz15/get_all_workshops_mobile.json";
-    public static final String registerurl = "http://bhuichalo.com/tz15/workshop_checkdetails.json";
+//    public static final String eventlisturl = "http://bhuichalo.com/tz15/get_all_workshops_mobile.json";
+//    public static final String registerurl = "http://bhuichalo.com/tz15/workshop_checkdetails.json";
 
     //public static final String eventlisturl = "http://192.168.87.50/tz-registration-master/workshops/get_all_workshops_mobile";
     //public static final String registerurl = "http://192.168.87.50/tz-registration-master/workshops/registerteam_mobile";
@@ -156,7 +156,7 @@ public class RegisterWorkshopActivityFragment extends Fragment implements Adapte
         @Override
         protected String[] doInBackground(Void... voids) {
 
-            String jsonstr = Util.getStringFromURL(eventlisturl);
+            String jsonstr = Util.getStringFromURL(URLS.WORKSHOP_LIST_URL);
             if (jsonstr != null) {
                 Log.d("GOT FROM HTTP", jsonstr);
 
@@ -262,31 +262,23 @@ public class RegisterWorkshopActivityFragment extends Fragment implements Adapte
             if (progressDialog.isShowing()) {
                 progressDialog.cancel();
             }
+            if (string == null) {
+                Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
+            }
             try {
 
-
-                //Log.d("Return msg", jsonObjectRec.getString("message"));
-                //return jsonObjectRec.getString("message");
-
-                if (string == null) {
-                    Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
-                } else {
-                    JSONObject jsonObjectRec = new JSONObject(string);
-                    if(jsonObjectRec.getString("status").equals("failure")){
+                JSONObject jsonObjectRec = new JSONObject(string);
+                if(jsonObjectRec.getString("status").equals("failure")){
                     Log.d("enter in else if","okk");
-
                     Toast.makeText(getActivity(),jsonObjectRec.getString("message"),Toast.LENGTH_SHORT).show();
-
                 }else {
-
                     Log.d("enterd in else part ",string);
-
                     Intent i = new Intent(getActivity(), WorkshopPaymentDetailsActivity.class);
                     i.putExtra("data", string);
                     startActivity(i);
                     Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
                 }
-                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }

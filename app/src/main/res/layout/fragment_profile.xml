@@ -143,5 +143,15 @@
         android:layout_below="@+id/textViewPhoneNumber"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Profile"
+        android:id="@+id/updateProfile"
+        android:layout_below="@+id/textViewEmail"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>
 </ScrollView>
