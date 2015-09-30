@@ -68,10 +68,18 @@ public class RegistrationFragment extends Fragment {
                 String userid = sh.getString("userid", "");
                 Boolean registration = ((CheckBox) getActivity().findViewById(R.id.checkBoxRegistration)).isChecked();
                 Boolean hospitality = ((CheckBox) getActivity().findViewById(R.id.checkBoxHospitality)).isChecked();
-                HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put("userid", userid);
-                hashMap.put("registration", String.valueOf(registration));
-                hashMap.put("hospitality", String.valueOf(hospitality));
+                Boolean agree = ((CheckBox) getActivity().findViewById(R.id.checkBoxAgree)).isChecked();
+                if (agree != null && agree) {
+                    Log.d("k--agree", "enter here");
+                    HashMap<String, String> hashMap = new HashMap<>();
+                    hashMap.put("userid", userid);
+                    hashMap.put("registration", String.valueOf(registration));
+                    hashMap.put("hospitality", String.valueOf(hospitality));
+                    Log.d("k-- check reg boolean", String.valueOf(registration));
+                    Log.d("k-- check hos boolean",String.valueOf(hospitality));
+                    new RegisterTask().execute(hashMap);
+                } else
+                    Toast.makeText(getActivity(), "Plz check the terms and condition checkbox", Toast.LENGTH_SHORT).show();
 
                 new RegisterTask().execute(hashMap);
 
@@ -129,12 +137,16 @@ public class RegistrationFragment extends Fragment {
 
             HashMap<String,String> hashMap1 = new HashMap<>();
             hashMap1.put("userid",userid);
+            Log.d("k--userid sent",userid);
 
             String jsonstr= Util.getStringFromURL(URLS.REGISTRATION_DATA,hashMap1);
             if (jsonstr!=null) {
                 Log.d("GOT FROM HTTP", jsonstr);
                 try {
                     JSONObject jsonObject1=new JSONObject(jsonstr);
+
+                    //TODO check failure
+//                    JSONObject jsonObject1=jsonObject.getJSONObject("data");
 
                     HashMap<String,String> hashMap=new HashMap<>();
 
@@ -143,6 +155,8 @@ public class RegistrationFragment extends Fragment {
                     hashMap.put("collegeid",jsonObject1.getString("collegeid"));
                     hashMap.put("registration",jsonObject1.getString("registration"));
                     hashMap.put("hospitality",jsonObject1.getString("hospitality"));
+                    Log.d("k--register hos", jsonObject1.getString("hospitality"));
+                    Log.d("k--register res",jsonObject1.getString("registration"));
 
                     return hashMap;
                 } catch (JSONException e) {
@@ -214,6 +228,10 @@ public class RegistrationFragment extends Fragment {
                     }
                 }
 
+//                ((TextView)getActivity().findViewById(R.id.textViewName)).setText(hashMap.get("name"));
+//                ((TextView)getActivity().findViewById(R.id.textViewCollegeIdValue)).setText(hashMap.get("collegeid"));
+//                ((TextView)getActivity().findViewById(R.id.textViewPhoneNumber)).setText(hashMap.get("phone"));
+//                ((TextView)getActivity().findViewById(R.id.textViewEmail)).setText(hashMap.get("email"));
             }
         }
     }
@@ -241,6 +259,38 @@ public class RegistrationFragment extends Fragment {
             }
 
 
+//
+//            String jsonstr= Util.getStringFromURL(URLS.REGISTRATION_URL);
+//            if (jsonstr!=null) {
+//                Log.d("GOT FROM HTTP", jsonstr);
+//                try {
+//                    JSONObject jsonObject=new JSONObject(jsonstr);
+////
+//                    HashMap<String,String> hashMap=new HashMap<>();
+////
+////                    hashMap.put("userid",jsonObject.getString("userid"));
+////                    if(jsonObject.getString("registration").equals("0")) {
+////                        hashMap.put("registration", "₹ 400 unpaid");
+////                    }else {
+////                        hashMap.put("registration", "paid");
+////                    }
+////                    if(jsonObject.getString("hospitality").equals("0")) {
+////                        hashMap.put("hospitality", "₹ 600 unpaid");
+////                    }else {
+////                        hashMap.put("hospitality", "paid");
+////                    }
+////                    hashMap.put("name",jsonObject.getString("name"));
+////                    hashMap.put("collegeid",jsonObject.getString("collegeid"));
+////                    hashMap.put("college",jsonObject.getString("college"));
+////                    hashMap.put("phone",jsonObject.getString("phone"));
+////                    hashMap.put("email",jsonObject.getString("email"));
+//
+//                    return hashMap;
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            JSONObject jsonObject=new JSONObject(jsonstr);
             return null;
         }
 
@@ -263,6 +313,30 @@ public class RegistrationFragment extends Fragment {
 
             }
 
+//            else{
+//                if (hashMap.get("registration").equalsIgnoreCase("paid")){
+//                    getActivity().findViewById(R.id.imageViewQrCode).setVisibility(View.VISIBLE);
+//                    SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
+//                    SharedPreferences.Editor editor= sharedPreferences.edit();
+//
+//
+//                    for(String s:hashMap.keySet()){
+//                        editor.putString(s,hashMap.get(s));
+//                    }
+//                    editor.putBoolean("data_stored",true);
+//                    editor.apply();
+//                }
+//                ((TextView)getActivity().findViewById(R.id.textViewTzIdValue)).setText(hashMap.get("userid"));
+//                ((TextView)getActivity().findViewById(R.id.textViewTechnozionRegistrationPaid)).setText(hashMap.get("registration"));
+//                ((TextView)getActivity().findViewById(R.id.textViewHospitalityRegistrationPaid)).setText(hashMap.get("hospitality"));
+//                ((TextView)getActivity().findViewById(R.id.textViewName)).setText(hashMap.get("name"));
+//                ((TextView)getActivity().findViewById(R.id.textViewCollegeIdValue)).setText(hashMap.get("collegeid"));
+//                ((TextView)getActivity().findViewById(R.id.textViewCollege)).setText(hashMap.get("college"));
+//                ((TextView)getActivity().findViewById(R.id.textViewPhoneNumber)).setText(hashMap.get("phone"));
+//                ((TextView)getActivity().findViewById(R.id.textViewEmail)).setText(hashMap.get("email"));
+
+//            }
+//            startActivity(new Intent(getActivity(), RegisterConfirmationActivity.class));
         }
     }
 }

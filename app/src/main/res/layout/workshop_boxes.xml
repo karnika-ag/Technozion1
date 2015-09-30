@@ -14,17 +14,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="55dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="not paid"
-        android:id="@+id/textViewHospitality"
-        android:layout_below="@+id/textViewUsername"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,7 +21,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="done"
         android:id="@+id/textViewRegistration"
-        android:layout_below="@+id/textViewHospitality"
+        android:layout_below="@+id/textViewUsername"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"

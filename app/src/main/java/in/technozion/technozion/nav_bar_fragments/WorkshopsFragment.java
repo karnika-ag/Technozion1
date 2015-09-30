@@ -1,7 +1,9 @@
 package in.technozion.technozion.nav_bar_fragments;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -78,7 +80,12 @@ public class WorkshopsFragment extends Fragment {
         @Override
         protected List<HashMap<String, String>> doInBackground(Void... voids) {
 
-            String jsonstr= Util.getStringFromURL(URLS.REGISTERED_WORKSHOPS_URL);
+            SharedPreferences sh = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String userid = sh.getString("userid", "");
+            Log.d("k--workshops",userid);
+            HashMap<String,String> hashMap = new HashMap<>();
+            hashMap.put("userid",userid);
+            String jsonstr= Util.getStringFromURL(URLS.REGISTERED_WORKSHOPS_URL,hashMap);
             if (jsonstr!=null) {
                 Log.d("GOT FROM HTTP", jsonstr);
 
@@ -94,8 +101,11 @@ public class WorkshopsFragment extends Fragment {
                     JSONObject jsonObject1=teams.getJSONObject(team_id);
                     HashMap<String,String> value=new HashMap<>();
                     value.put("team_id", team_id);
-                    value.put("workshopName", jsonObject1.getString("eventName"));
-                    value.put("status_name",jsonObject1.getString("status_name"));
+                    value.put("workshopName", jsonObject1.getString("workshopName"));
+                    if(jsonObject1.getString("status").equals("5"))
+                    value.put("status_name","CONFIRM");
+                    else
+                        value.put("status_name","WAITING LIST");
                     String users=jsonObject1.getJSONArray("users").toString();
                     users=users.replace("[","");
                     users=users.replace("]","");

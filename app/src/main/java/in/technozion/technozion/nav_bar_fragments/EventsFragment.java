@@ -63,11 +63,10 @@ public class EventsFragment extends Fragment {
         });
 
         listViewRegisteredEvents= (ListView) getActivity().findViewById(R.id.listViewRegisteredEvents);
-        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-        new GetEventsTask().execute(sharedPreferences.getString("userid",""));
+        new GetEventsTask().execute();
     }
 
-    public class GetEventsTask extends AsyncTask<String,Void,List<HashMap<String,String>>> {
+    public class GetEventsTask extends AsyncTask<Void,Void,List<HashMap<String,String>>> {
 
         private ProgressDialog progressDialog;
         @Override
@@ -80,14 +79,13 @@ public class EventsFragment extends Fragment {
         }
 
         @Override
-        protected List<HashMap<String, String>> doInBackground(String... strings) {
+        protected List<HashMap<String, String>> doInBackground(Void... voids) {
 
-            if (strings==null||strings[0]==null){
-                return null;
-            }
-
+            SharedPreferences sh = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String userid = sh.getString("userid", "");
+            Log.d("k--events",userid);
             HashMap<String,String> hashMap = new HashMap<>();
-            hashMap.put("userid",strings[0]);
+            hashMap.put("userid",userid);
 
             String jsonstr= Util.getStringFromURL(URLS.REGISTERED_EVENTS_URL,hashMap);
             if (jsonstr!=null) {
@@ -110,7 +108,10 @@ public class EventsFragment extends Fragment {
                     value.put("team_id", team_id);
                     value.put("eventName", jsonObject1.getString("eventName"));
                     value.put("status_name",jsonObject1.getString("status_name"));
-                    value.put("count_total", jsonObject1.getString("count") + "/" + jsonObject1.getString("total") + " registered");
+                    if(jsonObject1.getString("status").equals("1"))
+                    value.put("count_total", "All Registered");
+                    else
+                        value.put("count_total", jsonObject1.getString("count") + "/" + jsonObject1.getString("total") + " registered");
                     String users=jsonObject1.getJSONArray("users").toString();
                     users=users.replace("[","");
                     users=users.replace("]","");
@@ -142,9 +143,7 @@ public class EventsFragment extends Fragment {
                 Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
             } else{
 
-                if(listViewRegisteredEvents!=null) {
-                    listViewRegisteredEvents.setAdapter(new EventsAdapter(getActivity(), R.layout.event_boxes, list));
-                }
+                listViewRegisteredEvents.setAdapter(new EventsAdapter(getActivity(),R.layout.event_boxes,list));
             }
         }
     }

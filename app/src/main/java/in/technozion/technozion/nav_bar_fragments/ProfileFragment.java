@@ -1,8 +1,6 @@
 package in.technozion.technozion.nav_bar_fragments;
 
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
@@ -57,7 +55,6 @@ public class ProfileFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-//        new
         loadProfileData();
     }
 
@@ -70,7 +67,6 @@ public class ProfileFragment extends Fragment {
         ((TextView)getActivity().findViewById(R.id.textViewCollege)).setText(sharedPreferences.getString("college",""));
         ((TextView)getActivity().findViewById(R.id.textViewPhoneNumber)).setText(sharedPreferences.getString("phone", ""));
         ((TextView)getActivity().findViewById(R.id.textViewEmail)).setText(sharedPreferences.getString("email", ""));
-//        ((ImageView)getActivity().findViewById(R.id.imageViewQrCode)).setImageBitmap(Util.getDrawableFromURL(URLS.QR_CODE_URL,null));
 
 
 //        if (registered){
@@ -109,8 +105,6 @@ public class ProfileFragment extends Fragment {
         @Override
         protected HashMap<String ,String> doInBackground(String... strings) {
 
-
-
             if (strings==null||strings.length==0){
                 return null;
             }
@@ -127,6 +121,7 @@ public class ProfileFragment extends Fragment {
 
                     hashMap.put("userid",jsonObject.getString("userid"));
                     if(jsonObject.getString("registration").equals("0")) {
+                        Log.d("k--got reg",jsonObject.getString("registration"));
                         hashMap.put("registration", "₹ 400 unpaid");
                     }else {
                         hashMap.put("registration", "paid");
@@ -167,11 +162,11 @@ public class ProfileFragment extends Fragment {
                     SharedPreferences.Editor editor= sharedPreferences.edit();
 
 
-
                     for(String s:hashMap.keySet()){
                         editor.putString(s,hashMap.get(s));
                     }
-                    editor.putBoolean("registered",true);
+//                    if (hashMap.get("hospitality").equalsIgnoreCase("paid"))
+//                    editor.putBoolean("registered",true);
                     editor.apply();
 //                    editor.putString("registration", hashMap.get("registration"));
 //                    editor.putString("hospitality",hashMap.get("hospitality"));

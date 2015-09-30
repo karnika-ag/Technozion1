@@ -140,4 +140,25 @@
         android:textColor="@color/blue"
         android:layout_alignBottom="@+id/checkBoxAgree" />
 
+    <TextView
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Registered for Technozion"
+        android:id="@+id/textViewRegistered"
+        android:layout_below="@+id/textViewCollege"
+        android:layout_toRightOf="@+id/checkBoxRegistration"
+        android:layout_toEndOf="@+id/checkBoxRegistration" />
+
+    <TextView
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Registered for hospitality"
+        android:id="@+id/textViewRegisteredHospitality"
+        android:layout_below="@+id/checkBoxRegistration"
+        android:layout_toRightOf="@+id/checkBoxHospitality"
+        android:layout_toEndOf="@+id/checkBoxHospitality" />
 </RelativeLayout>

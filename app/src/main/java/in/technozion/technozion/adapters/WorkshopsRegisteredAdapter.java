@@ -36,8 +36,8 @@ public class WorkshopsRegisteredAdapter extends ArrayAdapter<HashMap<String,Stri
         View rowView = inflater.inflate(resource, parent, false);
         HashMap<String,String> hashMap= objects.get(position);
         ((TextView)rowView.findViewById(R.id.textViewWorkshoptName)).setText(hashMap.get("workshopName"));
-        ((TextView)rowView.findViewById(R.id.textViewRegistartionStatus)).setText(hashMap.get("team_id"));
-        ((TextView)rowView.findViewById(R.id.textViewTeamId)).setText(hashMap.get("status_name"));
+        ((TextView)rowView.findViewById(R.id.textViewRegistartionStatus)).setText("Teamid:"+hashMap.get("team_id"));
+        ((TextView)rowView.findViewById(R.id.textViewTeamId)).setText("Status:"+hashMap.get("status_name"));
         ((TextView)rowView.findViewById(R.id.textViewTeamMembers)).setText(hashMap.get("users"));
 
         return rowView;

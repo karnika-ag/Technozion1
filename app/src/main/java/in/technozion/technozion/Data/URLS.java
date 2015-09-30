@@ -8,7 +8,7 @@ public class URLS {
     public static final String QR_CODE_URL="http://technozion.in/profile/get_qrcode_mobile";
 
 //    public static final String LOGIN_URL="http://technozion.in/accounts/login_mobile";
-//    public static final String SIGNUP_URL="http://technozion.in/accounts/signup_mobile";
+    public static final String SIGNUP_URL="http://technozion.in/accounts/signup_mobile";
 //    public static final String LOGIN_URL="http://bhuichalo.com/tz15/login.json";
 //    public static final String LOGIN_URL="http://172.20.41.199/tz-registration-master/accounts/login_mobile";
     public static final String LOGIN_URL="http://technozion.in/accounts/login_mobile";
