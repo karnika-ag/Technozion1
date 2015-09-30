@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="login_white">#BBFFFFFF</color>
+
     <color name="green">#477573</color>
     <color name="blue">#0000FF</color>
 
