@@ -55,7 +55,9 @@ public class RegisterActivityFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String city=((TextView)view).getText().toString();
-                new FetchCollegeTask().execute(city);
+                if (!city.equalsIgnoreCase("select city")) {
+                    new FetchCollegeTask().execute(city);
+                }
             }
 
             @Override

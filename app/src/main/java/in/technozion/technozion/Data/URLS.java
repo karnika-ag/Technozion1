@@ -6,14 +6,15 @@ package in.technozion.technozion.Data;
 public class URLS {
     public static final String TERMS_AND_CONDITIONS="http://bhuichalo.com/tz15/reg_data.json";
 
-    public static final String LOGIN_URL="http://bhuichalo.com/tz15/login.json";
+//    public static final String LOGIN_URL="http://bhuichalo.com/tz15/login.json";
+    public static final String LOGIN_URL="http://technozion.org/app_test/tz-registration-master/accounts/login_mobile";
 //    public static final String REGISTER_URL="http://bhuichalo.com/tz15/register.json";
-    public static final String REGISTER_URL="http://bhuichalo.com/tz15/login.json";
-    public static final String FETCH_COLLEGES_URL="http://bhuichalo.com/tz15/login.json";
+    public static final String REGISTER_URL="http://192.168.66.50/tz-registration-master/accounts/signup_mobile";
+    public static final String FETCH_COLLEGES_URL="http://192.168.66.50/tz-registration-master/home/get_college";
 
     public static final String HOME_URL="http://bhuichalo.com/tz15/next_events.json";
 
-    public static final String PROFILE_URL="http://bhuichalo.com/tz15/profile.json";
+    public static final String PROFILE_URL="http://192.168.66.50/profile/index_mobile";
 
     public static final String REGISTRATION_DATA="http://bhuichalo.com/tz15/reg_data.json";
     public static final String REGISTRATION_URL="http://bhuichalo.com/tz15/reg_data.json";
