@@ -80,7 +80,10 @@ public class HomeFragment extends Fragment {
         @Override
         protected List<HashMap<String, String>> doInBackground(Void... voids) {
 
-            String jsonstr= Util.getStringFromURL(URLS.REGISTERED_EVENTS_URL);
+            HashMap<String,String> hashMap = new HashMap<>();
+            hashMap.put("userid","9346472");
+
+            String jsonstr= Util.getStringFromURL(URLS.REGISTERED_EVENTS_URL,hashMap);
             if (jsonstr!=null) {
                 Log.d("GOT FROM HTTP", jsonstr);
 

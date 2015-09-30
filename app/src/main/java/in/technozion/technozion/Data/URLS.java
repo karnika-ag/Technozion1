@@ -18,15 +18,15 @@ public class URLS {
     public static final String REGISTRATION_URL="http://technozion.in/hospitality/register_mobile";
     public static final String REGISTRATION_CONFIRMATION_URL="";
 
-    public static final String REGISTERED_EVENTS_URL="http://172.20.41.194/tz-registration-master/events/get_registered_events_mobile";
-    public static final String EVENT_LIST_URL="http://192.168.87.50/tz-registration-master/events/get_all_events_mobile";
-    public static final String EVENT_REGISTER_URL="http://192.168.87.50/tz-registration-master/events/registerteam_mobile";
-    public static final String EVENT_REGISTER_CONFIRM_URL="http://192.168.87.50/tz-registration-master/events/registerteam_mobile";
+    public static final String REGISTERED_EVENTS_URL="http://technozion.in/events/get_registered_events_mobile";
+    public static final String EVENT_LIST_URL="http://technozion.in/events/get_all_events_mobile";
+    public static final String EVENT_REGISTER_URL="http://technozion.in/events/registerteam_mobile";
+    public static final String EVENT_REGISTER_CONFIRM_URL="http://technozion.in/events/registerteam_mobile";
 
-    public static final String REGISTERED_WORKSHOPS_URL="http://192.168.87.50/tz-registration-master/workshops/get_registered_workshops_mobile";
-    public static final String WORKSHOP_LIST_URL="http://192.168.87.50/tz-registration-master/workshops/get_all_workshops_mobile";
-    public static final String WORKSHOP_REGISTER_URL="http://192.168.87.50/tz-registration-master/workshops/registerteam_mobile";
-    public static final String WORKSHOP_REGISTER_CONFIRM_URL="http://192.168.87.50/tz-registration-master/workshops/registerteam_payment_mobile";
+    public static final String REGISTERED_WORKSHOPS_URL="http://technozion.in/workshops/get_registered_workshops_mobile";
+    public static final String WORKSHOP_LIST_URL="http://technozion.in/workshops/get_all_workshops_mobile";
+    public static final String WORKSHOP_REGISTER_URL="http://technozion.in/workshops/registerteam_mobile";
+    public static final String WORKSHOP_REGISTER_CONFIRM_URL="http://technozion.in/workshops/registerteam_payment_mobile";
 
     public static final String T_SHIRT_URL="";
 }
