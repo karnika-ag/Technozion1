@@ -46,15 +46,6 @@
         android:layout_centerHorizontal="true">
 
 
-        <EditText
-            android:hint="password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/editTextPassword"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
 
         <EditText
             android:hint="email"
@@ -63,8 +54,15 @@
             android:inputType="textEmailAddress"
             android:ems="10"
             android:id="@+id/editTextEmail"
-            android:layout_above="@+id/editTextPassword"
-            android:layout_centerHorizontal="true" />
+            />
+        <EditText
+            android:hint="password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/editTextPassword"
+             />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -76,18 +74,14 @@
                 android:layout_weight="1"
             android:text="Register"
             android:id="@+id/buttonRegister"
-            android:layout_below="@+id/editTextPassword"
-            android:layout_alignLeft="@+id/editTextPassword"
-            android:layout_alignStart="@+id/editTextPassword" />
+        />
             <Button
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Login"
                 android:id="@+id/buttonLogin"
-                android:layout_alignTop="@+id/buttonRegister"
-                android:layout_alignRight="@+id/editTextPassword"
-                android:layout_alignEnd="@+id/editTextPassword" />
+                 />
         </LinearLayout>
 
 
