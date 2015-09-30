@@ -1,5 +1,6 @@
 package in.technozion.technozion;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -115,9 +116,9 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section4),
                         getString(R.string.title_section5),
                         getString(R.string.title_section6),
-                        getString(R.string.title_section7),
-                        getString(R.string.title_section8),
-                        getString(R.string.title_section9),
+//                        getString(R.string.title_section7),
+//                        getString(R.string.title_section8),
+//                        getString(R.string.title_section9),
                 });
         mDrawerListView.setAdapter(arrayAdapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
@@ -261,8 +262,16 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        if (item.getItemId() == R.id.action_example) {
-            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
+        if (item.getItemId() == R.id.action_logout) {
+            SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.putBoolean("logged_in", false);
+            editor.apply();
+
+            Intent intent=new Intent(getContext(),LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+//            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
             return true;
         }
 

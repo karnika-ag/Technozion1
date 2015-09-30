@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="login_white">#BBFFFFFF</color>
+
+    <color name="green">#477573</color>
     <color name="blue">#0000FF</color>
 
     <color name="myAccentColor">#CDDC39</color>
@@ -8,4 +11,6 @@
     <color name="next_event_time">#ffdbdbdb</color>
 
     <color name="bg">#555577</color>
+
+    <color name="action_bar">@color/green</color>
 </resources>

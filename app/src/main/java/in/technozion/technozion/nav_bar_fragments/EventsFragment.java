@@ -72,7 +72,7 @@ public class EventsFragment extends Fragment {
             super.onPreExecute();
             progressDialog=new ProgressDialog(getActivity());
             progressDialog.setMessage("fetching your events..");
-            progressDialog.setCancelable(false);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
         }
 

@@ -48,8 +48,9 @@ public class MainActivity extends AppCompatActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-        ((TextView)findViewById(R.id.textViewName)).setText("hjhjhjh");
-        ((TextView)findViewById(R.id.textViewTzId)).setText("2323232");
+        SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(this);
+        ((TextView) findViewById(R.id.textViewName)).setText(sharedPreferences.getString("name","------"));
+        ((TextView)findViewById(R.id.textViewTzId)).setText(sharedPreferences.getString("userid","----"));
     }
 
     @Override
@@ -74,24 +75,16 @@ public class MainActivity extends AppCompatActivity
                 fragment= WorkshopsFragment.newInstance(5);
                 break;
             case 5:
-                fragment=HomeFragment.newInstance(6);
+                fragment= FAQFragment.newInstance(6);
                 break;
             case 6:
                 fragment= TShirtsFragment.newInstance(7);
                 break;
             case 7:
-                fragment= FAQFragment.newInstance(8);
+                fragment=HomeFragment.newInstance(9);
                 break;
             case 8:
                 fragment=HomeFragment.newInstance(9);
-                SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor editor=sharedPreferences.edit();
-                editor.putBoolean("logged_in", false);
-                editor.apply();
-
-                Intent intent=new Intent(this,LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
                 break;
             default:
                 fragment= HomeFragment.newInstance(10);
@@ -127,9 +120,7 @@ public class MainActivity extends AppCompatActivity
             case 8:
                 mTitle = getString(R.string.title_section8);
                 break;
-            case 9:
-                mTitle = getString(R.string.title_section9);
-                break;
+
         }
     }
 
@@ -162,9 +153,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

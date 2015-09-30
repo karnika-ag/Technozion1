@@ -52,7 +52,7 @@ public class Util {
 
 
 
-            int HttpResult =httpURLConnection.getResponseCode();
+             int HttpResult =httpURLConnection.getResponseCode();
             if(HttpResult ==HttpURLConnection.HTTP_OK) {
 
 

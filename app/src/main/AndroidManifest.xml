@@ -20,12 +20,14 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/LoginRegisterTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".MainActivity"
@@ -34,7 +36,8 @@
         <activity
             android:name=".RegisterEventActivity"
             android:label="@string/title_activity_register_event"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.technozion.technozion.MainActivity" />
@@ -55,6 +58,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.technozion.technozion.MainActivity" />
         </activity>
+        <activity
+            android:name=".EventConfirmationActivity"
+            android:label="@string/title_activity_event_confirmation"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.technozion.technozion.MainActivity" />
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -66,7 +77,8 @@
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register"
-            android:parentActivityName=".LoginActivity" >
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/LoginRegisterTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.technozion.technozion.LoginActivity" />
@@ -82,10 +94,10 @@
         <activity
             android:name=".RegisterConfirmationActivity"
             android:label="@string/title_activity_register_confirmation"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".RegisterActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="in.technozion.technozion.MainActivity" />
+                android:value="in.technozion.technozion.RegisterActivity" />
         </activity>
     </application>
 
