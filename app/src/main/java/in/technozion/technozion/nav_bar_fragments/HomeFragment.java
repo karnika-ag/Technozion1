@@ -2,7 +2,9 @@ package in.technozion.technozion.nav_bar_fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -54,7 +57,8 @@ public class HomeFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        new GetNextEventsTask().execute();
+        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
+        new GetNextEventsTask().execute(sharedPreferences.getString("userid",null));
 
     }
 
@@ -65,7 +69,7 @@ public class HomeFragment extends Fragment {
                 getArguments().getInt(ARG_SECTION_NUMBER));
     }
 
-    public class GetNextEventsTask extends AsyncTask<Void,Void,List<HashMap<String,String>>> {
+    public class GetNextEventsTask extends AsyncTask<String,Void,List<HashMap<String,String>>> {
 
         private ProgressDialog progressDialog;
         @Override
@@ -74,46 +78,36 @@ public class HomeFragment extends Fragment {
             progressDialog=new ProgressDialog(getActivity());
             progressDialog.setMessage("fetching your events..");
             progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
+//            progressDialog.show();
         }
 
         @Override
-        protected List<HashMap<String, String>> doInBackground(Void... voids) {
+        protected List<HashMap<String, String>> doInBackground(String... strings) {
+//            SharedPreferences sharedPreferences=SharedPreferences
 
-            String jsonstr= Util.getStringFromURL(URLS.REGISTERED_EVENTS_URL);
+            if (strings==null||strings.length==0){
+                return null;
+            }
+            HashMap<String,String> hashMap=new HashMap<>();
+            hashMap.put("userid",strings[0]);
+            String jsonstr= Util.getStringFromURL(URLS.HOME_URL,hashMap);
             if (jsonstr!=null) {
                 Log.d("GOT FROM HTTP", jsonstr);
 
                 try {
-                    JSONObject jsonObject=new JSONObject(jsonstr);
-                    JSONArray jsonArray=jsonObject.getJSONArray("teamids");
+                    JSONArray jsonArray=new JSONArray(jsonstr);
+                    List<HashMap<String ,String>> values=new ArrayList<>();
+
                     int len=jsonArray.length();
-                    List<HashMap<String,String>> values=new ArrayList<>();
-
+                    if (len>2) len=2;
                     for(int i=0;i<len;i++){
-                        JSONObject teams=jsonObject.getJSONObject("teams");
-//                    Log.d("teams",teams.toString());
-                        String team_id=jsonArray.getJSONObject(i).getString("teamid");
-//                    Log.d("teamid",team_id.toString());
-                        JSONObject jsonObject1=teams.getJSONObject(team_id);
-                        HashMap<String,String> value=new HashMap<>();
-
-                        value.put("team_id", team_id);
-                        value.put("eventName", jsonObject1.getString("eventName"));
-                        value.put("status_name",jsonObject1.getString("status_name"));
-                        value.put("count_total", jsonObject1.getString("count") + "/" + jsonObject1.getString("total") + " registered");
-                        String users=jsonObject1.getJSONArray("users").toString();
-                        users=users.replace("[","");
-                        users=users.replace("]","");
-                        users=users.replace("\"","");
-                        users=users.replace(",",", ");
-                        value.put("users", users);
-                        values.add(value);
+                        JSONObject jsonObject=jsonArray.getJSONObject(i);
+                        HashMap<String ,String> hashMap1=new HashMap<>();
+                        hashMap1.put("event", jsonObject.getString("event"));
+                        hashMap1.put("time", jsonObject.getString("time"));
+                        values.add(hashMap1);
                     }
 
-//                values.add(new HashMap<String, String>());
-//                values.add(new HashMap<String, String>());
-//                values.add(new HashMap<String, String>());
                     return values;
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -132,8 +126,17 @@ public class HomeFragment extends Fragment {
             if (list==null) {
                 Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
             } else{
-
-//                listViewRegisteredEvents.setAdapter(new EventsAdapter(getActivity(),R.layout.event_boxes,list));
+                int len=list.size();
+                if (len>0){
+                    HashMap<String,String> hashMap1=list.get(0);
+                    ((TextView)getActivity().findViewById(R.id.textViewnextEvent)).setText(hashMap1.get("event"));
+                    ((TextView)getActivity().findViewById(R.id.textViewNextEventTime)).setText(hashMap1.get("time"));
+                    if (len>1){
+                        HashMap<String,String> hashMap2=list.get(1);
+                        ((TextView)getActivity().findViewById(R.id.textViewNextEvent2)).setText(hashMap2.get("event"));
+                        ((TextView)getActivity().findViewById(R.id.textViewNextEvent2Time)).setText(hashMap2.get("time"));
+                    }
+                }
             }
         }
     }

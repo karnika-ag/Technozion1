@@ -48,8 +48,9 @@ public class MainActivity extends AppCompatActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-        ((TextView)findViewById(R.id.textViewName)).setText("hjhjhjh");
-        ((TextView)findViewById(R.id.textViewTzId)).setText("2323232");
+        SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(this);
+        ((TextView) findViewById(R.id.textViewName)).setText(sharedPreferences.getString("name","------"));
+        ((TextView)findViewById(R.id.textViewTzId)).setText(sharedPreferences.getString("userid","----"));
     }
 
     @Override

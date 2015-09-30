@@ -71,7 +71,7 @@ public class WorkshopsFragment extends Fragment {
             super.onPreExecute();
             progressDialog=new ProgressDialog(getActivity());
             progressDialog.setMessage("fetching your registered workshops..");
-            progressDialog.setCancelable(false);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
         }
 

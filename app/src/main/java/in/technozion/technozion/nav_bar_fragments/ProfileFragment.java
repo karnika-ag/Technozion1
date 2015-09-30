@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,24 +54,27 @@ private static final String ARG_SECTION_NUMBER = "section_number";
 
     private void loadProfileData() {
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-        Boolean data_stored=sharedPreferences.getBoolean("data_stored", false);
-        if (data_stored){
+        Boolean registered=sharedPreferences.getBoolean("registered", false);
+        ((TextView)getActivity().findViewById(R.id.textViewTzIdValue)).setText(sharedPreferences.getString("userid", ""));
+        ((TextView)getActivity().findViewById(R.id.textViewName)).setText(sharedPreferences.getString("name",""));
+        ((TextView)getActivity().findViewById(R.id.textViewCollegeIdValue)).setText(sharedPreferences.getString("collegeid",""));
+        ((TextView)getActivity().findViewById(R.id.textViewCollege)).setText(sharedPreferences.getString("college",""));
+        ((TextView)getActivity().findViewById(R.id.textViewPhoneNumber)).setText(sharedPreferences.getString("phone", ""));
+        ((TextView)getActivity().findViewById(R.id.textViewEmail)).setText(sharedPreferences.getString("email", ""));
+
+        if (registered){
+            getActivity().findViewById(R.id.imageViewQrCode).setVisibility(View.VISIBLE);
+//            ((ImageView)getActivity().findViewById(R.id.imageViewQrCode)).setVisibility(View.VISIBLE);
 //            Toast.makeText(getActivity(),"Stored",Toast.LENGTH_SHORT).show();
-            ((TextView)getActivity().findViewById(R.id.textViewTzIdValue)).setText(sharedPreferences.getString("userid", ""));
-            ((TextView)getActivity().findViewById(R.id.textViewTechnozionRegistrationPaid)).setText(sharedPreferences.getString("registration",""));
+            ((TextView)getActivity().findViewById(R.id.textViewTechnozionRegistrationPaid)).setText(sharedPreferences.getString("registration", ""));
             ((TextView)getActivity().findViewById(R.id.textViewHospitalityRegistrationPaid)).setText(sharedPreferences.getString("hospitality",""));
-            ((TextView)getActivity().findViewById(R.id.textViewName)).setText(sharedPreferences.getString("name",""));
-            ((TextView)getActivity().findViewById(R.id.textViewCollegeIdValue)).setText(sharedPreferences.getString("collegeid",""));
-            ((TextView)getActivity().findViewById(R.id.textViewCollege)).setText(sharedPreferences.getString("college",""));
-            ((TextView)getActivity().findViewById(R.id.textViewPhoneNumber)).setText(sharedPreferences.getString("phone",""));
-            ((TextView)getActivity().findViewById(R.id.textViewEmail)).setText(sharedPreferences.getString("email",""));
-        }else {
+            }else {
 //            Toast.makeText(getActivity(),"Loading",Toast.LENGTH_SHORT).show();
-            new LoadEventsTask().execute();
+            new LoadEventsTask().execute(sharedPreferences.getString("userid", ""));
         }
     }
 
-    public class LoadEventsTask extends AsyncTask<Void,Void,HashMap<String ,String>> {
+    public class LoadEventsTask extends AsyncTask<String,Void,HashMap<String ,String>> {
 
         private ProgressDialog progressDialog;
         @Override
@@ -80,14 +84,19 @@ private static final String ARG_SECTION_NUMBER = "section_number";
             progressDialog.setMessage("fetching profile data..");
 //            progressDialog.setCancelable(false);
             progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
+//            progressDialog.show();
         }
 
         @Override
-        protected HashMap<String ,String> doInBackground(Void... voids) {
+        protected HashMap<String ,String> doInBackground(String... strings) {
 
+            if (strings==null||strings.length==0){
+                return null;
+            }
+            HashMap<String,String> data=new HashMap();
+            data.put("userid",strings[0]);
             String jsonstr=null;
-            jsonstr=Util.getStringFromURL(URLS.PROFILE_URL);
+            jsonstr=Util.getStringFromURL(URLS.PROFILE_URL,data);
             if (jsonstr!=null) {
                 Log.d("GOT FROM HTTP", jsonstr);
                 try {
@@ -140,7 +149,7 @@ private static final String ARG_SECTION_NUMBER = "section_number";
                     for(String s:hashMap.keySet()){
                         editor.putString(s,hashMap.get(s));
                     }
-                    editor.putBoolean("data_stored",true);
+                    editor.putBoolean("registered",true);
                     editor.apply();
 //                    editor.putString("registration", hashMap.get("registration"));
 //                    editor.putString("hospitality",hashMap.get("hospitality"));

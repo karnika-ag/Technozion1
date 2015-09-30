@@ -75,7 +75,7 @@ public class LoginActivityFragment extends Fragment {
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getContext());
         Boolean logged_in=sharedPreferences.getBoolean("logged_in", false);
         if (logged_in) {
-            startActivity(new Intent(getContext(), MainActivity.class));
+            startActivity(new Intent(getContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         }
     }
 
@@ -121,7 +121,7 @@ public class LoginActivityFragment extends Fragment {
                 try {
                     JSONObject jsonObject=new JSONObject(jsonstr);
 
-                    if(jsonObject.getString("status").equals("success")) {
+                    if(jsonObject.getString("status").equalsIgnoreCase("success")) {
                         HashMap<String, String> hashMap = new HashMap<>();
                         hashMap.put("userid", jsonObject.getString("userid"));
                         hashMap.put("name", jsonObject.getString("name"));
@@ -149,14 +149,18 @@ public class LoginActivityFragment extends Fragment {
             if (hashMap==null) {
                 Toast.makeText(getActivity(), "Login failed", Toast.LENGTH_SHORT).show();
             } else{
-                    SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
-                    SharedPreferences.Editor editor= sharedPreferences.edit();
+                SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences.Editor editor= sharedPreferences.edit();
 
-                    for(String s:hashMap.keySet()){
-                        editor.putString(s,hashMap.get(s));
-                    }
-                    editor.putBoolean("logged_in",true);
-                    editor.apply();
+                for(String s:hashMap.keySet()){
+                    editor.putString(s,hashMap.get(s));
+                }
+                editor.putBoolean("logged_in",true);
+                editor.apply();
+
+//                Intent intent=new Intent(getContext(), MainActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(new Intent(getContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         }
     }
