@@ -96,19 +96,20 @@ public class RegisterActivityFragment extends Fragment {
                 if (name == null || email == null || phone == null || college == null || id == null || password == null) {
                     Log.d("null", "sth is null");
                 } else{
-                    regdata.put("name", name);
-                    regdata.put("email", email);
-                    regdata.put("gender", gender);
-                    regdata.put("phone", phone);
-                    regdata.put("city", city);
-                    regdata.put("college", college);
-                    regdata.put("id", id);
-                    regdata.put("state", state);
-                    regdata.put("password", password);
+                    regdata.put("inputName", name);
+                    regdata.put("inputEmail", email);
+                    regdata.put("inputGender", gender);
+                    regdata.put("inputPhone", phone);
+                    regdata.put("inputCity", city);
+                    regdata.put("inputCollege", college);
+                    regdata.put("inputCollegeId", id);
+                    regdata.put("inputState", state);
+                    regdata.put("inputPassword", password);
+                    new RegisterTask().execute(regdata);
                 }
-                Log.d("gender", ((TextView)( (Spinner) getActivity().findViewById(R.id.spinnerGender)).getSelectedView()).getText().toString());
+//                Log.d("gender", ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerGender)).getSelectedView()).getText().toString());
 
-                new RegisterTask().execute(regdata);
+
             }
         });
     }
@@ -171,14 +172,19 @@ public class RegisterActivityFragment extends Fragment {
             HashMap<String,String> hashMap=new HashMap<>();
             hashMap.put("city", strings[0]);
 //            String jsonstr= Util.getStringFromURL(URLS.FETCH_COLLEGES_URL, hashMap);
-            String jsonstr= Util.getStringFromURL(URLS.FETCH_COLLEGES_URL);
+            String jsonstr= Util.getStringFromURL(URLS.FETCH_COLLEGES_URL,hashMap);
+            if (jsonstr==null){
+                Log.d("colleges","null");
+            }else {
+                Log.d("colleges", jsonstr);
+            }
             if (jsonstr!=null){
                 try {
                     JSONArray jsonArray=new JSONArray(jsonstr);
                     int len=jsonArray.length();
                     String colleges[]=new String[len+1];
                     for(int i=0;i<len;i++){
-                        colleges[i]=jsonArray.getString(i);
+                        colleges[i]=jsonArray.getJSONObject(i).getString("college");
                     }
                     colleges[len]="Other";
                     return colleges;

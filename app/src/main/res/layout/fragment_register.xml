@@ -206,10 +206,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/editTextStudentId"
             android:layout_below="@+id/editTextCollege"
-            android:layout_alignRight="@+id/editTextCollege"
-            android:layout_alignEnd="@+id/editTextCollege"
             android:layout_alignLeft="@+id/editTextCollege"
-            android:layout_alignStart="@+id/editTextCollege" />
+            android:layout_alignStart="@+id/editTextCollege"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <Spinner
             android:layout_width="wrap_content"

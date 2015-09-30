@@ -35,7 +35,7 @@ import in.technozion.technozion.adapters.WorkshopsAdapter;
 public class WorkshopPaymentDetailsActivityFragment extends Fragment {
 
     //public static final String registerurl="http://192.168.87.50/tz-registration-master/workshops/registerteampayment_mobile";
-    //public static final String registerurl="http://172.30.132.78/tz-registration-master/workshops/make_payment";
+//    public static final String registerurl="http://172.30.132.78/tz-registration-master/workshops/make_payment";
     private String string;
     ListView listViewWorkshopDetailsConfirmation;
 
@@ -133,6 +133,8 @@ public class WorkshopPaymentDetailsActivityFragment extends Fragment {
             String jsonstr= Util.getStringFromURL(URLS.WORKSHOP_REGISTER_CONFIRM_URL, map);
             if (jsonstr!=null) {
                 Log.d("GOT FROM HTTP", jsonstr);
+
+
                 return jsonstr ;
             }
 
@@ -148,13 +150,25 @@ public class WorkshopPaymentDetailsActivityFragment extends Fragment {
             if (string==null) {
                 Log.d("enter in if","okk");
                 Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
+
+
             }
             else {
+
+
+                try {
+
+                    JSONObject jsonObjectRec = new JSONObject(string);
                     Toast.makeText(getActivity(),"Going to launch webViewer", Toast.LENGTH_SHORT).show();
+
                     Intent i = new Intent(getActivity(), WebViewActivity.class);
                     i.putExtra("data", string);
                     startActivity(i);
                     Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
         }

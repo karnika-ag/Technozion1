@@ -2,7 +2,9 @@ package in.technozion.technozion;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -111,8 +113,11 @@ public class RegisterEventActivityFragment extends Fragment implements AdapterVi
 
         linearLayout.removeAllViews();
 
+        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String tzid=sharedPreferences.getString("userid","");
+//        "9346472"
         View view2=getActivity().getLayoutInflater().inflate(R.layout.edit_text_tz_id,null);
-        ((EditText)view2).setText("9346472");
+        ((EditText)view2).setText(tzid);
         view2.setEnabled(false);
         linearLayout.addView(view2);
 

@@ -7,7 +7,7 @@
     >
 
     <ImageView
-        android:background="@color/bg"
+        android:background="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView4"
@@ -56,12 +56,18 @@
         android:layout_alignLeft="@+id/editTextPassword"
         android:layout_alignStart="@+id/editTextPassword" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView3"
-        android:layout_alignBottom="@+id/editTextPassword"
-        android:layout_toLeftOf="@+id/editTextPassword"
-        android:layout_toStartOf="@+id/editTextPassword" />
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/imageView3"-->
+        <!--android:layout_alignBottom="@+id/editTextPassword"-->
+        <!--android:layout_toLeftOf="@+id/editTextPassword"-->
+        <!--android:layout_toStartOf="@+id/editTextPassword" />-->
 
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:id="@+id/frameLayout"/>-->
 </RelativeLayout>

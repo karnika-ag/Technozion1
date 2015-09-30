@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -40,6 +41,8 @@ public class LoginActivityFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+//        ((FrameLayout)getActivity().findViewById(R.id.frameLayout)).addView(getActivity().getLayoutInflater().inflate(R.layout.box_login,null));
+//       /*
 
         //Login
         getActivity().findViewById(R.id.buttonLogin).setOnClickListener(new View.OnClickListener() {
@@ -77,6 +80,7 @@ public class LoginActivityFragment extends Fragment {
         if (logged_in) {
             startActivity(new Intent(getContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         }
+//        */
     }
 
     @Override

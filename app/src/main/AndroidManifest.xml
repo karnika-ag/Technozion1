@@ -55,6 +55,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.technozion.technozion.MainActivity" />
         </activity>
+        <activity
+            android:name=".EventConfirmationActivity"
+            android:label="@string/title_activity_event_confirmation"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.technozion.technozion.MainActivity" />
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
