@@ -28,6 +28,7 @@ import in.technozion.technozion.Data.URLS;
 import in.technozion.technozion.Data.Util;
 import in.technozion.technozion.R;
 import in.technozion.technozion.RegisterConfirmationActivity;
+import in.technozion.technozion.WebViewActivity;
 
 public class RegistrationFragment extends Fragment {
     public static final String TAG = RegistrationFragment.class.getSimpleName();
@@ -52,10 +53,20 @@ public class RegistrationFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         LoadRegistrationData();
+
         getActivity().findViewById(R.id.buttonRegister).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new RegisterTask().execute();
+                SharedPreferences sh= PreferenceManager.getDefaultSharedPreferences(getActivity());
+                String userid = sh.getString("userid", "");
+                Boolean registration=((CheckBox) getActivity().findViewById(R.id.checkBoxRegistration)).isChecked();
+                Boolean hospitality=((CheckBox) getActivity().findViewById(R.id.checkBoxHospitality)).isChecked();
+                HashMap<String,String> hashMap=new HashMap<>();
+                hashMap.put("userid",userid);
+                hashMap.put("registration",String.valueOf(registration));
+                hashMap.put("hospitality",String.valueOf(hospitality));
+
+                new RegisterTask().execute(hashMap);
 
             }
         });
@@ -169,7 +180,7 @@ public class RegistrationFragment extends Fragment {
             }
         }
     }
-    public class RegisterTask extends AsyncTask<Void,Void,HashMap<String ,String>> {
+    public class RegisterTask extends AsyncTask<HashMap<String,String>,Void,String> {
 
         private ProgressDialog progressDialog;
         @Override
@@ -183,7 +194,15 @@ public class RegistrationFragment extends Fragment {
         }
 
         @Override
-        protected HashMap<String ,String> doInBackground(Void... voids) {
+        protected String doInBackground(HashMap<String,String>... string) {
+
+            String jsonstr= Util.getStringFromURL(URLS.REGISTRATION_URL,string[0]);
+            if (jsonstr!=null) {
+                Log.d("GOT FROM HTTP", jsonstr);
+                return jsonstr ;
+            }
+
+
 //
 //            String jsonstr= Util.getStringFromURL(URLS.REGISTRATION_URL);
 //            if (jsonstr!=null) {
@@ -220,14 +239,25 @@ public class RegistrationFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(HashMap<String ,String> hashMap) {
-            super.onPostExecute(hashMap);
+        protected void onPostExecute(String string) {
+            super.onPostExecute(string);
             if (progressDialog.isShowing()) {
                 progressDialog.cancel();
             }
-            if (hashMap==null) {
+            if (string==null) {
                 Toast.makeText(getActivity(), "Could not connect, please try again", Toast.LENGTH_SHORT).show();
-            } else{
+            }  else {
+
+                Toast.makeText(getActivity(), "Going to launch webViewer", Toast.LENGTH_SHORT).show();
+
+                Intent i = new Intent(getActivity(), WebViewActivity.class);
+                i.putExtra("data", string);
+                startActivity(i);
+                Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
+
+            }
+
+//            else{
 //                if (hashMap.get("registration").equalsIgnoreCase("paid")){
 //                    getActivity().findViewById(R.id.imageViewQrCode).setVisibility(View.VISIBLE);
 //                    SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -249,8 +279,8 @@ public class RegistrationFragment extends Fragment {
 //                ((TextView)getActivity().findViewById(R.id.textViewPhoneNumber)).setText(hashMap.get("phone"));
 //                ((TextView)getActivity().findViewById(R.id.textViewEmail)).setText(hashMap.get("email"));
 
-            }
-            startActivity(new Intent(getActivity(), RegisterConfirmationActivity.class));
+//            }
+//            startActivity(new Intent(getActivity(), RegisterConfirmationActivity.class));
         }
     }
 }
