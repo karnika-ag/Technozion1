@@ -299,7 +299,7 @@ public class RegisterEventActivityFragment extends Fragment implements AdapterVi
                         Intent i = new Intent(getActivity(), EventConfirmationActivity.class);
                         i.putExtra("data",string);
                         startActivity(i);
-                        Toast.makeText(getActivity(),string,Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(getActivity(),string,Toast.LENGTH_SHORT).show();
 
                     }
                 }

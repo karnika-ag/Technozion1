@@ -2,7 +2,9 @@ package in.technozion.technozion;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -117,8 +119,11 @@ public class RegisterWorkshopActivityFragment extends Fragment implements Adapte
         ((TextView) getActivity().findViewById(R.id.textViewWorkshopCostValue)).setText("" + cost);
         linearLayout.removeAllViews();
 
+        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String tzid=sharedPreferences.getString("userid","");
+
         View view2 = getActivity().getLayoutInflater().inflate(R.layout.edit_text_tz_id, null);
-        ((EditText) view2).setText("9346472");
+        ((EditText) view2).setText(tzid);
         view2.setEnabled(false);
         linearLayout.addView(view2);
 
@@ -262,22 +267,24 @@ public class RegisterWorkshopActivityFragment extends Fragment implements Adapte
             if (progressDialog.isShowing()) {
                 progressDialog.cancel();
             }
+            try {
             if (string == null) {
                 Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
-            }
-            try {
+            }else {
+
 
                 JSONObject jsonObjectRec = new JSONObject(string);
-                if(jsonObjectRec.getString("status").equals("failure")){
-                    Log.d("enter in else if","okk");
-                    Toast.makeText(getActivity(),jsonObjectRec.getString("message"),Toast.LENGTH_SHORT).show();
-                }else {
-                    Log.d("enterd in else part ",string);
+                if (jsonObjectRec.getString("status").equals("failure")) {
+                    Log.d("enter in else if", "okk");
+                    Toast.makeText(getActivity(), jsonObjectRec.getString("message"), Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d("entered in else part ", string);
                     Intent i = new Intent(getActivity(), WorkshopPaymentDetailsActivity.class);
                     i.putExtra("data", string);
                     startActivity(i);
-                    Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
+       //             Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
                 }
+            }
 
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -54,7 +54,7 @@ private static final String ARG_SECTION_NUMBER = "section_number";
 
     private void loadProfileData() {
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-        Boolean registered=sharedPreferences.getBoolean("registered", false);
+   //     Boolean registered=sharedPreferences.getBoolean("registered", false);
         ((TextView)getActivity().findViewById(R.id.textViewTzIdValue)).setText(sharedPreferences.getString("userid", ""));
         ((TextView)getActivity().findViewById(R.id.textViewName)).setText(sharedPreferences.getString("name",""));
         ((TextView)getActivity().findViewById(R.id.textViewCollegeIdValue)).setText(sharedPreferences.getString("collegeid",""));
@@ -62,16 +62,17 @@ private static final String ARG_SECTION_NUMBER = "section_number";
         ((TextView)getActivity().findViewById(R.id.textViewPhoneNumber)).setText(sharedPreferences.getString("phone", ""));
         ((TextView)getActivity().findViewById(R.id.textViewEmail)).setText(sharedPreferences.getString("email", ""));
 
-        if (registered){
-            getActivity().findViewById(R.id.imageViewQrCode).setVisibility(View.VISIBLE);
+     //   if (registered){
+     //       Log.d("k--profile register",registered.toString());
+      //      getActivity().findViewById(R.id.imageViewQrCode).setVisibility(View.VISIBLE);
 //            ((ImageView)getActivity().findViewById(R.id.imageViewQrCode)).setVisibility(View.VISIBLE);
 //            Toast.makeText(getActivity(),"Stored",Toast.LENGTH_SHORT).show();
-            ((TextView)getActivity().findViewById(R.id.textViewTechnozionRegistrationPaid)).setText(sharedPreferences.getString("registration", ""));
+            ((TextView)getActivity().findViewById(R.id.textViewTechnozionRegistrationPaid)).setText(sharedPreferences.getString("registration",""));
             ((TextView)getActivity().findViewById(R.id.textViewHospitalityRegistrationPaid)).setText(sharedPreferences.getString("hospitality",""));
-            }else {
+      //      }else {
 //            Toast.makeText(getActivity(),"Loading",Toast.LENGTH_SHORT).show();
             new LoadEventsTask().execute(sharedPreferences.getString("userid", ""));
-        }
+      //  }
     }
 
     public class LoadEventsTask extends AsyncTask<String,Void,HashMap<String ,String>> {
@@ -103,9 +104,9 @@ private static final String ARG_SECTION_NUMBER = "section_number";
                     JSONObject jsonObject=new JSONObject(jsonstr);
 
                     HashMap<String,String> hashMap=new HashMap<>();
-
                     hashMap.put("userid",jsonObject.getString("userid"));
                     if(jsonObject.getString("registration").equals("0")) {
+                        Log.d("k--got reg",jsonObject.getString("registration"));
                         hashMap.put("registration", "₹ 400 unpaid");
                     }else {
                         hashMap.put("registration", "paid");
@@ -149,7 +150,8 @@ private static final String ARG_SECTION_NUMBER = "section_number";
                     for(String s:hashMap.keySet()){
                         editor.putString(s,hashMap.get(s));
                     }
-                    editor.putBoolean("registered",true);
+//                    if (hashMap.get("hospitality").equalsIgnoreCase("paid"))
+//                    editor.putBoolean("registered",true);
                     editor.apply();
 //                    editor.putString("registration", hashMap.get("registration"));
 //                    editor.putString("hospitality",hashMap.get("hospitality"));

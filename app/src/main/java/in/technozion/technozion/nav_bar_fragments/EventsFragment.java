@@ -1,5 +1,7 @@
 package in.technozion.technozion.nav_bar_fragments;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -79,8 +81,11 @@ public class EventsFragment extends Fragment {
         @Override
         protected List<HashMap<String, String>> doInBackground(Void... voids) {
 
+            SharedPreferences sh = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String userid = sh.getString("userid", "");
+            Log.d("k--events",userid);
             HashMap<String,String> hashMap = new HashMap<>();
-            hashMap.put("userid","9346472");
+            hashMap.put("userid",userid);
 
             String jsonstr= Util.getStringFromURL(URLS.REGISTERED_EVENTS_URL,hashMap);
             if (jsonstr!=null) {
@@ -103,7 +108,10 @@ public class EventsFragment extends Fragment {
                     value.put("team_id", team_id);
                     value.put("eventName", jsonObject1.getString("eventName"));
                     value.put("status_name",jsonObject1.getString("status_name"));
-                    value.put("count_total", jsonObject1.getString("count") + "/" + jsonObject1.getString("total") + " registered");
+                    if(jsonObject1.getString("status").equals("1"))
+                    value.put("count_total", "All Registered");
+                    else
+                        value.put("count_total", jsonObject1.getString("count") + "/" + jsonObject1.getString("total") + " registered");
                     String users=jsonObject1.getJSONArray("users").toString();
                     users=users.replace("[","");
                     users=users.replace("]","");

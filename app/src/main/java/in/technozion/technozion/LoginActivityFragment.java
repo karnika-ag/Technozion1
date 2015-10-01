@@ -133,6 +133,16 @@ public class LoginActivityFragment extends Fragment {
                         hashMap.put("college", jsonObject.getString("college"));
                         hashMap.put("phone", jsonObject.getString("phone"));
                         hashMap.put("email", jsonObject.getString("email"));
+                        if(jsonObject.getString("registration").equals("1"))
+                        hashMap.put("registration", "paid");
+                        else
+                            hashMap.put("registration", "₹ 400 unpaid");
+                        if(jsonObject.getString("hospitality").equals("1"))
+                            hashMap.put("hospitality", "paid");
+                        else
+                            hashMap.put("hospitality", "₹ 600 unpaid");
+
+
 
                         return hashMap;
                     }
@@ -159,7 +169,9 @@ public class LoginActivityFragment extends Fragment {
                 for(String s:hashMap.keySet()){
                     editor.putString(s,hashMap.get(s));
                 }
-                editor.putBoolean("logged_in",true);
+                editor.putBoolean("logged_in", true);
+//                if(hashMap.get("registration").equalsIgnoreCase("paid") && hashMap.get("hospitality").equalsIgnoreCase("paid"))
+//                    editor.putBoolean("registered",true);
                 editor.apply();
 
 //                Intent intent=new Intent(getContext(), MainActivity.class);

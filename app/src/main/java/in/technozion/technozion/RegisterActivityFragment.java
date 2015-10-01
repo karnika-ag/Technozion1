@@ -54,7 +54,7 @@ public class RegisterActivityFragment extends Fragment {
         ((Spinner) getActivity().findViewById(R.id.spinnerCity)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String city=((TextView)view).getText().toString();
+                String city = ((TextView) view).getText().toString();
                 if (!city.equalsIgnoreCase("select city")) {
                     new FetchCollegeTask().execute(city);
                 }
@@ -141,13 +141,19 @@ public class RegisterActivityFragment extends Fragment {
             if (progressDialog.isShowing()) {
                 progressDialog.cancel();
             }
-            if (string==null) {
-                Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
-            } else{
-                Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
-                if (string.equalsIgnoreCase("successful")) {
-                    getActivity().onBackPressed();
+            try {
+                if (string == null) {
+                    Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                } else {
+                    JSONObject jsonObjectRec = new JSONObject(string);
+                    Toast.makeText(getActivity(), jsonObjectRec.getString("message"), Toast.LENGTH_SHORT).show();
+                    if (jsonObjectRec.getString("status").equalsIgnoreCase("success")) {
+                        getActivity().onBackPressed();
+                    }
                 }
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
             }
         }
     }

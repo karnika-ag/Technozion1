@@ -7,7 +7,7 @@ public class URLS {
     public static final String TERMS_AND_CONDITIONS="http://bhuichalo.com/tz15/reg_data.json";
 
 //    public static final String LOGIN_URL="http://technozion.in/accounts/login_mobile";
-    public static final String SIGNUP_URL="http://technozion.in/accounts/signup_mobile";
+//   public static final String SIGNUP_URL="http://technozion.in/accounts/signup_mobile";
 //    public static final String LOGIN_URL="http://bhuichalo.com/tz15/login.json";
 //    public static final String LOGIN_URL="http://172.20.41.199/tz-registration-master/accounts/login_mobile";
     public static final String LOGIN_URL="http://technozion.in/accounts/login_mobile";
@@ -19,7 +19,7 @@ public class URLS {
 
     public static final String PROFILE_URL="http://technozion.in/profile/index_mobile";
 
-    public static final String REGISTRATION_DATA="http://bhuichalo.com/tz15/reg_data.json";
+    public static final String REGISTRATION_DATA="http://technozion.in/profile/index_mobile";
     public static final String REGISTRATION_URL="http://technozion.in/hospitality/register_mobile";
 //    public static final String REGISTRATION_CONFIRMATION_URL="";
 

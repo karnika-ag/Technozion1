@@ -57,16 +57,22 @@ public class RegistrationFragment extends Fragment {
         getActivity().findViewById(R.id.buttonRegister).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sh= PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences sh = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 String userid = sh.getString("userid", "");
-                Boolean registration=((CheckBox) getActivity().findViewById(R.id.checkBoxRegistration)).isChecked();
-                Boolean hospitality=((CheckBox) getActivity().findViewById(R.id.checkBoxHospitality)).isChecked();
-                HashMap<String,String> hashMap=new HashMap<>();
-                hashMap.put("userid","9346472");
-                hashMap.put("registration",String.valueOf(registration));
-                hashMap.put("hospitality",String.valueOf(hospitality));
-
-                new RegisterTask().execute(hashMap);
+                Boolean registration = ((CheckBox) getActivity().findViewById(R.id.checkBoxRegistration)).isChecked();
+                Boolean hospitality = ((CheckBox) getActivity().findViewById(R.id.checkBoxHospitality)).isChecked();
+                Boolean agree = ((CheckBox) getActivity().findViewById(R.id.checkBoxAgree)).isChecked();
+                if (agree != null && agree) {
+                    Log.d("k--agree", "enter here");
+                    HashMap<String, String> hashMap = new HashMap<>();
+                    hashMap.put("userid", userid);
+                    hashMap.put("registration", String.valueOf(registration));
+                    hashMap.put("hospitality", String.valueOf(hospitality));
+                    Log.d("k-- check reg boolean", String.valueOf(registration));
+                    Log.d("k-- check hos boolean",String.valueOf(hospitality));
+                    new RegisterTask().execute(hashMap);
+                } else
+                    Toast.makeText(getActivity(), "Plz check the terms and condition checkbox", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -118,10 +124,9 @@ public class RegistrationFragment extends Fragment {
 
             SharedPreferences sh= PreferenceManager.getDefaultSharedPreferences(getActivity());
             String userid = sh.getString("userid","");
-
-
             HashMap<String,String> hashMap1 = new HashMap<>();
-            hashMap1.put("userid","9346472");
+            hashMap1.put("userid",userid);
+            Log.d("k--userid sent",userid);
 
             String jsonstr= Util.getStringFromURL(URLS.REGISTRATION_DATA,hashMap1);
             if (jsonstr!=null) {
@@ -139,6 +144,8 @@ public class RegistrationFragment extends Fragment {
                     hashMap.put("collegeid",jsonObject1.getString("collegeid"));
                     hashMap.put("registration",jsonObject1.getString("registration"));
                     hashMap.put("hospitality",jsonObject1.getString("hospitality"));
+                    Log.d("k--register hos", jsonObject1.getString("hospitality"));
+                    Log.d("k--register res",jsonObject1.getString("registration"));
 
                     return hashMap;
                 } catch (JSONException e) {
@@ -162,7 +169,9 @@ public class RegistrationFragment extends Fragment {
                 ((TextView)getActivity().findViewById(R.id.textViewCollege)).setText(hashMap.get("college"));
                 ((TextView)getActivity().findViewById(R.id.textViewCollegeIdValue)).setText(hashMap.get("collegeid"));
 
+
                 if (hashMap.get("hospitality").equals("1")){
+                    Log.d("k-- if cond hos","true");
                     getActivity().findViewById(R.id.textViewRegistered).setVisibility(View.VISIBLE);
                     getActivity().findViewById(R.id.textViewRegisteredHospitality).setVisibility(View.VISIBLE);
                     getActivity().findViewById(R.id.checkBoxRegistration).setVisibility(View.GONE);
@@ -172,6 +181,7 @@ public class RegistrationFragment extends Fragment {
 
                 }else{
                     if (hashMap.get("registration").equals("1")){
+                        Log.d("k-- if cond res","true");
                         getActivity().findViewById(R.id.textViewRegistered).setVisibility(View.VISIBLE);
                         getActivity().findViewById(R.id.checkBoxRegistration).setVisibility(View.GONE);
                         ((CheckBox)getActivity().findViewById(R.id.checkBoxRegistration)).setChecked(false);
@@ -261,8 +271,7 @@ public class RegistrationFragment extends Fragment {
                 Intent i = new Intent(getActivity(), WebViewActivity.class);
                 i.putExtra("data", string);
                 startActivity(i);
-                Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
-
+         //       Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
             }
 
 //            else{
