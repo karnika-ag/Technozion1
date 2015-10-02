@@ -62,7 +62,7 @@ public class RegistrationFragment extends Fragment {
                 Boolean registration=((CheckBox) getActivity().findViewById(R.id.checkBoxRegistration)).isChecked();
                 Boolean hospitality=((CheckBox) getActivity().findViewById(R.id.checkBoxHospitality)).isChecked();
                 HashMap<String,String> hashMap=new HashMap<>();
-                hashMap.put("userid",userid);
+                hashMap.put("userid","9346472");
                 hashMap.put("registration",String.valueOf(registration));
                 hashMap.put("hospitality",String.valueOf(hospitality));
 
@@ -70,14 +70,14 @@ public class RegistrationFragment extends Fragment {
 
             }
         });
-        getActivity().findViewById(R.id.textViewTerms).setOnClickListener(new View.OnClickListener() {
+     /*   getActivity().findViewById(R.id.textViewTerms).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(URLS.TERMS_AND_CONDITIONS));
                 startActivity(i);
             }
-        });
+        });*/
 
     }
 
@@ -116,14 +116,21 @@ public class RegistrationFragment extends Fragment {
         @Override
         protected HashMap<String ,String> doInBackground(Void... voids) {
 
-            String jsonstr= Util.getStringFromURL(URLS.REGISTRATION_DATA);
+            SharedPreferences sh= PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String userid = sh.getString("userid","");
+
+
+            HashMap<String,String> hashMap1 = new HashMap<>();
+            hashMap1.put("userid","9346472");
+
+            String jsonstr= Util.getStringFromURL(URLS.REGISTRATION_DATA,hashMap1);
             if (jsonstr!=null) {
                 Log.d("GOT FROM HTTP", jsonstr);
                 try {
-                    JSONObject jsonObject=new JSONObject(jsonstr);
+                    JSONObject jsonObject1=new JSONObject(jsonstr);
 
                     //TODO check failure
-                    JSONObject jsonObject1=jsonObject.getJSONObject("data");
+//                    JSONObject jsonObject1=jsonObject.getJSONObject("data");
 
                     HashMap<String,String> hashMap=new HashMap<>();
 
@@ -197,6 +204,7 @@ public class RegistrationFragment extends Fragment {
         protected String doInBackground(HashMap<String,String>... string) {
 
             String jsonstr= Util.getStringFromURL(URLS.REGISTRATION_URL,string[0]);
+            //Log.d("registration received ",jsonstr);
             if (jsonstr!=null) {
                 Log.d("GOT FROM HTTP", jsonstr);
                 return jsonstr ;
