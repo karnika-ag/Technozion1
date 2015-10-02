@@ -4,6 +4,7 @@
     <color name="technozion_black">#55000000</color>
 
     <color name="green">#477573</color>
+    <color name="transparent_green">#99477573</color>
     <color name="blue">#0000FF</color>
 
     <color name="myAccentColor">#CDDC39</color>
@@ -14,4 +15,6 @@
     <color name="bg">#555577</color>
 
     <color name="action_bar">@color/green</color>
+    <color name="stroke_login">@color/transparent_green</color>
+    <color name="stroke_old">#B1BCBE</color>
 </resources>

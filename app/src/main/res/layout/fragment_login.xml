@@ -7,34 +7,34 @@
     >
 
     <!--<ImageView-->
-        <!-- -->
-        <!--android:background="@drawable/roundedrect_light1"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/imageView4"-->
-        <!--android:layout_alignBottom="@+id/buttonLogin"-->
-        <!--android:layout_alignRight="@+id/buttonLogin"-->
-        <!--android:layout_alignEnd="@+id/buttonLogin"-->
-        <!--android:layout_alignTop="@+id/editTextEmail"-->
-        <!--android:layout_alignLeft="@+id/editTextPassword"-->
-        <!--android:layout_alignStart="@+id/editTextPassword" />-->
+    <!-- -->
+    <!--android:background="@drawable/roundedrect_light1"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/imageView4"-->
+    <!--android:layout_alignBottom="@+id/buttonLogin"-->
+    <!--android:layout_alignRight="@+id/buttonLogin"-->
+    <!--android:layout_alignEnd="@+id/buttonLogin"-->
+    <!--android:layout_alignTop="@+id/editTextEmail"-->
+    <!--android:layout_alignLeft="@+id/editTextPassword"-->
+    <!--android:layout_alignStart="@+id/editTextPassword" />-->
 
 
 
     <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/imageView3"-->
-        <!--android:layout_alignBottom="@+id/editTextPassword"-->
-        <!--android:layout_toLeftOf="@+id/editTextPassword"-->
-        <!--android:layout_toStartOf="@+id/editTextPassword" />-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/imageView3"-->
+    <!--android:layout_alignBottom="@+id/editTextPassword"-->
+    <!--android:layout_toLeftOf="@+id/editTextPassword"-->
+    <!--android:layout_toStartOf="@+id/editTextPassword" />-->
 
     <!--<FrameLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:id="@+id/frameLayout"/>-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:id="@+id/frameLayout"/>-->
     <LinearLayout
 
         android:background="@drawable/rounded_bg"
@@ -62,26 +62,24 @@
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/editTextPassword"
-             />
+            />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-            android:text="Register"
-            android:id="@+id/buttonRegister"
-        />
+                android:text="Register"
+                android:id="@+id/buttonRegister" />
             <Button
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Login"
-                android:id="@+id/buttonLogin"
-                 />
+                android:id="@+id/buttonLogin" />
         </LinearLayout>
 
 
