@@ -5,9 +5,10 @@ package in.technozion.technozion.Data;
  */
 public class URLS {
     public static final String TERMS_AND_CONDITIONS="http://bhuichalo.com/tz15/reg_data.json";
+    public static final String QR_CODE_URL="http://technozion.in/profile/get_qrcode_mobile";
 
 //    public static final String LOGIN_URL="http://technozion.in/accounts/login_mobile";
-    public static final String SIGNUP_URL="http://technozion.in/accounts/signup_mobile";
+//    public static final String SIGNUP_URL="http://technozion.in/accounts/signup_mobile";
 //    public static final String LOGIN_URL="http://bhuichalo.com/tz15/login.json";
 //    public static final String LOGIN_URL="http://172.20.41.199/tz-registration-master/accounts/login_mobile";
     public static final String LOGIN_URL="http://technozion.in/accounts/login_mobile";
@@ -15,11 +16,11 @@ public class URLS {
     public static final String REGISTER_URL="http://technozion.in/accounts/signup_mobile";
     public static final String FETCH_COLLEGES_URL="http://technozion.in/home/get_college_mobile";
 
-    public static final String HOME_URL="http://bhuichalo.com/tz15/next_events.json";
+    public static final String HOME_URL="http://technozion.in/events/get_next_two_events_mobile";
 
     public static final String PROFILE_URL="http://technozion.in/profile/index_mobile";
 
-    public static final String REGISTRATION_DATA="http://bhuichalo.com/tz15/reg_data.json";
+    public static final String REGISTRATION_DATA="http://technozion.in/profile/index_mobile";
     public static final String REGISTRATION_URL="http://technozion.in/hospitality/register_mobile";
 //    public static final String REGISTRATION_CONFIRMATION_URL="";
 

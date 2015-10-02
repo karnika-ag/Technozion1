@@ -123,18 +123,32 @@ public class HomeFragment extends Fragment {
             if (progressDialog.isShowing()) {
                 progressDialog.cancel();
             }
-            if (list==null) {
-                Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
-            } else{
+            TextView textView;
+            if (list!=null) {
+//                Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
+//            } else{
+
                 int len=list.size();
                 if (len>0){
                     HashMap<String,String> hashMap1=list.get(0);
-                    ((TextView)getActivity().findViewById(R.id.textViewnextEvent)).setText(hashMap1.get("event"));
-                    ((TextView)getActivity().findViewById(R.id.textViewNextEventTime)).setText(hashMap1.get("time"));
+                    textView=((TextView) getActivity().findViewById(R.id.textViewnextEvent));
+                    if (textView!=null){
+                        textView.setText(hashMap1.get("event"));
+                    }
+                    textView=((TextView)getActivity().findViewById(R.id.textViewNextEventTime));
+                    if (textView!=null) {
+                        textView.setText(hashMap1.get("time"));
+                    }
                     if (len>1){
                         HashMap<String,String> hashMap2=list.get(1);
-                        ((TextView)getActivity().findViewById(R.id.textViewNextEvent2)).setText(hashMap2.get("event"));
-                        ((TextView)getActivity().findViewById(R.id.textViewNextEvent2Time)).setText(hashMap2.get("time"));
+                        textView=((TextView)getActivity().findViewById(R.id.textViewNextEvent2));
+                        if (textView!=null){
+                            textView.setText(hashMap2.get("event"));
+                        }
+                        textView=((TextView)getActivity().findViewById(R.id.textViewNextEvent2Time));
+                        if (textView!=null){
+                            textView.setText(hashMap2.get("time"));
+                        }
                     }
                 }
             }

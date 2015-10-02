@@ -265,7 +265,8 @@ public class NavigationDrawerFragment extends Fragment {
         if (item.getItemId() == R.id.action_logout) {
             SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
             SharedPreferences.Editor editor=sharedPreferences.edit();
-            editor.putBoolean("logged_in", false);
+            editor.clear();
+//            editor.putBoolean("logged_in", false);
             editor.apply();
 
             Intent intent=new Intent(getContext(),LoginActivity.class);

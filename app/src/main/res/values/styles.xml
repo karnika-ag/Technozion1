@@ -14,7 +14,7 @@
     </style>
 
     <style name="LoginRegisterTheme" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/bg2</item>
+        <item name="android:windowBackground">@drawable/front1</item>
     </style>
 
     <style name="TzActionBar"

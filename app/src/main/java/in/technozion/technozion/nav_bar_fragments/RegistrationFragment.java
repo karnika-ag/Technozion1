@@ -52,19 +52,26 @@ public class RegistrationFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        SharedPreferences sh= PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        ((TextView)getActivity().findViewById(R.id.textViewNameValue)).setText(sh.getString("name", ""));
+        ((TextView)getActivity().findViewById(R.id.textViewCollege)).setText(sh.getString("college",""));
+        ((TextView)getActivity().findViewById(R.id.textViewCollegeIdValue)).setText(sh.getString("collegeid", ""));
+
         LoadRegistrationData();
 
         getActivity().findViewById(R.id.buttonRegister).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sh= PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences sh = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 String userid = sh.getString("userid", "");
-                Boolean registration=((CheckBox) getActivity().findViewById(R.id.checkBoxRegistration)).isChecked();
-                Boolean hospitality=((CheckBox) getActivity().findViewById(R.id.checkBoxHospitality)).isChecked();
-                HashMap<String,String> hashMap=new HashMap<>();
-                hashMap.put("userid","9346472");
-                hashMap.put("registration",String.valueOf(registration));
-                hashMap.put("hospitality",String.valueOf(hospitality));
+                Boolean registration = ((CheckBox) getActivity().findViewById(R.id.checkBoxRegistration)).isChecked();
+                Boolean hospitality = ((CheckBox) getActivity().findViewById(R.id.checkBoxHospitality)).isChecked();
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("userid", userid);
+                hashMap.put("registration", String.valueOf(registration));
+                hashMap.put("hospitality", String.valueOf(hospitality));
 
                 new RegisterTask().execute(hashMap);
 
@@ -121,16 +128,13 @@ public class RegistrationFragment extends Fragment {
 
 
             HashMap<String,String> hashMap1 = new HashMap<>();
-            hashMap1.put("userid","9346472");
+            hashMap1.put("userid",userid);
 
             String jsonstr= Util.getStringFromURL(URLS.REGISTRATION_DATA,hashMap1);
             if (jsonstr!=null) {
                 Log.d("GOT FROM HTTP", jsonstr);
                 try {
                     JSONObject jsonObject1=new JSONObject(jsonstr);
-
-                    //TODO check failure
-//                    JSONObject jsonObject1=jsonObject.getJSONObject("data");
 
                     HashMap<String,String> hashMap=new HashMap<>();
 
@@ -158,32 +162,58 @@ public class RegistrationFragment extends Fragment {
             if (hashMap==null) {
                 Toast.makeText(getActivity(), "Could not fetch registration data, please try again", Toast.LENGTH_SHORT).show();
             } else{
-                ((TextView)getActivity().findViewById(R.id.textViewNameValue)).setText(hashMap.get("name"));
-                ((TextView)getActivity().findViewById(R.id.textViewCollege)).setText(hashMap.get("college"));
-                ((TextView)getActivity().findViewById(R.id.textViewCollegeIdValue)).setText(hashMap.get("collegeid"));
-
+//                ((TextView)getActivity().findViewById(R.id.textViewNameValue)).setText(hashMap.get("name"));
+//                ((TextView)getActivity().findViewById(R.id.textViewCollege)).setText(hashMap.get("college"));
+//                ((TextView)getActivity().findViewById(R.id.textViewCollegeIdValue)).setText(hashMap.get("collegeid"));
+                View view;
+                CheckBox checkBox;
                 if (hashMap.get("hospitality").equals("1")){
-                    getActivity().findViewById(R.id.textViewRegistered).setVisibility(View.VISIBLE);
-                    getActivity().findViewById(R.id.textViewRegisteredHospitality).setVisibility(View.VISIBLE);
-                    getActivity().findViewById(R.id.checkBoxRegistration).setVisibility(View.GONE);
-                    getActivity().findViewById(R.id.checkBoxHospitality).setVisibility(View.GONE);
-                    getActivity().findViewById(R.id.buttonRegister).setVisibility(View.GONE);
-                    getActivity().findViewById(R.id.checkBoxAgree).setVisibility(View.GONE);
+
+                    view=getActivity().findViewById(R.id.textViewRegistered);
+                    if (view!=null) {
+                        view.setVisibility(View.VISIBLE);
+                    }
+                    view=getActivity().findViewById(R.id.textViewRegisteredHospitality);
+                    if (view!=null) {
+                        view.setVisibility(View.VISIBLE);
+                    }
+                    view=getActivity().findViewById(R.id.checkBoxRegistration);
+                    if (view!=null) {
+                        view.setVisibility(View.INVISIBLE);
+                    }
+                    view=getActivity().findViewById(R.id.checkBoxHospitality);
+                    if (view!=null) {
+                        view.setVisibility(View.INVISIBLE);
+                    }
+                    view=getActivity().findViewById(R.id.buttonRegister);
+                    if (view!=null) {
+                        view.setVisibility(View.GONE);
+                    }
+                    view=getActivity().findViewById(R.id.checkBoxAgree);
+                    if (view!=null) {
+                        view.setVisibility(View.GONE);
+                    }
 
                 }else{
                     if (hashMap.get("registration").equals("1")){
-                        getActivity().findViewById(R.id.textViewRegistered).setVisibility(View.VISIBLE);
-                        getActivity().findViewById(R.id.checkBoxRegistration).setVisibility(View.GONE);
-                        ((CheckBox)getActivity().findViewById(R.id.checkBoxRegistration)).setChecked(false);
-                        ((CheckBox)getActivity().findViewById(R.id.checkBoxHospitality)).setChecked(true);
-                        getActivity().findViewById(R.id.checkBoxHospitality).setEnabled(false);
+                        view=getActivity().findViewById(R.id.textViewRegistered);
+                        view.setVisibility(View.VISIBLE);
+                        view=getActivity().findViewById(R.id.checkBoxRegistration);
+                        view.setVisibility(View.INVISIBLE);
+                        checkBox=((CheckBox)getActivity().findViewById(R.id.checkBoxRegistration));
+                        checkBox.setChecked(false);
+                        checkBox=((CheckBox)getActivity().findViewById(R.id.checkBoxHospitality));
+                        checkBox.setChecked(true);
+                        view=getActivity().findViewById(R.id.checkBoxHospitality);
+                        view.setEnabled(false);
+                    }else {
+                        checkBox=((CheckBox)getActivity().findViewById(R.id.checkBoxRegistration));
+                        checkBox.setChecked(true);
+                        view=getActivity().findViewById(R.id.checkBoxRegistration);
+                        view.setEnabled(false);
                     }
                 }
 
-//                ((TextView)getActivity().findViewById(R.id.textViewName)).setText(hashMap.get("name"));
-//                ((TextView)getActivity().findViewById(R.id.textViewCollegeIdValue)).setText(hashMap.get("collegeid"));
-//                ((TextView)getActivity().findViewById(R.id.textViewPhoneNumber)).setText(hashMap.get("phone"));
-//                ((TextView)getActivity().findViewById(R.id.textViewEmail)).setText(hashMap.get("email"));
             }
         }
     }
@@ -211,38 +241,6 @@ public class RegistrationFragment extends Fragment {
             }
 
 
-//
-//            String jsonstr= Util.getStringFromURL(URLS.REGISTRATION_URL);
-//            if (jsonstr!=null) {
-//                Log.d("GOT FROM HTTP", jsonstr);
-//                try {
-//                    JSONObject jsonObject=new JSONObject(jsonstr);
-////
-//                    HashMap<String,String> hashMap=new HashMap<>();
-////
-////                    hashMap.put("userid",jsonObject.getString("userid"));
-////                    if(jsonObject.getString("registration").equals("0")) {
-////                        hashMap.put("registration", "₹ 400 unpaid");
-////                    }else {
-////                        hashMap.put("registration", "paid");
-////                    }
-////                    if(jsonObject.getString("hospitality").equals("0")) {
-////                        hashMap.put("hospitality", "₹ 600 unpaid");
-////                    }else {
-////                        hashMap.put("hospitality", "paid");
-////                    }
-////                    hashMap.put("name",jsonObject.getString("name"));
-////                    hashMap.put("collegeid",jsonObject.getString("collegeid"));
-////                    hashMap.put("college",jsonObject.getString("college"));
-////                    hashMap.put("phone",jsonObject.getString("phone"));
-////                    hashMap.put("email",jsonObject.getString("email"));
-//
-//                    return hashMap;
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            JSONObject jsonObject=new JSONObject(jsonstr);
             return null;
         }
 
@@ -261,34 +259,10 @@ public class RegistrationFragment extends Fragment {
                 Intent i = new Intent(getActivity(), WebViewActivity.class);
                 i.putExtra("data", string);
                 startActivity(i);
-                Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
 
             }
 
-//            else{
-//                if (hashMap.get("registration").equalsIgnoreCase("paid")){
-//                    getActivity().findViewById(R.id.imageViewQrCode).setVisibility(View.VISIBLE);
-//                    SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
-//                    SharedPreferences.Editor editor= sharedPreferences.edit();
-//
-//
-//                    for(String s:hashMap.keySet()){
-//                        editor.putString(s,hashMap.get(s));
-//                    }
-//                    editor.putBoolean("data_stored",true);
-//                    editor.apply();
-//                }
-//                ((TextView)getActivity().findViewById(R.id.textViewTzIdValue)).setText(hashMap.get("userid"));
-//                ((TextView)getActivity().findViewById(R.id.textViewTechnozionRegistrationPaid)).setText(hashMap.get("registration"));
-//                ((TextView)getActivity().findViewById(R.id.textViewHospitalityRegistrationPaid)).setText(hashMap.get("hospitality"));
-//                ((TextView)getActivity().findViewById(R.id.textViewName)).setText(hashMap.get("name"));
-//                ((TextView)getActivity().findViewById(R.id.textViewCollegeIdValue)).setText(hashMap.get("collegeid"));
-//                ((TextView)getActivity().findViewById(R.id.textViewCollege)).setText(hashMap.get("college"));
-//                ((TextView)getActivity().findViewById(R.id.textViewPhoneNumber)).setText(hashMap.get("phone"));
-//                ((TextView)getActivity().findViewById(R.id.textViewEmail)).setText(hashMap.get("email"));
-
-//            }
-//            startActivity(new Intent(getActivity(), RegisterConfirmationActivity.class));
         }
     }
 }

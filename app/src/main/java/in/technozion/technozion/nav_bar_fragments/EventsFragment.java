@@ -1,5 +1,7 @@
 package in.technozion.technozion.nav_bar_fragments;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -61,10 +63,11 @@ public class EventsFragment extends Fragment {
         });
 
         listViewRegisteredEvents= (ListView) getActivity().findViewById(R.id.listViewRegisteredEvents);
-        new GetEventsTask().execute();
+        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
+        new GetEventsTask().execute(sharedPreferences.getString("userid",""));
     }
 
-    public class GetEventsTask extends AsyncTask<Void,Void,List<HashMap<String,String>>> {
+    public class GetEventsTask extends AsyncTask<String,Void,List<HashMap<String,String>>> {
 
         private ProgressDialog progressDialog;
         @Override
@@ -77,10 +80,14 @@ public class EventsFragment extends Fragment {
         }
 
         @Override
-        protected List<HashMap<String, String>> doInBackground(Void... voids) {
+        protected List<HashMap<String, String>> doInBackground(String... strings) {
+
+            if (strings==null||strings[0]==null){
+                return null;
+            }
 
             HashMap<String,String> hashMap = new HashMap<>();
-            hashMap.put("userid","9346472");
+            hashMap.put("userid",strings[0]);
 
             String jsonstr= Util.getStringFromURL(URLS.REGISTERED_EVENTS_URL,hashMap);
             if (jsonstr!=null) {
@@ -135,7 +142,9 @@ public class EventsFragment extends Fragment {
                 Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
             } else{
 
-                listViewRegisteredEvents.setAdapter(new EventsAdapter(getActivity(),R.layout.event_boxes,list));
+                if(listViewRegisteredEvents!=null) {
+                    listViewRegisteredEvents.setAdapter(new EventsAdapter(getActivity(), R.layout.event_boxes, list));
+                }
             }
         }
     }

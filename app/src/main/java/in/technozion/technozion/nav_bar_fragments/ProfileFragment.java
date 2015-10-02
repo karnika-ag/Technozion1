@@ -1,5 +1,8 @@
 package in.technozion.technozion.nav_bar_fragments;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
@@ -7,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +23,10 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 
 import in.technozion.technozion.Data.URLS;
@@ -28,9 +36,9 @@ import in.technozion.technozion.R;
 
 public class ProfileFragment extends Fragment {
     public static final String TAG = ProfileFragment.class.getSimpleName();
-//    public static final String profileUrl="http://192.168.87.50/tz-registration-master/profile/index_mobile/9346472";
+    //    public static final String profileUrl="http://192.168.87.50/tz-registration-master/profile/index_mobile/9346472";
 //    public static final String profileUrl="http://bhuichalo.com/tz15/profile.json";
-private static final String ARG_SECTION_NUMBER = "section_number";
+    private static final String ARG_SECTION_NUMBER = "section_number";
 
     public static ProfileFragment newInstance(int sectionNumber) {
         ProfileFragment fragment = new ProfileFragment();
@@ -49,29 +57,40 @@ private static final String ARG_SECTION_NUMBER = "section_number";
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+//        new
         loadProfileData();
     }
 
     private void loadProfileData() {
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-        Boolean registered=sharedPreferences.getBoolean("registered", false);
+//        Boolean registered=sharedPreferences.getBoolean("registered", false);
         ((TextView)getActivity().findViewById(R.id.textViewTzIdValue)).setText(sharedPreferences.getString("userid", ""));
         ((TextView)getActivity().findViewById(R.id.textViewName)).setText(sharedPreferences.getString("name",""));
         ((TextView)getActivity().findViewById(R.id.textViewCollegeIdValue)).setText(sharedPreferences.getString("collegeid",""));
         ((TextView)getActivity().findViewById(R.id.textViewCollege)).setText(sharedPreferences.getString("college",""));
         ((TextView)getActivity().findViewById(R.id.textViewPhoneNumber)).setText(sharedPreferences.getString("phone", ""));
         ((TextView)getActivity().findViewById(R.id.textViewEmail)).setText(sharedPreferences.getString("email", ""));
+//        ((ImageView)getActivity().findViewById(R.id.imageViewQrCode)).setImageBitmap(Util.getDrawableFromURL(URLS.QR_CODE_URL,null));
 
-        if (registered){
-            getActivity().findViewById(R.id.imageViewQrCode).setVisibility(View.VISIBLE);
+
+//        if (registered){
+//            getActivity().findViewById(R.id.imageViewQrCode).setVisibility(View.VISIBLE);
 //            ((ImageView)getActivity().findViewById(R.id.imageViewQrCode)).setVisibility(View.VISIBLE);
 //            Toast.makeText(getActivity(),"Stored",Toast.LENGTH_SHORT).show();
-            ((TextView)getActivity().findViewById(R.id.textViewTechnozionRegistrationPaid)).setText(sharedPreferences.getString("registration", ""));
-            ((TextView)getActivity().findViewById(R.id.textViewHospitalityRegistrationPaid)).setText(sharedPreferences.getString("hospitality",""));
-            }else {
+        ((TextView)getActivity().findViewById(R.id.textViewTechnozionRegistrationPaid)).setText(sharedPreferences.getString("registration", ""));
+        ((TextView)getActivity().findViewById(R.id.textViewHospitalityRegistrationPaid)).setText(sharedPreferences.getString("hospitality",""));
+//            }else {
 //            Toast.makeText(getActivity(),"Loading",Toast.LENGTH_SHORT).show();
-            new LoadEventsTask().execute(sharedPreferences.getString("userid", ""));
+        new LoadEventsTask().execute(sharedPreferences.getString("userid", ""));
+        String qr_code=sharedPreferences.getString("qr_code","");
+        if (qr_code.isEmpty()) {
+            new LoadQRCodeTask().execute(sharedPreferences.getString("userid", ""));
+        }else {
+            byte[] decodedString = Base64.decode(qr_code, Base64.NO_WRAP);
+            InputStream inputStream = new ByteArrayInputStream(decodedString);
+            ((ImageView) getActivity().findViewById(R.id.imageViewQrCode)).setImageBitmap(BitmapFactory.decodeStream(inputStream));
         }
+//        }
     }
 
     public class LoadEventsTask extends AsyncTask<String,Void,HashMap<String ,String>> {
@@ -90,12 +109,14 @@ private static final String ARG_SECTION_NUMBER = "section_number";
         @Override
         protected HashMap<String ,String> doInBackground(String... strings) {
 
+
+
             if (strings==null||strings.length==0){
                 return null;
             }
             HashMap<String,String> data=new HashMap();
-            data.put("userid",strings[0]);
-            String jsonstr=null;
+            data.put("userid", strings[0]);
+            String jsonstr;
             jsonstr=Util.getStringFromURL(URLS.PROFILE_URL,data);
             if (jsonstr!=null) {
                 Log.d("GOT FROM HTTP", jsonstr);
@@ -141,9 +162,10 @@ private static final String ARG_SECTION_NUMBER = "section_number";
             } else{
                 if (hashMap.get("registration").equalsIgnoreCase("paid")){
                     //TODO SAVE THINGS IN SHAREDPREFERENCES
-                    getActivity().findViewById(R.id.imageViewQrCode).setVisibility(View.VISIBLE);
+//                    getActivity().findViewById(R.id.imageViewQrCode).setVisibility(View.VISIBLE);
                     SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
                     SharedPreferences.Editor editor= sharedPreferences.edit();
+
 
 
                     for(String s:hashMap.keySet()){
@@ -160,16 +182,90 @@ private static final String ARG_SECTION_NUMBER = "section_number";
 //                    editor.putString("phone",hashMap.get("phone"));
 //                    editor.putString("email",hashMap.get("email"));
                 }
-                ((TextView)getActivity().findViewById(R.id.textViewTzIdValue)).setText(hashMap.get("userid"));
-                ((TextView)getActivity().findViewById(R.id.textViewTechnozionRegistrationPaid)).setText(hashMap.get("registration"));
-                ((TextView)getActivity().findViewById(R.id.textViewHospitalityRegistrationPaid)).setText(hashMap.get("hospitality"));
-                ((TextView)getActivity().findViewById(R.id.textViewName)).setText(hashMap.get("name"));
-                ((TextView)getActivity().findViewById(R.id.textViewCollegeIdValue)).setText(hashMap.get("collegeid"));
-                ((TextView)getActivity().findViewById(R.id.textViewCollege)).setText(hashMap.get("college"));
-                ((TextView)getActivity().findViewById(R.id.textViewPhoneNumber)).setText(hashMap.get("phone"));
-                ((TextView)getActivity().findViewById(R.id.textViewEmail)).setText(hashMap.get("email"));
+                TextView textView;
+                textView=((TextView) getActivity().findViewById(R.id.textViewTzIdValue));
+                if (textView!=null) {
+                    textView.setText(hashMap.get("userid"));
+                }
+                textView=((TextView)getActivity().findViewById(R.id.textViewTechnozionRegistrationPaid));
+                if (textView!=null) {
+                    textView.setText(hashMap.get("registration"));
+                }
+                textView=((TextView)getActivity().findViewById(R.id.textViewHospitalityRegistrationPaid));
+                if (textView!=null) {
+                    textView.setText(hashMap.get("hospitality"));
+                }
+                textView=((TextView)getActivity().findViewById(R.id.textViewName));
+                if (textView!=null) {
+                    textView.setText(hashMap.get("name"));
+                }
+                textView=((TextView)getActivity().findViewById(R.id.textViewCollegeIdValue));
+                if (textView!=null) {
+                    textView.setText(hashMap.get("collegeid"));
+                }
+                textView=((TextView)getActivity().findViewById(R.id.textViewCollege));
+                if (textView!=null) {
+                    textView.setText(hashMap.get("college"));
+                }
+                textView=((TextView)getActivity().findViewById(R.id.textViewPhoneNumber));
+                if (textView!=null) {
+                    textView.setText(hashMap.get("phone"));
+                }
+                textView=((TextView)getActivity().findViewById(R.id.textViewEmail));
+                if (textView!=null) {
+                    textView.setText(hashMap.get("email"));
+                }
             }
         }
     }
 
+
+    public class LoadQRCodeTask extends AsyncTask<String,Void,String> {
+
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog=new ProgressDialog(getActivity());
+            progressDialog.setMessage("fetching QR data..");
+//            progressDialog.setCancelable(false);
+            progressDialog.setCanceledOnTouchOutside(false);
+//            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+
+
+            if (strings==null||strings.length==0){
+                return null;
+            }
+            HashMap<String,String> data=new HashMap();
+            data.put("userid", strings[0]);
+
+            return Util.getStringFromURL(URLS.QR_CODE_URL, data);
+        }
+
+        @Override
+        protected void onPostExecute(String string) {
+            super.onPostExecute(string);
+            if (progressDialog.isShowing()) {
+                progressDialog.cancel();
+            }
+            if (string==null||string.length()<100) {
+                Toast.makeText(getActivity(), "Could not fetch QR, please try again", Toast.LENGTH_SHORT).show();
+            } else {
+                SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(getActivity()).edit();
+                editor.putString("qr_code",string);
+                editor.apply();
+                ImageView imageView=((ImageView) getActivity().findViewById(R.id.imageViewQrCode));
+                if (imageView!=null) {
+                    byte[] decodedString = Base64.decode(string, Base64.NO_WRAP);
+                    InputStream inputStream = new ByteArrayInputStream(decodedString);
+                    imageView.setImageBitmap(BitmapFactory.decodeStream(inputStream));
+                }
+            }
+        }
+    }
 }
