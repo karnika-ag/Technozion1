@@ -81,7 +81,7 @@ public class RegistrationFragment extends Fragment {
                 } else
                     Toast.makeText(getActivity(), "Plz check the terms and condition checkbox", Toast.LENGTH_SHORT).show();
 
-                new RegisterTask().execute(hashMap);
+             //   new RegisterTask().execute(hashMap);
 
             }
         });

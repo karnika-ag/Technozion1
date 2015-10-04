@@ -46,7 +46,6 @@
         android:layout_centerHorizontal="true">
 
 
-
         <EditText
             android:hint="email"
             android:layout_width="wrap_content"
