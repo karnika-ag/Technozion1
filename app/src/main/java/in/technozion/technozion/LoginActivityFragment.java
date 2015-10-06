@@ -1,5 +1,6 @@
 package in.technozion.technozion;
 
+import android.animation.Animator;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -41,6 +45,10 @@ public class LoginActivityFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        Animation animation= (Animation) getActivity().getResources().getAnimation(R.anim.shake);
+        getActivity().findViewById(R.id.buttonLogin).startAnimation(animation);
+//        AnimationUtils.loadAnimation(animation);
+
 //        ((FrameLayout)getActivity().findViewById(R.id.frameLayout)).addView(getActivity().getLayoutInflater().inflate(R.layout.box_login,null));
 //       /*
 
@@ -49,7 +57,7 @@ public class LoginActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                new LoginTask().execute(((EditText)getActivity().findViewById(R.id.editTextEmail)).getText().toString(),((EditText)getActivity().findViewById(R.id.editTextPassword)).getText().toString());
+                new LoginTask().execute(((EditText) getActivity().findViewById(R.id.editTextEmail)).getText().toString(), ((EditText) getActivity().findViewById(R.id.editTextPassword)).getText().toString());
 
 //                SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getContext());
 //                SharedPreferences.Editor editor = sharedPreferences.edit();
