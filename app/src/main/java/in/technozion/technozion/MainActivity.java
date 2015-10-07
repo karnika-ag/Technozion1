@@ -1,6 +1,9 @@
 package in.technozion.technozion;
 
 import android.content.Intent;
+import android.os.Build;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +11,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import in.technozion.technozion.nav_bar_fragments.EventsFragment;
@@ -23,7 +27,7 @@ import in.technozion.technozion.nav_bar_fragments.RegistrationFragment;
 import in.technozion.technozion.nav_bar_fragments.TShirtsFragment;
 import in.technozion.technozion.nav_bar_fragments.WorkshopsFragment;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
@@ -32,7 +36,7 @@ public class MainActivity extends AppCompatActivity
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private Toolbar mToolbar;
     /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
+     * Used to store the last screen title. For use in {@link # restoreActionBar()}.
      */
     private CharSequence mTitle;
 
@@ -47,13 +51,21 @@ public class MainActivity extends AppCompatActivity
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(getResources().getColor(R.color.myPrimaryDarkColor));
+        }
+
         // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
+      /*  mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(this);
         ((TextView) findViewById(R.id.textViewName)).setText(sharedPreferences.getString("name","------"));
         ((TextView)findViewById(R.id.textViewTzId)).setText(sharedPreferences.getString("userid","----"));
+        */
     }
 
     @Override

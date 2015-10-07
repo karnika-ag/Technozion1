@@ -6,11 +6,7 @@
     android:background="@drawable/bg2"
     >
 
-    <include
-        android:id="@+id/toolbar_actionbar"
-        layout="@layout/toolbar_default"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+
     <ImageView
         android:background="@color/technozion_black"
         android:padding="20dp"

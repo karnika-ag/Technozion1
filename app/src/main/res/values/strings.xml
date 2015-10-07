@@ -36,4 +36,6 @@
     <string name="title_activity_event_confirmation">Event Confirmation</string>
     <string name="action_logout">logout</string>
 
+    <string name="action_search">Search</string>
+    <string name="action_filter">Filter</string>
 </resources>
