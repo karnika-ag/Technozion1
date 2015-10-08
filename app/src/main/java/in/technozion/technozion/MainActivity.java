@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +29,7 @@ import in.technozion.technozion.nav_bar_fragments.RegistrationFragment;
 import in.technozion.technozion.nav_bar_fragments.TShirtsFragment;
 import in.technozion.technozion.nav_bar_fragments.WorkshopsFragment;
 
-public class MainActivity extends ActionBarActivity
+public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
@@ -59,14 +60,17 @@ public class MainActivity extends ActionBarActivity
             window.setStatusBarColor(getResources().getColor(R.color.myPrimaryDarkColor));
         }
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         // Set up the drawer.
-      /*  mNavigationDrawerFragment.setUp(
+       mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+                (DrawerLayout) findViewById(R.id.drawer_layout),mToolbar);
         SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(this);
         ((TextView) findViewById(R.id.textViewName)).setText(sharedPreferences.getString("name","------"));
         ((TextView)findViewById(R.id.textViewTzId)).setText(sharedPreferences.getString("userid","----"));
-        */
+
     }
 
     @Override

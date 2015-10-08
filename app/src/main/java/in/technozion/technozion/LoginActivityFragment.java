@@ -89,6 +89,8 @@ public class LoginActivityFragment extends Fragment {
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getContext());
         Boolean logged_in=sharedPreferences.getBoolean("logged_in", false);
         if (logged_in) {
+            String a="aaa";
+            Log.d("HI this is mainactivity starting",a);
             startActivity(new Intent(getContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         }
 //        */
@@ -100,6 +102,7 @@ public class LoginActivityFragment extends Fragment {
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getContext());
         Boolean logged_in=sharedPreferences.getBoolean("logged_in", false);
         if (logged_in) {
+
             getActivity().onBackPressed();
 //            startActivity(new Intent(getContext(), MainActivity.class));
         }

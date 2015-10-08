@@ -5,13 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.view.GravityCompat;
+import android.support.v7.widget.Toolbar;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +25,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import in.technozion.technozion.adapters.NavigationDrawerAdapter;
 
@@ -53,6 +58,7 @@ public class NavigationDrawerFragment extends Fragment {
      * Helper component that ties the action bar to the navigation drawer.
      */
     private ActionBarDrawerToggle mDrawerToggle;
+    private android.support.v7.app.ActionBarDrawerToggle mActionBarDrawerToggle;
 
     private DrawerLayout mDrawerLayout;
     private RelativeLayout mDrawerRelativeLayout;
@@ -105,8 +111,9 @@ public class NavigationDrawerFragment extends Fragment {
             }
         });
 
+        /*
         ArrayAdapter arrayAdapter=new NavigationDrawerAdapter(
-                getActionBar().getThemedContext(),
+                getActivity().getApplicationContext(),
                 android.R.layout.simple_list_item_1,
 //                android.R.id.text1,
                 new String[]{
@@ -120,11 +127,29 @@ public class NavigationDrawerFragment extends Fragment {
 //                        getString(R.string.title_section8),
 //                        getString(R.string.title_section9),
                 });
-        mDrawerListView.setAdapter(arrayAdapter);
+        */
+        final List<NavigationItem> navigationItems =  getMenu();
+        NavigationDrawerAdapter adapter = new NavigationDrawerAdapter(getActivity().getApplicationContext(),
+                android.R.layout.simple_list_item_1,navigationItems);
+    //    mDrawerListView.setAdapter(arrayAdapter);
+        mDrawerListView.setAdapter(adapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerRelativeLayout;
     }
-
+    public List<NavigationItem> getMenu() {
+        List<NavigationItem> items = new ArrayList<NavigationItem>();
+        items.add(new NavigationItem(getString(R.string.nav_home), getResources().getDrawable(R.mipmap.ic_tz)));
+        Toast.makeText(getActivity().getApplicationContext(),items.get(0).getText(),Toast.LENGTH_LONG).show();
+        items.add(new NavigationItem(getString(R.string.nav_profile), getResources().getDrawable(R.mipmap.ic_profile)));
+        items.add(new NavigationItem(getString(R.string.nav_registration), getResources().getDrawable(R.mipmap.ic_register)));
+        items.add(new NavigationItem(getString(R.string.nav_events), getResources().getDrawable(R.mipmap.ic_events)));
+        items.add(new NavigationItem(getString(R.string.nav_workshops), getResources().getDrawable(R.mipmap.ic_workshops)));
+        items.add(new NavigationItem(getString(R.string.nav_map), getResources().getDrawable(R.mipmap.ic_googlemaps)));
+        items.add(new NavigationItem(getString(R.string.nav_t_shirts), getResources().getDrawable(R.mipmap.ic_tshirts)));
+        items.add(new NavigationItem(getString(R.string.nav_faq), getResources().getDrawable(R.mipmap.ic_faq)));
+        items.add(new NavigationItem(getString(R.string.nav_logout), getResources().getDrawable(R.mipmap.ic_logout)));
+        return items;
+    }
     public boolean isDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
     }
@@ -135,13 +160,14 @@ public class NavigationDrawerFragment extends Fragment {
      * @param fragmentId   The android:id of this fragment in its activity's layout.
      * @param drawerLayout The DrawerLayout containing this fragment's UI.
      */
-    public void setUp(int fragmentId, DrawerLayout drawerLayout) {
+    public void setUp(int fragmentId, DrawerLayout drawerLayout,Toolbar toolbar) {
         mFragmentContainerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
-
+     //   Toast.makeText(getActivity().getApplicationContext(),"HAHAHAHHA",Toast.LENGTH_LONG).show();
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
+        mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.myPrimaryDarkColor));
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -152,7 +178,7 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
                 mDrawerLayout,                    /* DrawerLayout object */
-                R.drawable.ic_drawer,             /* nav drawer image to replace 'Up' caret */
+                toolbar,             /* nav drawer image to replace 'Up' caret */
                 R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
                 R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
         ) {
