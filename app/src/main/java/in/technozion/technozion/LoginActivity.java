@@ -26,7 +26,6 @@ public class LoginActivity extends AppCompatActivity {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(getResources().getColor(R.color.myNavigationColor));
         }
-
     }
 
 
