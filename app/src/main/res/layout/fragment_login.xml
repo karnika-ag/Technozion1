@@ -38,6 +38,11 @@
     <!--android:id="@+id/frameLayout"/>-->
     <LinearLayout
 
+
+
+android:id="@+id/linearLayoutLogin"
+        android:background="@drawable/rounded_bg"
+        android:padding="15dp"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

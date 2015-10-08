@@ -1,5 +1,6 @@
 package in.technozion.technozion.nav_bar_fragments;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -25,13 +26,12 @@ import java.util.List;
 
 import in.technozion.technozion.Data.URLS;
 import in.technozion.technozion.Data.Util;
+import in.technozion.technozion.MainActivity;
 import in.technozion.technozion.R;
 import in.technozion.technozion.RegisterWorkshopActivity;
 import in.technozion.technozion.adapters.WorkshopsRegisteredAdapter;
 
-/**
- * Created by poliveira on 11/03/2015.
- */
+
 public class WorkshopsFragment extends Fragment {
     public static final String TAG = WorkshopsFragment.class.getSimpleName();
     private ListView listViewRegisteredWorkshops;
@@ -45,6 +45,14 @@ public class WorkshopsFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        ((MainActivity) activity).onSectionAttached(
+                getArguments().getInt(ARG_SECTION_NUMBER));
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -130,10 +138,12 @@ public class WorkshopsFragment extends Fragment {
                 progressDialog.cancel();
             }
             if (list==null) {
-                Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
             } else{
 
-                listViewRegisteredWorkshops.setAdapter(new WorkshopsRegisteredAdapter(getActivity(),R.layout.workshops_registerd,list));
+                if (listViewRegisteredWorkshops!=null) {
+                    listViewRegisteredWorkshops.setAdapter(new WorkshopsRegisteredAdapter(getActivity(), R.layout.workshops_registerd, list));
+                }
             }
         }
     }

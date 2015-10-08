@@ -30,22 +30,27 @@ public class Util {
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
             httpURLConnection.connect();
+
+            String data = "";
+
+            for (String key:hashMap.keySet()){
+
+            }
             int len = hashMap.size();
             Set<String> set = hashMap.keySet();
             java.util.Iterator ir = set.iterator();
-            String data = "";
 
             for(int i=0;i<len;i++) {
                 String key = (String) ir.next();
                 String value = hashMap.get(key);
-                Log.d("testing_data"+i,key+" "+value);
+//                Log.d("testing_data"+i,key+" "+value);
                 if(i==0)
                     data = ""+key+"="+URLEncoder.encode(value,"UTF-8");
                 else
                     data +="&"+key+"="+URLEncoder.encode(value,"UTF-8");
             }
 
-            Log.d("checking_send_data",data);
+//            Log.d("checking_send_data",data);
             OutputStreamWriter out = new OutputStreamWriter(httpURLConnection.getOutputStream());
             out.write(data);
             out.close();
@@ -58,7 +63,7 @@ public class Util {
                 while ((line = reader.readLine()) != null) {
                     builder.append(line);
                 }
-                Log.d("checking_val",builder.toString());
+//                Log.d("checking_val",builder.toString());
                 return builder.toString();
             }
         } catch (IOException e) {

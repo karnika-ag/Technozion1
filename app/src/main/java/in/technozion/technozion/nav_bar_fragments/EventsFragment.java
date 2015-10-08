@@ -1,5 +1,6 @@
 package in.technozion.technozion.nav_bar_fragments;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,7 @@ import java.util.List;
 
 import in.technozion.technozion.Data.URLS;
 import in.technozion.technozion.Data.Util;
+import in.technozion.technozion.MainActivity;
 import in.technozion.technozion.R;
 import in.technozion.technozion.RegisterEventActivity;
 import in.technozion.technozion.adapters.EventsAdapter;
@@ -44,6 +46,13 @@ public class EventsFragment extends Fragment {
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        ((MainActivity) activity).onSectionAttached(
+                getArguments().getInt(ARG_SECTION_NUMBER));
     }
 
     @Nullable
@@ -140,10 +149,12 @@ public class EventsFragment extends Fragment {
                 progressDialog.cancel();
             }
             if (list==null) {
-                Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
             } else{
 
-                listViewRegisteredEvents.setAdapter(new EventsAdapter(getActivity(),R.layout.event_boxes,list));
+                if (listViewRegisteredEvents!=null) {
+                    listViewRegisteredEvents.setAdapter(new EventsAdapter(getActivity(), R.layout.event_boxes, list));
+                }
             }
         }
     }

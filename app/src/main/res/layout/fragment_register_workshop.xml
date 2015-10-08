@@ -46,7 +46,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Minimum Participants"
         android:id="@+id/textViewMinimumParticipants"
         android:layout_below="@+id/spinnerNewEvents"
@@ -56,7 +56,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Maximum Participants"
         android:id="@+id/textViewMaximumParticipants"
         android:layout_below="@+id/textViewMinimumParticipants"
@@ -66,7 +66,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Workshop Cost"
         android:id="@+id/textViewWorkshopCost"
         android:layout_below="@+id/textViewMaximumParticipants"
@@ -77,7 +77,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="1"
         android:id="@+id/textViewMaximumParticipantsValue"
         android:layout_alignBottom="@+id/textViewMaximumParticipants"
@@ -88,7 +88,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="1"
         android:id="@+id/textViewMinimumParticipantsValue"
         android:layout_above="@+id/textViewMaximumParticipants"
@@ -98,7 +98,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="1"
         android:id="@+id/textViewWorkshopCostValue"
         android:layout_alignBottom="@+id/textViewWorkshopCost"
@@ -123,12 +123,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Enter the Technozion-ID of the prticipants:"
         android:id="@+id/textViewParticipants"
         android:layout_below="@+id/textViewWorkshopCost"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_alignEnd="@+id/textView3" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
       </RelativeLayout>
     </ScrollView>

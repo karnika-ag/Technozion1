@@ -18,6 +18,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import in.technozion.technozion.nav_bar_fragments.DevelopersFragment;
 import in.technozion.technozion.nav_bar_fragments.EventsFragment;
 import in.technozion.technozion.nav_bar_fragments.FAQFragment;
 import in.technozion.technozion.nav_bar_fragments.HomeFragment;
@@ -93,7 +94,7 @@ public class MainActivity extends ActionBarActivity
                 fragment= FAQFragment.newInstance(6);
                 break;
             case 6:
-                fragment= TShirtsFragment.newInstance(7);
+                fragment= DevelopersFragment.newInstance(7);
                 break;
             case 7:
                 fragment=HomeFragment.newInstance(9);
