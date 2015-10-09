@@ -24,9 +24,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import in.technozion.technozion.adapters.NavigationDrawerAdapter;
@@ -101,9 +103,14 @@ public class NavigationDrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mDrawerRelativeLayout = (RelativeLayout) inflater.inflate(
+        View view=(RelativeLayout) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
-        mDrawerListView = (ListView) mDrawerRelativeLayout.findViewById(R.id.listViewNavigationDrawer);
+ /*       mDrawerRelativeLayout = (RelativeLayout) inflater.inflate(
+                R.layout.fragment_navigation_drawer, container, false);
+   */
+        mDrawerListView = (ListView) view.findViewById(R.id.listViewNavigationDrawer);
+/*        mDrawerListView = (ListView) mDrawerRelativeLayout.findViewById(R.id.listViewNavigationDrawer);
+  */
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -128,18 +135,50 @@ public class NavigationDrawerFragment extends Fragment {
 //                        getString(R.string.title_section9),
                 });
         */
-        final List<NavigationItem> navigationItems =  getMenu();
+        String[] names=new String[]{"Home", "Profile", "Registeration", "Events", "Workshops", "Map", "T-Shirts",  "FAQ", "Developers", };
+
+    /*Array of Images*/
+        int[] image = new int[] {R.mipmap.ic_tz,
+                R.mipmap.ic_profile
+                ,R.mipmap.ic_register
+                ,R.mipmap.ic_events,
+                R.mipmap.ic_workshops,
+                R.mipmap.ic_googlemaps
+                ,R.mipmap.ic_tshirts
+                ,R.mipmap.ic_faq,
+                R.mipmap.ic_faq,
+                };
+
+        List<HashMap<String, String>> listinfo = new ArrayList<HashMap<String, String>>();
+        listinfo.clear();
+        for(int i=0;i<9;i++){
+            HashMap<String, String> hm = new HashMap<String, String>();
+            hm.put("name", names[i]);
+            hm.put("image", Integer.toString(image[i]));
+            listinfo.add(hm);
+        }
+
+        // Keys used in Hashmap
+        String[] from = { "image", "name" };
+        int[] to = { R.id.imageViewIcon, R.id.textViewName };
+        SimpleAdapter adapter = new SimpleAdapter(getActivity().getApplicationContext(), listinfo, R.layout.listview_list_row, from, to);
+
+     /*   final List<NavigationItem> navigationItems =  getMenu();
         NavigationDrawerAdapter adapter = new NavigationDrawerAdapter(getActivity().getApplicationContext(),
                 android.R.layout.simple_list_item_1,navigationItems);
     //    mDrawerListView.setAdapter(arrayAdapter);
+        Toast.makeText(getActivity().getApplicationContext(),adapter.mData.get(8).getText(),Toast.LENGTH_LONG).show();
+       */
         mDrawerListView.setAdapter(adapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-        return mDrawerRelativeLayout;
+        return view;
+  /*      return mDrawerRelativeLayout;
+  */
+
     }
     public List<NavigationItem> getMenu() {
         List<NavigationItem> items = new ArrayList<NavigationItem>();
-        items.add(new NavigationItem(getString(R.string.nav_home), getResources().getDrawable(R.mipmap.ic_tz)));
-        Toast.makeText(getActivity().getApplicationContext(),items.get(0).getText(),Toast.LENGTH_LONG).show();
+    /*    items.add(new NavigationItem(getString(R.string.title_section1), getResources().getDrawable(R.mipmap.ic_tz)));
         items.add(new NavigationItem(getString(R.string.nav_profile), getResources().getDrawable(R.mipmap.ic_profile)));
         items.add(new NavigationItem(getString(R.string.nav_registration), getResources().getDrawable(R.mipmap.ic_register)));
         items.add(new NavigationItem(getString(R.string.nav_events), getResources().getDrawable(R.mipmap.ic_events)));
@@ -148,6 +187,7 @@ public class NavigationDrawerFragment extends Fragment {
         items.add(new NavigationItem(getString(R.string.nav_t_shirts), getResources().getDrawable(R.mipmap.ic_tshirts)));
         items.add(new NavigationItem(getString(R.string.nav_faq), getResources().getDrawable(R.mipmap.ic_faq)));
         items.add(new NavigationItem(getString(R.string.nav_logout), getResources().getDrawable(R.mipmap.ic_logout)));
+*/
         return items;
     }
     public boolean isDrawerOpen() {

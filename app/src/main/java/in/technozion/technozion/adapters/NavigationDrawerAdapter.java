@@ -17,11 +17,14 @@ import in.technozion.technozion.NavigationItem;
 import in.technozion.technozion.R;
 
 public class NavigationDrawerAdapter extends ArrayAdapter<NavigationItem> {
-    private List<NavigationItem> mData;
+    public List<NavigationItem> mData;
+    private int resource;
     private Context context;
     public NavigationDrawerAdapter(Context context,int resource,List<NavigationItem> data) {
         super(context,resource,data);
-        mData = data;
+        this.resource=resource;
+        this.context=context;
+        this.mData = data;
     }
   /*  public NavigationDrawerAdapter(Context context, int resource, String[] objects) {
         super(context, resource, objects);
@@ -31,10 +34,11 @@ public class NavigationDrawerAdapter extends ArrayAdapter<NavigationItem> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView view= (TextView) super.getView(position, convertView, parent);
-   //     Drawable drawable=context.getResources().getDrawable(R.mipmap.ic_launcher);
-       // drawable.setBounds(0,0,40,40);
-     //   view.setCompoundDrawables(drawable,null,null,null);
-        return view;
+        Drawable drawable=context.getResources().getDrawable(R.mipmap.ic_launcher);
+        drawable.setBounds(0,0,40,40);
+        view.setCompoundDrawables(drawable,null,null,null);
+
+        return convertView;
     }
 }
 

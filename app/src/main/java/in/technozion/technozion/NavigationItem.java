@@ -4,8 +4,8 @@ import android.graphics.drawable.Drawable;
 
 public class NavigationItem {
 
-    private String mText;
-    private Drawable mDrawable;
+    public String mText;
+    public Drawable mDrawable;
 
     public NavigationItem(String text, Drawable drawable) {
         mText = text;

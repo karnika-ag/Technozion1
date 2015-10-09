@@ -20,7 +20,7 @@
     <color name="stroke_login">@color/transparent_green</color>
     <color name="stroke_old">#B1BCBE</color>
 
-    <color name="divider_color">#B1BCBE</color>
+    <color name="divider_color">#2cb1c9</color>
 
 
     <color name="myPrimaryColor">#00BCD4</color>
@@ -30,8 +30,10 @@
     <color name="myWindowBackground">#FFFFFF</color>
     <color name="myTextPrimaryColor">#212121</color>
     <color name="myNavigationColor">#000000</color>
-    <color name="recyclerview">#1c232d</color>
+    <color name="listview">#1c232d</color>
     <color name="selected_gray">#333c46</color>
+
+
 
 
 </resources>
