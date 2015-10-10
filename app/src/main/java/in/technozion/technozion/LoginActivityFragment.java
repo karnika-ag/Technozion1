@@ -45,8 +45,8 @@ public class LoginActivityFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Animation animation= (Animation) getActivity().getResources().getAnimation(R.anim.shake);
-        getActivity().findViewById(R.id.buttonLogin).startAnimation(animation);
+//        Animation animation= (Animation) getActivity().getResources().getAnimation(R.anim.shake);
+//        getActivity().findViewById(R.id.buttonLogin).startAnimation(animation);
 //        AnimationUtils.loadAnimation(animation);
 
 //        ((FrameLayout)getActivity().findViewById(R.id.frameLayout)).addView(getActivity().getLayoutInflater().inflate(R.layout.box_login,null));
