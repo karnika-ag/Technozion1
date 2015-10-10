@@ -1,5 +1,6 @@
 package in.technozion.technozion.nav_bar_fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,9 @@ import android.support.annotation.Nullable;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -33,6 +37,7 @@ import java.util.HashMap;
 
 import in.technozion.technozion.Data.URLS;
 import in.technozion.technozion.Data.Util;
+import in.technozion.technozion.MainActivity;
 import in.technozion.technozion.EventConfirmationActivity;
 import in.technozion.technozion.R;
 import in.technozion.technozion.RegisterActivity;
@@ -52,6 +57,36 @@ public class ProfileFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        ((MainActivity) activity).onSectionAttached(
+                getArguments().getInt(ARG_SECTION_NUMBER));
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_profile,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.action_fetch_qr_code){
+//            Toast.makeText(getActivity(),"Loading QR Code",Toast.LENGTH_SHORT).show();
+            SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
+            new LoadQRCodeTask().execute(sharedPreferences.getString("userid", ""));
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,6 +104,7 @@ public class ProfileFragment extends Fragment {
 
                 SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
                 new UpdateProfile().execute(sharedPreferences.getString("userid", ""));
+                loadProfileData();
 
 
             }
@@ -90,7 +126,7 @@ public class ProfileFragment extends Fragment {
 //            getActivity().findViewById(R.id.imageViewQrCode).setVisibility(View.VISIBLE);
 //            ((ImageView)getActivity().findViewById(R.id.imageViewQrCode)).setVisibility(View.VISIBLE);
 //            Toast.makeText(getActivity(),"Stored",Toast.LENGTH_SHORT).show();
-        ((TextView)getActivity().findViewById(R.id.textViewTechnozionRegistrationPaid)).setText(sharedPreferences.getString("registration", ""));
+        ((TextView)getActivity().findViewById(R.id.textViewTechnozionRegistrationPaid)).setText(sharedPreferences.getString("registration",""));
         ((TextView)getActivity().findViewById(R.id.textViewHospitalityRegistrationPaid)).setText(sharedPreferences.getString("hospitality",""));
 //            }else {
 //            Toast.makeText(getActivity(),"Loading",Toast.LENGTH_SHORT).show();
@@ -170,21 +206,28 @@ public class ProfileFragment extends Fragment {
                 progressDialog.cancel();
             }
             if (hashMap==null) {
-                Toast.makeText(getActivity(), "Could not fetch events, please try again", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Could not fetch events, please try again", Toast.LENGTH_SHORT).show();
             } else{
+                SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences.Editor editor= sharedPreferences.edit();
+                for(String s:hashMap.keySet()){
+                    editor.putString(s,hashMap.get(s));
+                }
+                editor.apply();
+
                 if (hashMap.get("registration").equalsIgnoreCase("paid")){
                     //TODO SAVE THINGS IN SHAREDPREFERENCES
 //                    getActivity().findViewById(R.id.imageViewQrCode).setVisibility(View.VISIBLE);
-                    SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
-                    SharedPreferences.Editor editor= sharedPreferences.edit();
+                 //   SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
+                 //   SharedPreferences.Editor editor= sharedPreferences.edit();
 
 
-                    for(String s:hashMap.keySet()){
-                        editor.putString(s,hashMap.get(s));
-                    }
+                 //   for(String s:hashMap.keySet()){
+                 //       editor.putString(s,hashMap.get(s));
+                 //   }
 //                    if (hashMap.get("hospitality").equalsIgnoreCase("paid"))
 //                    editor.putBoolean("registered",true);
-                    editor.apply();
+                 //   editor.apply();
 //                    editor.putString("registration", hashMap.get("registration"));
 //                    editor.putString("hospitality",hashMap.get("hospitality"));
 //                    editor.putString("userid",hashMap.get("userid"));
@@ -266,7 +309,7 @@ public class ProfileFragment extends Fragment {
                 progressDialog.cancel();
             }
             if (string==null||string.length()<100) {
-                Toast.makeText(getActivity(), "Could not fetch QR, please try again", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Could not fetch QR, please try again", Toast.LENGTH_SHORT).show();
             } else {
                 SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(getActivity()).edit();
                 editor.putString("qr_code",string);

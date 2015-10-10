@@ -52,45 +52,47 @@ public class WorkshopPaymentDetailsActivityFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         string = getActivity().getIntent().getStringExtra("data");
-        Log.d("on confirm page", string);
-        try{
+        if (string!=null) {
+            Log.d("on confirm page", string);
 
-            JSONObject jsonObject= new JSONObject(string);
-            JSONArray username =  jsonObject.getJSONArray("username");
-        //    JSONArray hospitality =  jsonObject.getJSONArray("hospitality");
-            JSONArray registration =  jsonObject.getJSONArray("registration");
-            int len=username.length();
-            List<HashMap<String,String>> values=new ArrayList<>();
+            try {
+
+                JSONObject jsonObject = new JSONObject(string);
+                JSONArray username = jsonObject.getJSONArray("username");
+                //    JSONArray hospitality =  jsonObject.getJSONArray("hospitality");
+                JSONArray registration = jsonObject.getJSONArray("registration");
+                int len = username.length();
+                List<HashMap<String, String>> values = new ArrayList<>();
 
 
-            for(int i=0;i<len;i++)
-            {
-                HashMap<String,String> value=new HashMap<>();
-                value.put("username", username.getString(i));
-          //      value.put("hospitality", hospitality.getString(i));
-                value.put("registration", registration.getString(i));
-                values.add(value);
+                for (int i = 0; i < len; i++) {
+                    HashMap<String, String> value = new HashMap<>();
+                    value.put("username", username.getString(i));
+                    //      value.put("hospitality", hospitality.getString(i));
+                    value.put("registration", registration.getString(i));
+                    values.add(value);
+                }
+
+                Log.d("Workshop Cost:", String.valueOf(jsonObject.getInt("workshopCost")));
+                //Log.d("Hospitality Cost:",String.valueOf(jsonObject.getInt("hospitalityCost")));
+                Log.d("Registration Cost:", String.valueOf(jsonObject.getInt("registrationCost")));
+                Log.d("Transaction Cost:", String.valueOf(jsonObject.getInt("transactionCharges")));
+                Log.d("Total Cost:", String.valueOf(jsonObject.getInt("totalCost")));
+
+                listViewWorkshopDetailsConfirmation = (ListView) getActivity().findViewById(R.id.listViewWorkshopDetailsConfirmation);
+                listViewWorkshopDetailsConfirmation.setAdapter(new WorkshopsAdapter(getActivity(), R.layout.workshop_boxes, values));
+
+
+                ((TextView) getActivity().findViewById(R.id.textViewWorkshopCost)).setText("Workshop Cost:" + jsonObject.getInt("workshopCost"));
+                //((TextView)getActivity().findViewById(R.id.textViewHospitalityCost)).setText("Hospitality Cost:" + jsonObject.getInt("hospitalityCost"));
+                ((TextView) getActivity().findViewById(R.id.textViewRegistrationCost)).setText("Registration Cost:" + jsonObject.getInt("registrationCost"));
+                ((TextView) getActivity().findViewById(R.id.textViewTransactionCharges)).setText("Transaction Charges:" + jsonObject.getInt("transactionCharges"));
+                ((TextView) getActivity().findViewById(R.id.textViewTotalCost)).setText("Total Cost:" + jsonObject.getInt("totalCost"));
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-
-            Log.d("Workshop Cost:", String.valueOf(jsonObject.getInt("workshopCost")));
-            //Log.d("Hospitality Cost:",String.valueOf(jsonObject.getInt("hospitalityCost")));
-            Log.d("Registration Cost:",String.valueOf(jsonObject.getInt("registrationCost")));
-            Log.d("Transaction Cost:",String.valueOf(jsonObject.getInt("transactionCharges")));
-            Log.d("Total Cost:", String.valueOf(jsonObject.getInt("totalCost")));
-
-            listViewWorkshopDetailsConfirmation= (ListView) getActivity().findViewById(R.id.listViewWorkshopDetailsConfirmation);
-            listViewWorkshopDetailsConfirmation.setAdapter(new WorkshopsAdapter(getActivity(), R.layout.workshop_boxes, values));
-
-
-            ((TextView)getActivity().findViewById(R.id.textViewWorkshopCost)).setText("Workshop Cost:" + jsonObject.getInt("workshopCost"));
-            //((TextView)getActivity().findViewById(R.id.textViewHospitalityCost)).setText("Hospitality Cost:" + jsonObject.getInt("hospitalityCost"));
-            ((TextView)getActivity().findViewById(R.id.textViewRegistrationCost)).setText("Registration Cost:" +  jsonObject.getInt("registrationCost"));
-            ((TextView)getActivity().findViewById(R.id.textViewTransactionCharges)).setText("Transaction Charges:" +  jsonObject.getInt("transactionCharges"));
-            ((TextView)getActivity().findViewById(R.id.textViewTotalCost)).setText("Total Cost:" +  jsonObject.getInt("totalCost"));
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
 
         getActivity().findViewById(R.id.buttonRegisterConfirm).setOnClickListener(new View.OnClickListener() {

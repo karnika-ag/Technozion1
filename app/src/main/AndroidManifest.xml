@@ -53,18 +53,18 @@
         <activity
             android:name=".WorkshopPaymentDetailsActivity"
             android:label="@string/title_activity_workshop_payment_details"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".RegisterWorkshopActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="in.technozion.technozion.MainActivity" />
+                android:value="in.technozion.technozion.RegisterWorkshopActivity" />
         </activity>
         <activity
             android:name=".EventConfirmationActivity"
             android:label="@string/title_activity_event_confirmation"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".RegisterEventActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="in.technozion.technozion.MainActivity" />
+                android:value="in.technozion.technozion.RegisterEventActivity" />
         </activity>
 
         <meta-data
@@ -86,10 +86,10 @@
         <activity
             android:name=".WebViewActivity"
             android:label="@string/title_activity_web_view"
-            android:parentActivityName=".WorkshopPaymentDetailsActivity" >
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="in.technozion.technozion.WorkshopPaymentDetailsActivity" />
+                android:value="in.technozion.technozion.MainActivity" />
         </activity>
         <activity
             android:name=".RegisterConfirmationActivity"

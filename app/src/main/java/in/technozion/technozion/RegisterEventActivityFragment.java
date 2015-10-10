@@ -105,7 +105,7 @@ public class RegisterEventActivityFragment extends Fragment implements AdapterVi
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         index=i;
-        Toast.makeText(getActivity(),""+mins.get(i)+" - "+maxs.get(i),Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(),""+mins.get(i)+" - "+maxs.get(i),Toast.LENGTH_SHORT).show();
         min=mins.get(i);
         max=maxs.get(i);
         ((TextView)getActivity().findViewById(R.id.textViewMinimumParticipantsValue)).setText("" + min);
@@ -150,7 +150,7 @@ public class RegisterEventActivityFragment extends Fragment implements AdapterVi
             super.onPreExecute();
             progressDialog=new ProgressDialog(getActivity());
             progressDialog.setMessage("fetching event list..");
-            progressDialog.setCancelable(false);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
         }
 
@@ -204,9 +204,11 @@ public class RegisterEventActivityFragment extends Fragment implements AdapterVi
             if (strings==null) {
                 Toast.makeText(getActivity(),"Could not fetch events, please try again",Toast.LENGTH_SHORT).show();
             } else{
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, strings);
-                spinner.setAdapter(arrayAdapter);
-                spinner.setOnItemSelectedListener(RegisterEventActivityFragment.this);
+                if (spinner!=null) {
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, strings);
+                    spinner.setAdapter(arrayAdapter);
+                    spinner.setOnItemSelectedListener(RegisterEventActivityFragment.this);
+                }
             }
         }
     }

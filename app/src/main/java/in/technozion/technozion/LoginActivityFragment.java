@@ -1,5 +1,6 @@
 package in.technozion.technozion;
 
+import android.animation.Animator;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -41,6 +46,10 @@ public class LoginActivityFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+//        Animation animation= (TranslateAnimation) getActivity().getResources().getAnimation(R.anim.shake);
+
+//        AnimationUtils.loadAnimation(animation);
+
 //        ((FrameLayout)getActivity().findViewById(R.id.frameLayout)).addView(getActivity().getLayoutInflater().inflate(R.layout.box_login,null));
 //       /*
 
@@ -49,7 +58,8 @@ public class LoginActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                new LoginTask().execute(((EditText)getActivity().findViewById(R.id.editTextEmail)).getText().toString(),((EditText)getActivity().findViewById(R.id.editTextPassword)).getText().toString());
+
+                new LoginTask().execute(((EditText) getActivity().findViewById(R.id.editTextEmail)).getText().toString(), ((EditText) getActivity().findViewById(R.id.editTextPassword)).getText().toString());
 
 //                SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getContext());
 //                SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -161,7 +171,8 @@ public class LoginActivityFragment extends Fragment {
                 progressDialog.cancel();
             }
             if (hashMap==null) {
-                Toast.makeText(getActivity(), "Login failed", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Login failed", Toast.LENGTH_SHORT).show();
+                shakeView(getActivity().findViewById(R.id.linearLayoutLogin));
             } else{
                 SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
                 SharedPreferences.Editor editor= sharedPreferences.edit();
@@ -179,5 +190,17 @@ public class LoginActivityFragment extends Fragment {
                 startActivity(new Intent(getContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         }
+    }
+
+    private void shakeView(View view) {
+        TranslateAnimation translateAnimation=new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF,-0.02f,
+                Animation.RELATIVE_TO_SELF,0.02f,
+                Animation.RELATIVE_TO_SELF,0,
+                Animation.RELATIVE_TO_SELF,0);
+        translateAnimation.setRepeatCount(5);
+        translateAnimation.setRepeatMode(TranslateAnimation.REVERSE);
+        translateAnimation.setDuration(30);
+        view.startAnimation(translateAnimation);
     }
 }

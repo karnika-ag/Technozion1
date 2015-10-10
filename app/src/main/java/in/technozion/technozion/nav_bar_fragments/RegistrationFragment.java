@@ -1,5 +1,6 @@
 package in.technozion.technozion.nav_bar_fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -26,6 +27,7 @@ import java.util.HashMap;
 
 import in.technozion.technozion.Data.URLS;
 import in.technozion.technozion.Data.Util;
+import in.technozion.technozion.MainActivity;
 import in.technozion.technozion.R;
 import in.technozion.technozion.RegisterConfirmationActivity;
 import in.technozion.technozion.WebViewActivity;
@@ -41,6 +43,13 @@ public class RegistrationFragment extends Fragment {
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        ((MainActivity) activity).onSectionAttached(
+                getArguments().getInt(ARG_SECTION_NUMBER));
     }
 
     @Nullable
@@ -79,9 +88,9 @@ public class RegistrationFragment extends Fragment {
                     Log.d("k-- check hos boolean",String.valueOf(hospitality));
                     new RegisterTask().execute(hashMap);
                 } else
-                    Toast.makeText(getActivity(), "Plz check the terms and condition checkbox", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Please check the terms and condition checkbox", Toast.LENGTH_SHORT).show();
 
-                //new RegisterTask().execute(hashMap);
+//                new RegisterTask().execute(hashMap);
 
             }
         });
@@ -137,7 +146,7 @@ public class RegistrationFragment extends Fragment {
 
             HashMap<String,String> hashMap1 = new HashMap<>();
             hashMap1.put("userid",userid);
-            Log.d("k--userid sent",userid);
+            Log.d("k--userid sent", userid);
 
             String jsonstr= Util.getStringFromURL(URLS.REGISTRATION_DATA,hashMap1);
             if (jsonstr!=null) {
@@ -156,7 +165,7 @@ public class RegistrationFragment extends Fragment {
                     hashMap.put("registration",jsonObject1.getString("registration"));
                     hashMap.put("hospitality",jsonObject1.getString("hospitality"));
                     Log.d("k--register hos", jsonObject1.getString("hospitality"));
-                    Log.d("k--register res",jsonObject1.getString("registration"));
+                    Log.d("k--register res", jsonObject1.getString("registration"));
 
                     return hashMap;
                 } catch (JSONException e) {
@@ -174,7 +183,7 @@ public class RegistrationFragment extends Fragment {
                 progressDialog.cancel();
             }
             if (hashMap==null) {
-                Toast.makeText(getActivity(), "Could not fetch registration data, please try again", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Could not fetch registration data, please try again", Toast.LENGTH_SHORT).show();
             } else{
 //                ((TextView)getActivity().findViewById(R.id.textViewNameValue)).setText(hashMap.get("name"));
 //                ((TextView)getActivity().findViewById(R.id.textViewCollege)).setText(hashMap.get("college"));
@@ -301,10 +310,10 @@ public class RegistrationFragment extends Fragment {
                 progressDialog.cancel();
             }
             if (string==null) {
-                Toast.makeText(getActivity(), "Could not connect, please try again", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Could not connect, please try again", Toast.LENGTH_SHORT).show();
             }  else {
 
-                Toast.makeText(getActivity(), "Going to launch webViewer", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Going to launch webViewer", Toast.LENGTH_SHORT).show();
 
                 Intent i = new Intent(getActivity(), WebViewActivity.class);
                 i.putExtra("data", string);

@@ -133,9 +133,14 @@ public class RegisterActivityFragment extends Fragment {
                     String gender = ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerGender)).getSelectedView()).getText().toString();
                     String phone = ((EditText) getActivity().findViewById(R.id.editTextPhone)).getText().toString();
                     String city = ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerCity)).getSelectedView()).getText().toString();
-                    String college = ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerCollege)).getSelectedView()).getText().toString();
+                    Log.d("k--city",city);
+                    String college = new String();
+                    if(!city.equalsIgnoreCase("select city")  && city!=null)
+                        college  = ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerCollege)).getSelectedView()).getText().toString();
+                        Log.d("k--college if",college);
                     if (college.equalsIgnoreCase("other")) {
                         college = ((EditText) getActivity().findViewById(R.id.editTextCollege)).getText().toString();
+
                     }
                     String id = ((EditText) getActivity().findViewById(R.id.editTextStudentId)).getText().toString();
                     String state = ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerState)).getSelectedView()).getText().toString();
