@@ -90,7 +90,7 @@ public class LoginActivityFragment extends Fragment {
         Boolean logged_in=sharedPreferences.getBoolean("logged_in", false);
         if (logged_in) {
             String a="aaa";
-            Log.d("HI this is mainactivity starting",a);
+
             startActivity(new Intent(getContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         }
 //        */
@@ -180,7 +180,7 @@ public class LoginActivityFragment extends Fragment {
             }
 
             else{
-            /*    SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
                 SharedPreferences.Editor editor= sharedPreferences.edit();
 
                 for(String s:hashMap.keySet()){
@@ -194,7 +194,7 @@ public class LoginActivityFragment extends Fragment {
 //                Intent intent=new Intent(getContext(), MainActivity.class);
 //                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-              */
+
                startActivity(new Intent(getContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         }

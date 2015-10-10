@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="login_white">#BBFFFFFF</color>
+    <color name="login_white">#bbcfcfcf</color>
     <color name="technozion_black">#55000000</color>
 
     <color name="green">#477573</color>

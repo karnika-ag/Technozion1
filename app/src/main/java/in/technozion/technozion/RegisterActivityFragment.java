@@ -55,7 +55,7 @@ public class RegisterActivityFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String city = ((TextView) view).getText().toString();
-                if (!city.equalsIgnoreCase("select city")) {
+                if (!city.equalsIgnoreCase("Select city")) {
                     new FetchCollegeTask().execute(city);
                 }
             }
@@ -65,6 +65,10 @@ public class RegisterActivityFragment extends Fragment {
 
             }
         });
+        String[] collg={"Select College"};
+        ArrayAdapter collegeAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,collg);
+        ((Spinner) getActivity().findViewById(R.id.spinnerCollege)).setAdapter(collegeAdapter);
+
         String[] state=getActivity().getResources().getStringArray(R.array.state);
         ArrayAdapter stateAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,state);
         ((Spinner) getActivity().findViewById(R.id.spinnerState)).setAdapter(stateAdapter);
@@ -79,7 +83,6 @@ public class RegisterActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 HashMap<String, String> regdata = new HashMap<String, String>();
-
                 String name = ((EditText) getActivity().findViewById(R.id.editTextName)).getText().toString();
                 String email = ((EditText) getActivity().findViewById(R.id.editTextEmail)).getText().toString();
                 String gender = ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerGender)).getSelectedView()).getText().toString();

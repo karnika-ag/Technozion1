@@ -53,8 +53,8 @@ android:id="@+id/linearLayoutLogin"
         <EditText
             android:background="@drawable/edituserbg"
             android:hint="Email"
-            android:textColorHint="@color/login_white"
-            android:textColor="@color/login_white"
+            android:textColorHint="@color/selected_gray"
+            android:textColor="@color/selected_gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -65,8 +65,7 @@ android:id="@+id/linearLayoutLogin"
         <EditText
             android:background="@drawable/editpassbg"
             android:hint="Password"
-            android:textColorHint="@color/login_white"
-
+            android:textColorHint="@color/selected_gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -82,7 +81,7 @@ android:id="@+id/linearLayoutLogin"
             android:layout_margin="10dp">
             <Button
                 android:background="@drawable/buttonbg"
-                android:textColor="@color/login_white"
+                android:textColor="@color/selected_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -91,7 +90,7 @@ android:id="@+id/linearLayoutLogin"
                 android:layout_marginRight="5dp"/>
             <Button
                 android:background="@drawable/buttonbg"
-                android:textColor="@color/login_white"
+                android:textColor="@color/selected_gray"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

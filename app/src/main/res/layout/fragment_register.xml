@@ -5,157 +5,98 @@
     android:layout_height="match_parent"
     android:background="@color/login_white">
 
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        >
 
-        <TextView
+            <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Enter registration data"
             android:id="@+id/textView31"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
 
-        <LinearLayout android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_weight="2"
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Name" />
+
             <EditText
                 android:layout_weight="3"
-                android:layout_width="0dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:inputType="textPersonName"
-                android:hint="First Last"
-                android:id="@+id/editTextName" />
-        </LinearLayout>
+                android:hint="Full Name"
+                android:id="@+id/editTextName"
+                android:drawablePadding="15dp"
+                android:background="@drawable/apptheme_edit_text_holo_light"
+                android:drawableStart="@mipmap/username_register"
+                android:paddingRight="40dp"
+                />
 
-        <LinearLayout android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_weight="2"
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Email"
-                android:id="@+id/textView42" />
+
             <EditText
                 android:layout_weight="3"
-                android:hint="someone@example.com"
-                android:layout_width="0dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Email Address"
                 android:inputType="textEmailAddress"
                 android:ems="10"
-                android:id="@+id/editTextEmail" />
-        </LinearLayout>
-
-        <LinearLayout android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_weight="2"
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Gender"
-                android:id="@+id/textView43"
+                android:id="@+id/editTextEmail"
+                android:drawablePadding="15dp"
+                android:background="@drawable/apptheme_edit_text_holo_light"
+                android:drawableStart="@mipmap/username_register"
+                android:paddingRight="40dp"
                 />
+
+
             <Spinner
+                android:fadingEdge="horizontal"
                 android:layout_weight="3"
-                android:layout_width="0dp"
+                android:layout_width="250dp"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinnerGender" />
-        </LinearLayout>
 
-        <LinearLayout android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_weight="2"
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Phone"
-                android:id="@+id/textViewPhone"
-                />
+
             <EditText
                 android:layout_weight="3"
-                android:hint="9491850387"
-                android:layout_width="0dp"
+                android:hint="10-digit Mobile No."
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:inputType="phone"
                 android:ems="10"
+                android:paddingRight="40dp"
+                android:drawableStart="@mipmap/username_register"
+                android:drawablePadding="10dp"
+                android:background="@drawable/apptheme_edit_text_holo_light"
                 android:id="@+id/editTextPhone" />
-        </LinearLayout>
 
-        <LinearLayout android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <View
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2" />
 
-            <TextView
-                android:layout_weight="3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Do not add prefix +91"
-                android:id="@+id/textView32"
-                />
-        </LinearLayout>
-        <LinearLayout android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_weight="2"
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="City"
-                android:id="@+id/textView44" />
+
             <Spinner
                 android:layout_weight="3"
-                android:layout_width="0dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:id="@+id/spinnerCity" />
-        </LinearLayout>
-        <LinearLayout android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <TextView
-                android:layout_weight="2"
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="College"
-                android:id="@+id/textView45"
-                />
+
 
             <Spinner
                 android:layout_weight="3"
-                android:layout_width="0dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:id="@+id/spinnerCollege"
                 />
-        </LinearLayout>
+
         <LinearLayout android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -170,70 +111,48 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editTextCollege" />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <!--</LinearLayout>-->
-        </LinearLayout>
-        <LinearLayout android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_weight="2"
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Student ID"
-                />
+
 
             <EditText
-                android:layout_weight="3"
-                android:layout_width="0dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:inputType="phone"
+                android:ems="10"
+                android:paddingRight="40dp"
+                android:drawableStart="@mipmap/username_register"
+                android:drawablePadding="10dp"
+                android:background="@drawable/apptheme_edit_text_holo_light"
+                android:hint="Student ID"
+                android:layout_weight="3"
                 android:id="@+id/editTextStudentId"
                 />
-        </LinearLayout>
-        <LinearLayout android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_weight="2"
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="State"
-                android:id="@+id/textView47"
-                />
+
+
             <Spinner
                 android:layout_weight="3"
-                android:layout_width="0dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:id="@+id/spinnerState"
                 />
-        </LinearLayout>
-        <LinearLayout android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_weight="2"
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Password"
-                android:id="@+id/textView48"/>
+
+
             <EditText
-                android:layout_weight="3"
-                android:layout_width="0dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingRight="40dp"
+                android:drawableStart="@mipmap/username_register"
+                android:drawablePadding="10dp"
+                android:background="@drawable/apptheme_edit_text_holo_light"
+                android:layout_weight="3"
                 android:inputType="textPassword"
                 android:ems="10"
+                android:hint="Password"
                 android:id="@+id/editTextPassword" />
-        </LinearLayout>
+
 
         <LinearLayout
             android:orientation="horizontal"
