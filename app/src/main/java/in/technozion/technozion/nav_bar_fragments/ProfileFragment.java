@@ -1,5 +1,6 @@
 package in.technozion.technozion.nav_bar_fragments;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
@@ -13,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,11 +28,14 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import in.technozion.technozion.Data.URLS;
 import in.technozion.technozion.Data.Util;
+import in.technozion.technozion.EventConfirmationActivity;
 import in.technozion.technozion.R;
+import in.technozion.technozion.RegisterActivity;
 
 
 public class ProfileFragment extends Fragment {
@@ -39,6 +45,7 @@ public class ProfileFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     public static ProfileFragment newInstance(int sectionNumber) {
+
         ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -56,6 +63,16 @@ public class ProfileFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         loadProfileData();
+        getActivity().findViewById(R.id.updateProfile).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
+                new UpdateProfile().execute(sharedPreferences.getString("userid", ""));
+
+
+            }
+        });
     }
 
     private void loadProfileData() {
@@ -263,4 +280,53 @@ public class ProfileFragment extends Fragment {
             }
         }
     }
+
+    public class UpdateProfile extends AsyncTask<String,Void,String> {
+
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog=new ProgressDialog(getActivity());
+            progressDialog.setMessage("fetching Update Profile data..");
+//            progressDialog.setCancelable(false);
+            progressDialog.setCanceledOnTouchOutside(false);
+//            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            if (strings==null||strings.length==0){
+                return null;
+            }
+            HashMap<String,String> data=new HashMap();
+            data.put("userid", strings[0]);
+            Log.d("k-- send userid",strings[0]);
+            return Util.getStringFromURL(URLS.UPDATE_PROFILE_FETCHDETAILS_URL, data);
+        }
+
+        @Override
+        protected void onPostExecute(String string) {
+            super.onPostExecute(string);
+            if (progressDialog.isShowing()) {
+                progressDialog.cancel();
+            }
+            if (string==null) {
+                Toast.makeText(getActivity(), "Could not fetch ur update profile data, please try again", Toast.LENGTH_SHORT).show();
+            } else {
+
+                Log.d("k-- check ",string);
+
+               // Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
+
+                Intent i = new Intent(getActivity(), RegisterActivity.class);
+                i.putExtra("data",string);
+                startActivity(i);
+
+                }
+            }
+
+    }
+
 }
