@@ -46,10 +46,10 @@ public class RegisterActivityFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         String[] gender=getActivity().getResources().getStringArray(R.array.gender);
-        ArrayAdapter genderAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,gender);
+        ArrayAdapter genderAdapter=new ArrayAdapter(getActivity(),R.layout.spinner_item,gender);
         ((Spinner) getActivity().findViewById(R.id.spinnerGender)).setAdapter(genderAdapter);
         String[] city=getActivity().getResources().getStringArray(R.array.city);
-        ArrayAdapter cityAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,city);
+        ArrayAdapter cityAdapter=new ArrayAdapter(getActivity(),R.layout.spinner_item,city);
         ((Spinner) getActivity().findViewById(R.id.spinnerCity)).setAdapter(cityAdapter);
         ((Spinner) getActivity().findViewById(R.id.spinnerCity)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -66,11 +66,11 @@ public class RegisterActivityFragment extends Fragment {
             }
         });
         String[] collg={"Select College"};
-        ArrayAdapter collegeAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,collg);
+        ArrayAdapter collegeAdapter=new ArrayAdapter(getActivity(),R.layout.spinner_item,collg);
         ((Spinner) getActivity().findViewById(R.id.spinnerCollege)).setAdapter(collegeAdapter);
 
         String[] state=getActivity().getResources().getStringArray(R.array.state);
-        ArrayAdapter stateAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,state);
+        ArrayAdapter stateAdapter=new ArrayAdapter(getActivity(),R.layout.spinner_item,state);
         ((Spinner) getActivity().findViewById(R.id.spinnerState)).setAdapter(stateAdapter);
 
         getActivity().findViewById(R.id.buttonCancel).setOnClickListener(new View.OnClickListener() {
@@ -217,7 +217,7 @@ public class RegisterActivityFragment extends Fragment {
 //                if (string.equalsIgnoreCase("successful")) {
 //                    getActivity().onBackPressed();
 //                }
-                ArrayAdapter collegeAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,strings);
+                ArrayAdapter collegeAdapter=new ArrayAdapter(getActivity(),R.layout.spinner_item,strings);
                 ((Spinner) getActivity().findViewById(R.id.spinnerCollege)).setAdapter(collegeAdapter);
                 ((Spinner) getActivity().findViewById(R.id.spinnerCollege)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
