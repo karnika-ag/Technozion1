@@ -40,6 +40,7 @@ public class LoginActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_login, container, false);
+
     }
 
     @Override
@@ -88,6 +89,8 @@ public class LoginActivityFragment extends Fragment {
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getContext());
         Boolean logged_in=sharedPreferences.getBoolean("logged_in", false);
         if (logged_in) {
+            String a="aaa";
+
             startActivity(new Intent(getContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         }
 //        */
@@ -99,6 +102,7 @@ public class LoginActivityFragment extends Fragment {
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getContext());
         Boolean logged_in=sharedPreferences.getBoolean("logged_in", false);
         if (logged_in) {
+
             getActivity().onBackPressed();
 //            startActivity(new Intent(getContext(), MainActivity.class));
         }
@@ -173,7 +177,9 @@ public class LoginActivityFragment extends Fragment {
             if (hashMap==null) {
 //                Toast.makeText(getActivity(), "Login failed", Toast.LENGTH_SHORT).show();
                 shakeView(getActivity().findViewById(R.id.linearLayoutLogin));
-            } else{
+            }
+
+            else{
                 SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
                 SharedPreferences.Editor editor= sharedPreferences.edit();
 
@@ -187,7 +193,9 @@ public class LoginActivityFragment extends Fragment {
 
 //                Intent intent=new Intent(getContext(), MainActivity.class);
 //                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(new Intent(getContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+
+
+               startActivity(new Intent(getContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         }
     }

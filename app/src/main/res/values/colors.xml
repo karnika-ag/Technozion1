@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="login_white">#BBFFFFFF</color>
+    <color name="login_white">#bbcfcfcf</color>
     <color name="technozion_black">#55000000</color>
 
     <color name="green">#477573</color>
@@ -19,4 +19,21 @@
     <color name="action_bar">@color/technozion_blue</color>
     <color name="stroke_login">@color/transparent_green</color>
     <color name="stroke_old">#B1BCBE</color>
+
+    <color name="divider_color">#2cb1c9</color>
+
+
+    <color name="myPrimaryColor">#00BCD4</color>
+    <color name="myPrimaryDarkColor">#0097A7</color>
+
+    <color name="myDrawerBackground">#FFF</color>
+    <color name="myWindowBackground">#FFFFFF</color>
+    <color name="myTextPrimaryColor">#212121</color>
+    <color name="myNavigationColor">#000000</color>
+    <color name="listview">#1c232d</color>
+    <color name="selected_gray">#333c46</color>
+
+
+
+
 </resources>
