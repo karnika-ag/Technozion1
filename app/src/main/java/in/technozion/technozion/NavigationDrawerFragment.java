@@ -135,7 +135,7 @@ public class NavigationDrawerFragment extends Fragment {
 //                        getString(R.string.title_section9),
                 });
         */
-        String[] names=new String[]{"Home", "Profile", "Registeration", "Events", "Workshops", "Map", "T-Shirts",  "FAQ", "Developers", };
+        String[] names=new String[]{"Home", "Profile", "Registration", "Events", "Workshops", "Map", "T-Shirts",  "FAQ", "Developers", };
 
     /*Array of Images*/
         int[] image = new int[] {R.mipmap.ic_tz,

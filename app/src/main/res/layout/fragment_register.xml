@@ -3,28 +3,34 @@
     tools:context="in.technozion.technozion.RegisterActivityFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/login_white">
+    android:background="@drawable/back_reg1">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout"
-        >
+        android:id="@+id/linearLayout">
 
             <TextView
-            android:layout_width="wrap_content"
+            android:background="@color/listview"
+            android:textColor="@color/pure_white"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Enter registration data"
+            android:text="Enter Registration data"
+            android:fontFamily="sans-serif-medium"
             android:id="@+id/textView31"
-            android:layout_column="0"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:autoText="false"
+            android:focusable="false"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="10dp" />
 
 
             <EditText
+                android:textColorHint="@color/pure_white"
+                android:textColor="@color/pure_white"
                 android:layout_weight="3"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
@@ -34,12 +40,24 @@
                 android:id="@+id/editTextName"
                 android:drawablePadding="15dp"
                 android:background="@drawable/apptheme_edit_text_holo_light"
-                android:drawableStart="@mipmap/username_register"
+                android:drawableStart="@mipmap/user_name"
                 android:paddingRight="40dp"
                 />
 
+        <Spinner
+            android:textColor="@color/pure_white"
+            android:fadingEdge="horizontal"
+            android:layout_weight="3"
+            android:layout_width="250dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerGender"
+            android:prompt="@string/gender"
+            android:popupBackground="@color/listview"/>
 
-            <EditText
+        <EditText
+                android:textColorHint="@color/pure_white"
+                android:textColor="@color/pure_white"
                 android:layout_weight="3"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
@@ -50,51 +68,59 @@
                 android:id="@+id/editTextEmail"
                 android:drawablePadding="15dp"
                 android:background="@drawable/apptheme_edit_text_holo_light"
-                android:drawableStart="@mipmap/username_register"
+                android:drawableStart="@mipmap/email_icon"
+                android:drawableLeft="@mipmap/email_icon"
                 android:paddingRight="40dp"
                 />
 
 
-            <Spinner
-                android:fadingEdge="horizontal"
-                android:layout_weight="3"
-                android:layout_width="250dp"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinnerGender" />
-
-
-            <EditText
-                android:layout_weight="3"
-                android:hint="10-digit Mobile No."
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:inputType="phone"
-                android:ems="10"
-                android:paddingRight="40dp"
-                android:drawableStart="@mipmap/username_register"
-                android:drawablePadding="10dp"
-                android:background="@drawable/apptheme_edit_text_holo_light"
-                android:id="@+id/editTextPhone" />
+        <EditText
+            android:textColorHint="@color/pure_white"
+            android:textColor="@color/pure_white"
+            android:layout_weight="3"
+            android:hint="10-digit Mobile No."
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:inputType="phone"
+            android:ems="10"
+            android:paddingRight="30dp"
+            android:drawableStart="@mipmap/mob_icon"
+            android:drawablePadding="10dp"
+            android:background="@drawable/apptheme_edit_text_holo_light"
+            android:id="@+id/editTextPhone" />
 
 
 
-            <Spinner
-                android:layout_weight="3"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:id="@+id/spinnerCity" />
 
-
+        <Spinner
+            android:textColor="@color/pure_white"
+            android:layout_weight="3"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/spinnerState"
+            android:popupBackground="@color/listview"
+            />
 
             <Spinner
+                android:textColor="@color/pure_white"
+                android:layout_weight="3"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/spinnerCity"
+                android:popupBackground="@color/listview"/>
+
+
+            <Spinner
+                android:textColor="@color/pure_white"
                 android:layout_weight="3"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:id="@+id/spinnerCollege"
+                android:popupBackground="@color/listview"
                 />
 
         <LinearLayout android:orientation="horizontal"
@@ -106,6 +132,9 @@
                 android:layout_weight="2" />
 
             <EditText
+                android:textColorHint="@color/pure_white"
+                android:textColor="@color/pure_white"
+
                 android:layout_weight="3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -115,13 +144,16 @@
 
 
             <EditText
+                android:textColorHint="@color/pure_white"
+                android:textColor="@color/pure_white"
+
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:inputType="phone"
                 android:ems="10"
                 android:paddingRight="40dp"
-                android:drawableStart="@mipmap/username_register"
+                android:drawableStart="@mipmap/student_id"
                 android:drawablePadding="10dp"
                 android:background="@drawable/apptheme_edit_text_holo_light"
                 android:hint="Student ID"
@@ -130,21 +162,18 @@
                 />
 
 
-            <Spinner
-                android:layout_weight="3"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:id="@+id/spinnerState"
-                />
+
 
 
             <EditText
+                android:textColorHint="@color/pure_white"
+                android:textColor="@color/pure_white"
+
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingRight="40dp"
-                android:drawableStart="@mipmap/username_register"
+                android:drawableStart="@mipmap/password"
                 android:drawablePadding="10dp"
                 android:background="@drawable/apptheme_edit_text_holo_light"
                 android:layout_weight="3"
@@ -163,12 +192,18 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Cancel"
+                android:background="@color/listview"
+                android:textColor="@color/pure_white"
+                android:layout_margin="5dp"
                 android:id="@+id/buttonCancel" />
             <Button
                 android:layout_weight="1"
                 android:layout_width="0dp"
+                android:textColor="@color/pure_white"
                 android:layout_height="wrap_content"
                 android:text="Register"
+                android:layout_margin="5dp"
+                android:background="@color/listview"
                 android:id="@+id/buttonRegister" />
 
 
