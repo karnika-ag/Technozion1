@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/transparent_green"
+    android:background="#555"
     android:padding="10dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
+    <!--android:background="@color/transparent_green"-->
+
+    <ImageView
+        android:background="@drawable/bg_lines"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView6"
+        android:layout_alignTop="@+id/textViewEventName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/textViewTeamMembers" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:text="Aerial tramline"
         android:id="@+id/textViewEventName"
         android:layout_alignParentTop="true"
@@ -20,7 +33,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:text="279"
         android:id="@+id/textViewTeamId"
         android:layout_alignParentTop="true"
@@ -30,7 +43,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAppearance="?android:attr/textAppearanceSmallInverse"
         android:text="confirmed/proceed to payment"
         android:id="@+id/textViewStatus"
         android:layout_below="@+id/textViewEventName"
@@ -42,7 +55,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAppearance="?android:attr/textAppearanceSmallInverse"
         android:text="0/1 registered"
         android:id="@+id/textViewRegisteredCount"
         android:layout_below="@+id/textViewStatus"
@@ -54,7 +67,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAppearance="?android:attr/textAppearanceSmallInverse"
         android:text="A,B,C,d"
         android:id="@+id/textViewTeamMembers"
         android:layout_below="@+id/textViewRegisteredCount"
@@ -70,4 +83,13 @@
         <!--android:layout_below="@+id/textViewRegisteredCount"-->
         <!--android:layout_alignParentLeft="true"-->
         <!--android:layout_alignParentStart="true" />-->
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="5dp"-->
+        <!--android:background="#00a199"-->
+        <!--android:layout_below="@+id/textViewTeamMembers"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:id="@+id/imageView7" />-->
+
 </RelativeLayout>

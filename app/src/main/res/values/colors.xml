@@ -27,7 +27,7 @@
     <color name="myPrimaryDarkColor">#0097A7</color>
 
     <color name="myDrawerBackground">#FFF</color>
-    <color name="myWindowBackground">#000000</color>
+    <color name="myWindowBackground">#fff</color>
     <color name="myTextPrimaryColor">#212121</color>
     <color name="myNavigationColor">#000000</color>
 
