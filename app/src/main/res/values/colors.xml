@@ -19,4 +19,7 @@
     <color name="action_bar">@color/technozion_blue</color>
     <color name="stroke_login">@color/transparent_green</color>
     <color name="stroke_old">#B1BCBE</color>
+
+    <color name="primary_dark">#0097A7</color>
+
 </resources>
