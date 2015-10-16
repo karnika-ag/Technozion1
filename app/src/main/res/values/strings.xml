@@ -15,7 +15,6 @@
 
     <string name="technozion_description">Technozion is a three-day annual technical symposium organized by the student fraternity of National Institute of Technology, Warangal and is aimed at providing a platform for students across India to assemble, interact, and share knowledge in various fields of science and technology.</string>
 
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -45,4 +44,8 @@
 
 
 
+    <string name="action_search">Search</string>
+    <string name="action_filter">Filter</string>
+
+    <string name="gender">Gender</string>
 </resources>

@@ -69,11 +69,15 @@ public class RegisterActivityFragment extends Fragment {
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
 
-                }
-            });
-            String[] state = getActivity().getResources().getStringArray(R.array.state);
-            ArrayAdapter stateAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, state);
-            ((Spinner) getActivity().findViewById(R.id.spinnerState)).setAdapter(stateAdapter);
+            }
+        });
+        String[] collg={"Select College"};
+        ArrayAdapter collegeAdapter=new ArrayAdapter(getActivity(),R.layout.spinner_item,collg);
+        ((Spinner) getActivity().findViewById(R.id.spinnerCollege)).setAdapter(collegeAdapter);
+
+        String[] state=getActivity().getResources().getStringArray(R.array.state);
+        ArrayAdapter stateAdapter=new ArrayAdapter(getActivity(),R.layout.spinner_item,state);
+        ((Spinner) getActivity().findViewById(R.id.spinnerState)).setAdapter(stateAdapter);
 
         if(string != null) {
             flag=1;
@@ -293,7 +297,7 @@ public class RegisterActivityFragment extends Fragment {
 //                if (string.equalsIgnoreCase("successful")) {
 //                    getActivity().onBackPressed();
 //                }
-                ArrayAdapter collegeAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,strings);
+                ArrayAdapter collegeAdapter=new ArrayAdapter(getActivity(),R.layout.spinner_item,strings);
                 ((Spinner) getActivity().findViewById(R.id.spinnerCollege)).setAdapter(collegeAdapter);
                 ((Spinner) getActivity().findViewById(R.id.spinnerCollege)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
