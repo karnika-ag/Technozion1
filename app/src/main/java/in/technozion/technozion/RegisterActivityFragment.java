@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.widget.Button;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ import in.technozion.technozion.Data.Util;
  */
 public class RegisterActivityFragment extends Fragment {
 
+    private int flag;
+    private String string;
     public RegisterActivityFragment() {
     }
 
@@ -44,74 +47,142 @@ public class RegisterActivityFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        string = getActivity().getIntent().getStringExtra("data");
 
-        String[] gender=getActivity().getResources().getStringArray(R.array.gender);
-        ArrayAdapter genderAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,gender);
-        ((Spinner) getActivity().findViewById(R.id.spinnerGender)).setAdapter(genderAdapter);
-        String[] city=getActivity().getResources().getStringArray(R.array.city);
-        ArrayAdapter cityAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,city);
-        ((Spinner) getActivity().findViewById(R.id.spinnerCity)).setAdapter(cityAdapter);
-        ((Spinner) getActivity().findViewById(R.id.spinnerCity)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String city = ((TextView) view).getText().toString();
-                if (!city.equalsIgnoreCase("select city")) {
-                    new FetchCollegeTask().execute(city);
+           flag=0;
+
+            String[] gender = getActivity().getResources().getStringArray(R.array.gender);
+            ArrayAdapter genderAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, gender);
+            ((Spinner) getActivity().findViewById(R.id.spinnerGender)).setAdapter(genderAdapter);
+            String[] city = getActivity().getResources().getStringArray(R.array.city);
+            ArrayAdapter cityAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, city);
+            ((Spinner) getActivity().findViewById(R.id.spinnerCity)).setAdapter(cityAdapter);
+            ((Spinner) getActivity().findViewById(R.id.spinnerCity)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    String city = ((TextView) view).getText().toString();
+                    if (!city.equalsIgnoreCase("select city")) {
+                        new FetchCollegeTask().execute(city);
+                    }
                 }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
-        String[] state=getActivity().getResources().getStringArray(R.array.state);
-        ArrayAdapter stateAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,state);
-        ((Spinner) getActivity().findViewById(R.id.spinnerState)).setAdapter(stateAdapter);
-
-        getActivity().findViewById(R.id.buttonCancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().onBackPressed();
-            }
-        });
-        getActivity().findViewById(R.id.buttonRegister).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HashMap<String, String> regdata = new HashMap<String, String>();
-
-                String name = ((EditText) getActivity().findViewById(R.id.editTextName)).getText().toString();
-                String email = ((EditText) getActivity().findViewById(R.id.editTextEmail)).getText().toString();
-                String gender = ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerGender)).getSelectedView()).getText().toString();
-                String phone = ((EditText) getActivity().findViewById(R.id.editTextPhone)).getText().toString();
-                String city = ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerCity)).getSelectedView()).getText().toString();
-                String college = ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerCollege)).getSelectedView()).getText().toString();
-                if (college.equalsIgnoreCase("other")) {
-                    college = ((EditText) getActivity().findViewById(R.id.editTextCollege)).getText().toString();
                 }
-                String id = ((EditText) getActivity().findViewById(R.id.editTextStudentId)).getText().toString();
-                String state = ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerState)).getSelectedView()).getText().toString();
-                String password = ((EditText) getActivity().findViewById(R.id.editTextPassword)).getText().toString();
+            });
+            String[] state = getActivity().getResources().getStringArray(R.array.state);
+            ArrayAdapter stateAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, state);
+            ((Spinner) getActivity().findViewById(R.id.spinnerState)).setAdapter(stateAdapter);
 
-                if (name == null || email == null || phone == null || college == null || id == null || password == null) {
-                    Log.d("null", "sth is null");
-                } else{
-                    regdata.put("inputName", name);
-                    regdata.put("inputEmail", email);
-                    regdata.put("inputGender", gender);
-                    regdata.put("inputPhone", phone);
-                    regdata.put("inputCity", city);
-                    regdata.put("inputCollege", college);
-                    regdata.put("inputCollegeId", id);
-                    regdata.put("inputState", state);
-                    regdata.put("inputPassword", password);
-                    new RegisterTask().execute(regdata);
+        if(string != null) {
+            flag=1;
+            //Toast.makeText(getActivity(), "came from update profiles1 **", Toast.LENGTH_SHORT).show();
+            try {
+            JSONObject jsonObject= new JSONObject(string);
+                String name = jsonObject.getString("name");
+                String email=jsonObject.getString("email");
+                String phone=jsonObject.getString("phone");
+                String sex=jsonObject.getString("sex");
+                String college=jsonObject.getString("college");
+                String collegeid=jsonObject.getString("collegeid");
+                String city1=jsonObject.getString("city");
+                String state1=jsonObject.getString("state");
+                Log.d("city1",city1);
+//             ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerState)).getSelectedView()).setText(state1);
+                View view2=getActivity().findViewById(R.id.editTextName);
+                ((EditText) view2).setText(name);
+                view2.setEnabled(false);
+                View view4=getActivity().findViewById(R.id.editTextEmail);
+                ((EditText) view4).setText(email);
+                view4.setEnabled(false);
+
+            ((EditText) getActivity().findViewById(R.id.editTextPhone)).setText(phone);
+            ((EditText) getActivity().findViewById(R.id.editTextStudentId)).setText(collegeid);
+               View view=getActivity().findViewById(R.id.editTextPassword);
+                if (view!=null) {
+                    view.setVisibility(View.GONE);
                 }
+                View view3=getActivity().findViewById(R.id.textView48);
+                if (view3!=null) {
+                    view3.setVisibility(View.GONE);
+                }
+
+
+                Button mButton=(Button)getActivity().findViewById(R.id.buttonRegister);
+            mButton.setText("update profile");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+            getActivity().findViewById(R.id.buttonCancel).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().onBackPressed();
+                }
+            });
+            getActivity().findViewById(R.id.buttonRegister).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    HashMap<String, String> regdata = new HashMap<String, String>();
+
+                    String name = ((EditText) getActivity().findViewById(R.id.editTextName)).getText().toString();
+                    String email = ((EditText) getActivity().findViewById(R.id.editTextEmail)).getText().toString();
+                    String gender = ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerGender)).getSelectedView()).getText().toString();
+                    String phone = ((EditText) getActivity().findViewById(R.id.editTextPhone)).getText().toString();
+                    String city = ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerCity)).getSelectedView()).getText().toString();
+                    Log.d("k--city",city);
+                    String college = new String();
+                    if(!city.equalsIgnoreCase("select city")  && city!=null)
+                        college  = ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerCollege)).getSelectedView()).getText().toString();
+                        Log.d("k--college if",college);
+                    if (college.equalsIgnoreCase("other")) {
+                        college = ((EditText) getActivity().findViewById(R.id.editTextCollege)).getText().toString();
+
+                    }
+                    String id = ((EditText) getActivity().findViewById(R.id.editTextStudentId)).getText().toString();
+                    String state = ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerState)).getSelectedView()).getText().toString();
+
+
+                    String password = ((EditText) getActivity().findViewById(R.id.editTextPassword)).getText().toString();
+
+
+                    if (name == null || email == null || phone == null ||city==null || gender==null || state==null|| college == null || id == null  ||(flag == 0 && password == null)) {
+                        Log.d("null", "sth is null");
+                    } else {
+
+                        if(flag==0) {
+                            regdata.put("inputName", name);
+                            regdata.put("inputEmail", email);
+                            regdata.put("inputGender", gender);
+                            regdata.put("inputPhone", phone);
+                            regdata.put("inputCity", city);
+                            regdata.put("inputCollege", college);
+                            regdata.put("inputCollegeId", id);
+                            regdata.put("inputState", state);
+                            regdata.put("inputPassword", password);
+                        }
+                        else
+                        {
+                            regdata.put("inputGender", gender);
+                            regdata.put("inputPhone", phone);
+                            regdata.put("inputCity", city);
+                            regdata.put("inputCollege", college);
+                            regdata.put("inputCollegeId", id);
+                            regdata.put("inputState", state);
+                            SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
+                            regdata.put("userid",sharedPreferences.getString("userid", ""));
+                        }
+                        new RegisterTask().execute(regdata);
+                    }
 //                Log.d("gender", ((TextView) ((Spinner) getActivity().findViewById(R.id.spinnerGender)).getSelectedView()).getText().toString());
 
 
-            }
-        });
+                }
+            });
+
     }
 
 
@@ -122,7 +193,10 @@ public class RegisterActivityFragment extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog=new ProgressDialog(getActivity());
+            if(flag==0)
             progressDialog.setMessage("Registering..");
+            else
+                progressDialog.setMessage("Updating..");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
@@ -132,7 +206,12 @@ public class RegisterActivityFragment extends Fragment {
             if (hashMaps==null||hashMaps.length==0){
                 return null;
             }
-            return Util.getStringFromURL(URLS.REGISTER_URL, hashMaps[0]);
+            String s=new String();
+            if(flag==0)
+                s=Util.getStringFromURL(URLS.REGISTER_URL, hashMaps[0]);
+            else
+                s=Util.getStringFromURL(URLS.UPDATE_PROFILE_URL, hashMaps[0]);
+            return s;
         }
 
         @Override

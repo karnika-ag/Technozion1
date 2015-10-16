@@ -76,13 +76,13 @@ public class MainActivity extends AppCompatActivity
                 fragment= WorkshopsFragment.newInstance(5);
                 break;
             case 5:
-                fragment= FAQFragment.newInstance(6);
+                fragment= TShirtsFragment.newInstance(6);
                 break;
             case 6:
-                fragment= DevelopersFragment.newInstance(7);
+                fragment= FAQFragment.newInstance(7);
                 break;
             case 7:
-                fragment=HomeFragment.newInstance(9);
+                fragment= DevelopersFragment.newInstance(8);
                 break;
             case 8:
                 fragment=HomeFragment.newInstance(9);
@@ -120,6 +120,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case 8:
                 mTitle = getString(R.string.title_section8);
+                break;
+            case 9:
+                mTitle = getString(R.string.title_section9);
                 break;
 
         }
