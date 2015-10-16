@@ -18,8 +18,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,18 +27,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import in.technozion.technozion.Data.URLS;
 import in.technozion.technozion.Data.Util;
 import in.technozion.technozion.MainActivity;
-import in.technozion.technozion.EventConfirmationActivity;
 import in.technozion.technozion.R;
 import in.technozion.technozion.RegisterActivity;
+import in.technozion.technozion.imagefromurl.ImageLoader;
 
 
 public class ProfileFragment extends Fragment {
@@ -303,25 +298,46 @@ public class ProfileFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(String string) {
-            super.onPostExecute(string);
+        protected void onPostExecute(String image_url) {
+            super.onPostExecute(image_url);
             if (progressDialog.isShowing()) {
                 progressDialog.cancel();
             }
-            Log.d("qr image:",string);
-            if (string==null||string.length()<100) {
-//                Toast.makeText(getActivity(), "Could not fetch QR, please try again", Toast.LENGTH_SHORT).show();
-            } else {
-                SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(getActivity()).edit();
-                editor.putString("qr_code",string);
-                editor.apply();
-                ImageView imageView=((ImageView) getActivity().findViewById(R.id.imageViewQrCode));
-                if (imageView!=null) {
-                    byte[] decodedString = Base64.decode(string, Base64.NO_WRAP);
-                    InputStream inputStream = new ByteArrayInputStream(decodedString);
-                    imageView.setImageBitmap(BitmapFactory.decodeStream(inputStream));
-                }
-            }
+            Log.d("qr image:",image_url);
+//            if (string==null||string.length()<100) {
+////                Toast.makeText(getActivity(), "Could not fetch QR, please try again", Toast.LENGTH_SHORT).show();
+//            } else {
+//                SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(getActivity()).edit();
+//                editor.putString("qr_code",string);
+//                editor.apply();
+//                ImageView imageView=((ImageView) getActivity().findViewById(R.id.imageViewQrCode));
+//                if (imageView!=null) {
+//                    byte[] decodedString = Base64.decode(string, Base64.NO_WRAP);
+//                    InputStream inputStream = new ByteArrayInputStream(decodedString);
+//                    imageView.setImageBitmap(BitmapFactory.decodeStream(inputStream));
+//                }
+//            }
+            // Loader image - will be shown before loading image
+            int loader = R.drawable.loader;
+
+            // Imageview to show
+            ImageView image = (ImageView)getActivity().findViewById(R.id.imageViewQrCode);
+
+            // Image url
+           //String image_url = "http://api.androidhive.info/images/sample.jpg";// "https://chart.googleapis.com/chart?cht=qr&chl=1234&choe=UTF-8&chs=100x100";
+
+            // ImageLoader class instance
+            ImageLoader imgLoader = new ImageLoader(getActivity().getApplicationContext());
+
+            // whenever you want to load an image from url
+            // call DisplayImage function
+            // url - image url to load
+            // loader - loader image, will be displayed before getting image
+            // image - ImageView
+            imgLoader.DisplayImage(image_url, loader, image);
+
+
+
         }
     }
 
