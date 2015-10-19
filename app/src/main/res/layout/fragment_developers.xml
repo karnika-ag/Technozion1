@@ -20,7 +20,9 @@
            android:gravity="center">
 
             <ImageView
-                android:padding="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
                 android:src="@drawable/nage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -64,11 +66,13 @@
         android:gravity="center">
 
         <ImageView
-            android:padding="15dp"
+            android:paddingTop="5dp"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
             android:src="@drawable/karnika"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView3"
+            android:id="@+id/imageView6"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
@@ -114,11 +118,13 @@
     android:orientation="vertical"
     android:gravity="center">
     <ImageView
-        android:padding="15dp"
+        android:paddingTop="5dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
         android:src="@drawable/rohit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView6"
+        android:id="@+id/imageView7"
         android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/textView60"
         android:layout_alignStart="@+id/textView60" />
@@ -160,7 +166,9 @@
 
 
     <ImageView
-        android:padding="15dp"
+        android:paddingTop="5dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
         android:src="@drawable/nage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
