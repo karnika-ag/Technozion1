@@ -149,7 +149,7 @@ public class EventsFragment extends Fragment {
                 progressDialog.cancel();
             }
             if (list==null) {
-//                Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
             } else{
 
                 if (listViewRegisteredEvents!=null) {
