@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+       <LinearLayout
+           android:layout_weight="1"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:gravity="center">
 
             <ImageView
                 android:padding="15dp"
@@ -29,7 +34,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Nagendra Ghimire"
                 android:id="@+id/textView50"
-                android:layout_below="@+id/imageView5"
+                android:layout_alignBottom="@+id/imageView5"
                 android:layout_centerHorizontal="true" />
 
             <TextView
@@ -49,140 +54,149 @@
                 android:id="@+id/textView57"
                 android:layout_below="@+id/textView51"
                 android:layout_centerHorizontal="true" />
-        </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
-            android:layout_weight="1"
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:padding="15dp"
+            android:src="@drawable/karnika"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView3"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
-            <ImageView
-                android:padding="15dp"
-                android:src="@drawable/karnika"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView3"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Karnika Agarwal"
+            android:id="@+id/textView46"
+            android:layout_alignBottom="@+id/imageView3"
+            android:layout_centerHorizontal="true" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Karnika Agarwal"
-                android:id="@+id/textView46"
-                android:layout_below="@+id/imageView3"
-                android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="8985185142"
+            android:id="@+id/textView49"
+            android:layout_below="@+id/textView46"
+            android:layout_centerHorizontal="true" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="8985185142"
-                android:id="@+id/textView49"
-                android:layout_below="@+id/textView46"
-                android:layout_centerHorizontal="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="agarwal.karnika@gmail.com"
-                android:id="@+id/textView59"
-                android:layout_below="@+id/textView49"
-                android:layout_centerHorizontal="true" />
-        </RelativeLayout>
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="agarwal.karnika@gmail.com"
+            android:id="@+id/textView59"
+            android:layout_below="@+id/textView49"
+            android:layout_centerHorizontal="true" />
+    </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
 
-            <ImageView
-                android:padding="15dp"
-                android:src="@drawable/rohit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView6"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+<LinearLayout
+    android:layout_weight="1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center">
+    <ImageView
+        android:padding="15dp"
+        android:src="@drawable/rohit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView6"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/textView60"
+        android:layout_alignStart="@+id/textView60" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Rohit Tanwar"
-                android:id="@+id/textView52"
-                android:layout_below="@+id/imageView6"
-                android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Rohit Tanwar"
+        android:id="@+id/textView52"
+        android:layout_alignBottom="@+id/imageView6"
+        android:layout_centerHorizontal="true" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="9618351702"
-                android:id="@+id/textView54"
-                android:layout_below="@+id/textView52"
-                android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="9618351702"
+        android:id="@+id/textView54"
+        android:layout_below="@+id/textView52"
+        android:layout_centerHorizontal="true" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="rohit_annpurna@rediff.com"
-                android:id="@+id/textView60"
-                android:layout_below="@+id/textView54"
-                android:layout_centerHorizontal="true" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:padding="15dp"
-                android:src="@drawable/nage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView3"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Sai Teja"
-                android:id="@+id/textView66"
-                android:layout_below="@+id/imageView3"
-                android:layout_centerHorizontal="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="7794879899"
-                android:id="@+id/textView67"
-                android:layout_below="@+id/textView66"
-                android:layout_centerHorizontal="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="saiteja@gmail.com"
-                android:id="@+id/textView68"
-                android:layout_below="@+id/textView67"
-                android:layout_centerHorizontal="true" />
-        </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="rohit_annpurna@rediff.com"
+        android:id="@+id/textView60"
+        android:layout_below="@+id/textView54"
+        android:layout_centerHorizontal="true" />
 
     </LinearLayout>
+<LinearLayout
+    android:layout_weight="1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center">
+
+
+    <ImageView
+        android:padding="15dp"
+        android:src="@drawable/nage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView3"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Sai Teja"
+        android:id="@+id/textView66"
+        android:layout_alignBottom="@+id/imageView3"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="7794879899"
+        android:id="@+id/textView67"
+        android:layout_below="@+id/textView66"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="saiteja@gmail.com"
+        android:id="@+id/textView68"
+        android:layout_below="@+id/textView67"
+        android:layout_centerHorizontal="true" />
 </LinearLayout>
+        </LinearLayout>
+
+
+</LinearLayout>
+</ScrollView>
