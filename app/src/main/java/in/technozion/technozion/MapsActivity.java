@@ -3,12 +3,14 @@ package in.technozion.technozion;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.app.VoiceInteractor;
+import android.app.VoiceInteractor;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -19,6 +21,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -112,8 +116,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             getSupportFragmentManager().beginTransaction().replace(R.id.map, mapFragment).commit();
         }
         map = mapFragment.getMap();
-
-
 
         CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(17.984055, 79.530788));
         CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
