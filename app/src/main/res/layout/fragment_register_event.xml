@@ -91,9 +91,6 @@
             android:layout_toStartOf="@+id/textViewMaximumParticipantsValue"
             android:fillViewport="false"
             android:layout_below="@+id/textViewParticipants">
-
-
-
         </LinearLayout>
 
         <TextView

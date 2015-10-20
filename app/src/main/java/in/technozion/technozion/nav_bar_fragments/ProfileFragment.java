@@ -1,6 +1,7 @@
 package in.technozion.technozion.nav_bar_fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
@@ -26,15 +27,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.HashMap;
 
 import in.technozion.technozion.Data.URLS;
 import in.technozion.technozion.Data.Util;
 import in.technozion.technozion.MainActivity;
 import in.technozion.technozion.R;
+import in.technozion.technozion.RegisterActivity;
 import in.technozion.technozion.imagefromurl.ImageLoader;
 
 
@@ -45,6 +45,7 @@ public class ProfileFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     public static ProfileFragment newInstance(int sectionNumber) {
+
         ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -92,6 +93,17 @@ public class ProfileFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         loadProfileData();
+        getActivity().findViewById(R.id.updateProfile).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
+                new UpdateProfile().execute(sharedPreferences.getString("userid", ""));
+                loadProfileData();
+
+
+            }
+        });
     }
 
     private void loadProfileData() {
@@ -191,19 +203,26 @@ public class ProfileFragment extends Fragment {
             if (hashMap==null) {
 //                Toast.makeText(getActivity(), "Could not fetch events, please try again", Toast.LENGTH_SHORT).show();
             } else{
+                SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences.Editor editor= sharedPreferences.edit();
+                for(String s:hashMap.keySet()){
+                    editor.putString(s,hashMap.get(s));
+                }
+                editor.apply();
+
                 if (hashMap.get("registration").equalsIgnoreCase("paid")){
                     //TODO SAVE THINGS IN SHAREDPREFERENCES
 //                    getActivity().findViewById(R.id.imageViewQrCode).setVisibility(View.VISIBLE);
-                    SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
-                    SharedPreferences.Editor editor= sharedPreferences.edit();
+                 //   SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
+                 //   SharedPreferences.Editor editor= sharedPreferences.edit();
 
 
-                    for(String s:hashMap.keySet()){
-                        editor.putString(s,hashMap.get(s));
-                    }
+                 //   for(String s:hashMap.keySet()){
+                 //       editor.putString(s,hashMap.get(s));
+                 //   }
 //                    if (hashMap.get("hospitality").equalsIgnoreCase("paid"))
 //                    editor.putBoolean("registered",true);
-                    editor.apply();
+                 //   editor.apply();
 //                    editor.putString("registration", hashMap.get("registration"));
 //                    editor.putString("hospitality",hashMap.get("hospitality"));
 //                    editor.putString("userid",hashMap.get("userid"));
@@ -284,25 +303,90 @@ public class ProfileFragment extends Fragment {
             if (progressDialog.isShowing()) {
                 progressDialog.cancel();
             }
-            /*
-            if (string==null||string.length()<100) {
-//                Toast.makeText(getActivity(), "Could not fetch QR, please try again", Toast.LENGTH_SHORT).show();
-            } else {
-                SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(getActivity()).edit();
-                editor.putString("qr_code",string);
-                editor.apply();
-                ImageView imageView=((ImageView) getActivity().findViewById(R.id.imageViewQrCode));
-                if (imageView!=null) {
-                    byte[] decodedString = Base64.decode(string, Base64.NO_WRAP);
-                    InputStream inputStream = new ByteArrayInputStream(decodedString);
-                    imageView.setImageBitmap(BitmapFactory.decodeStream(inputStream));
-                }
-            }*/
+            Log.d("qr image:",image_url);
+//            if (string==null||string.length()<100) {
+////                Toast.makeText(getActivity(), "Could not fetch QR, please try again", Toast.LENGTH_SHORT).show();
+//            } else {
+//                SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(getActivity()).edit();
+//                editor.putString("qr_code",string);
+//                editor.apply();
+//                ImageView imageView=((ImageView) getActivity().findViewById(R.id.imageViewQrCode));
+//                if (imageView!=null) {
+//                    byte[] decodedString = Base64.decode(string, Base64.NO_WRAP);
+//                    InputStream inputStream = new ByteArrayInputStream(decodedString);
+//                    imageView.setImageBitmap(BitmapFactory.decodeStream(inputStream));
+//                }
+//            }
+            // Loader image - will be shown before loading image
+            int loader = R.drawable.loader;
 
-            int loader= R.drawable.loader;
+            // Imageview to show
             ImageView image = (ImageView)getActivity().findViewById(R.id.imageViewQrCode);
+
+            // Image url
+           //String image_url = "http://api.androidhive.info/images/sample.jpg";// "https://chart.googleapis.com/chart?cht=qr&chl=1234&choe=UTF-8&chs=100x100";
+
+            // ImageLoader class instance
             ImageLoader imgLoader = new ImageLoader(getActivity().getApplicationContext());
-            imgLoader.DisplayImage(image_url,loader,image);
+
+            // whenever you want to load an image from url
+            // call DisplayImage function
+            // url - image url to load
+            // loader - loader image, will be displayed before getting image
+            // image - ImageView
+            imgLoader.DisplayImage(image_url, loader, image);
+
+
+
         }
     }
+
+    public class UpdateProfile extends AsyncTask<String,Void,String> {
+
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog=new ProgressDialog(getActivity());
+            progressDialog.setMessage("fetching Update Profile data..");
+//            progressDialog.setCancelable(false);
+            progressDialog.setCanceledOnTouchOutside(false);
+//            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            if (strings==null||strings.length==0){
+                return null;
+            }
+            HashMap<String,String> data=new HashMap();
+            data.put("userid", strings[0]);
+            Log.d("k-- send userid",strings[0]);
+            return Util.getStringFromURL(URLS.UPDATE_PROFILE_FETCHDETAILS_URL, data);
+        }
+
+        @Override
+        protected void onPostExecute(String string) {
+            super.onPostExecute(string);
+            if (progressDialog.isShowing()) {
+                progressDialog.cancel();
+            }
+            if (string==null) {
+                Toast.makeText(getActivity(), "Could not fetch ur update profile data, please try again", Toast.LENGTH_SHORT).show();
+            } else {
+
+                Log.d("k-- check ",string);
+
+               // Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
+
+                Intent i = new Intent(getActivity(), RegisterActivity.class);
+                i.putExtra("data",string);
+                startActivity(i);
+
+                }
+            }
+
+    }
+
 }
