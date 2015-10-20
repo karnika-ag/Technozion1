@@ -61,14 +61,7 @@ public class MyDialog extends DialogFragment implements View.OnClickListener{
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                if (position == 2) {
-                    adapter1= ArrayAdapter.createFromResource(getActivity(), R.array.death_array, android.R.layout.simple_spinner_dropdown_item);
-                    spinner2.setAdapter(adapter1);
-                } else {
                     new FetchTask().execute("1");
-
-                }
             }
 
             @Override
