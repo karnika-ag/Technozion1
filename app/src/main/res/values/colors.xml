@@ -35,6 +35,6 @@
     <color name="selected_gray">#333c46</color>
     <color name="blur_white">#252739</color>
 
-
+<color name="list_bg">#555</color>
 
 </resources>

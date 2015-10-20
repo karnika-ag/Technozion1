@@ -35,6 +35,7 @@ import in.technozion.technozion.Data.URLS;
 import in.technozion.technozion.Data.Util;
 import in.technozion.technozion.MainActivity;
 import in.technozion.technozion.R;
+import in.technozion.technozion.imagefromurl.ImageLoader;
 
 
 public class ProfileFragment extends Fragment {
@@ -278,11 +279,12 @@ public class ProfileFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(String string) {
-            super.onPostExecute(string);
+        protected void onPostExecute(String image_url) {
+            super.onPostExecute(image_url);
             if (progressDialog.isShowing()) {
                 progressDialog.cancel();
             }
+            /*
             if (string==null||string.length()<100) {
 //                Toast.makeText(getActivity(), "Could not fetch QR, please try again", Toast.LENGTH_SHORT).show();
             } else {
@@ -295,7 +297,12 @@ public class ProfileFragment extends Fragment {
                     InputStream inputStream = new ByteArrayInputStream(decodedString);
                     imageView.setImageBitmap(BitmapFactory.decodeStream(inputStream));
                 }
-            }
+            }*/
+
+            int loader= R.drawable.loader;
+            ImageView image = (ImageView)getActivity().findViewById(R.id.imageViewQrCode);
+            ImageLoader imgLoader = new ImageLoader(getActivity().getApplicationContext());
+            imgLoader.DisplayImage(image_url,loader,image);
         }
     }
 }

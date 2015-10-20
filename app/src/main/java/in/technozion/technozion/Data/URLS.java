@@ -12,6 +12,7 @@ public class URLS {
 //    public static final String LOGIN_URL="http://bhuichalo.com/tz15/login.json";
 //    public static final String LOGIN_URL="http://172.20.41.199/tz-registration-master/accounts/login_mobile";
     public static final String LOGIN_URL="http://technozion.in/accounts/login_mobile";
+    //public static final String LOGIN_URL="http://technozion.in/accounts/login_mobile";
 //    public static final String REGISTER_URL="http://bhuichalo.com/tz15/register.json";
     public static final String REGISTER_URL="http://technozion.in/accounts/signup_mobile";
     public static final String FETCH_COLLEGES_URL="http://technozion.in/home/get_college_mobile";
@@ -34,5 +35,5 @@ public class URLS {
     public static final String WORKSHOP_REGISTER_URL="http://technozion.in/workshops/registerteam_mobile";
     public static final String WORKSHOP_REGISTER_CONFIRM_URL="http://technozion.in/workshops/registerteam_payment_mobile";
 
-    public static final String T_SHIRT_URL="";
+    public static final String BUY_TSHIRT_URL="http://technozion.in/tshirt/add_tshirt_mobile";
 }

@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity
                 fragment= DevelopersFragment.newInstance(7);
                 break;
             case 7:
-                fragment=HomeFragment.newInstance(9);
+                fragment=TShirtsFragment.newInstance(8);
                 break;
             case 8:
                 fragment=HomeFragment.newInstance(9);
