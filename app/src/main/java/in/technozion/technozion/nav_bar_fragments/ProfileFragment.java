@@ -303,7 +303,9 @@ public class ProfileFragment extends Fragment {
             if (progressDialog.isShowing()) {
                 progressDialog.cancel();
             }
-            Log.d("qr image:",image_url);
+            if (image_url!=null) {
+                Log.d("qr image:", image_url);
+            }
 //            if (string==null||string.length()<100) {
 ////                Toast.makeText(getActivity(), "Could not fetch QR, please try again", Toast.LENGTH_SHORT).show();
 //            } else {

@@ -8,10 +8,10 @@
     <string name="title_section3">Registration</string>
     <string name="title_section4">Events</string>
     <string name="title_section5">Workshops</string>
-    <string name="title_section6">FAQ</string>
-    <string name="title_section7">Developers</string>
-    <string name="title_section8">Map</string>
-    <string name="title_section9">T shirts</string>
+    <string name="title_section6">Map</string>
+    <string name="title_section7">T shirts</string>
+    <string name="title_section8">FAQ</string>
+    <string name="title_section9">Developers</string>
 
     <string name="technozion_description">Technozion is a three-day annual technical symposium organized by the student fraternity of National Institute of Technology, Warangal and is aimed at providing a platform for students across India to assemble, interact, and share knowledge in various fields of science and technology.</string>
 

@@ -36,4 +36,6 @@ public class URLS {
     public static final String WORKSHOP_REGISTER_CONFIRM_URL="http://technozion.in/workshops/registerteam_payment_mobile";
 
     public static final String BUY_TSHIRT_URL="http://technozion.in/tshirt/add_tshirt_mobile";
+    public static final String UPDATE_PROFILE_FETCHDETAILS_URL="http://technozion.in/update_profile/update_profile_fetchDetails_mobile";
+    public static final String UPDATE_PROFILE_URL="http://technozion.in/update_profile/update_profile_mobile";
 }

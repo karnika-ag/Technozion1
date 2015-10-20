@@ -118,7 +118,7 @@ public class NavigationDrawerFragment extends Fragment {
                 getActivity().getApplicationContext(),
                 android.R.layout.simple_list_item_1,
 //                android.R.id.text1,
-                new String[]{
+          String[] names=      new String[]{
                         getString(R.string.title_section1),
                         getString(R.string.title_section2),
                         getString(R.string.title_section3),
@@ -130,8 +130,19 @@ public class NavigationDrawerFragment extends Fragment {
 //                        getString(R.string.title_section9),
                 });
         */
-        String[] names=new String[]{"Home", "Profile", "Registration", "Events", "Workshops", "Map", "T-Shirts",  "FAQ", "Developers", };
+//        String[] names=new String[]{"Home", "Profile", "Registration", "Events", "Workshops", "Map", "T-Shirts",  "FAQ", "Developers", };
 
+        String[] names=      new String[]{
+                getString(R.string.title_section1),
+                getString(R.string.title_section2),
+                getString(R.string.title_section3),
+                getString(R.string.title_section4),
+                getString(R.string.title_section5),
+                getString(R.string.title_section6),
+                getString(R.string.title_section7),
+                getString(R.string.title_section8),
+                getString(R.string.title_section9),
+        };
     /*Array of Images*/
         int[] image = new int[] {R.mipmap.ic_tz,
                 R.mipmap.ic_profile
