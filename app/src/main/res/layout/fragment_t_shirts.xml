@@ -9,8 +9,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/imageView"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/buttonPurchase">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"

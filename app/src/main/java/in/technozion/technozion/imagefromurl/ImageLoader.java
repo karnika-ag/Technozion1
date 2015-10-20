@@ -54,11 +54,11 @@ public class ImageLoader {
         if(bitmap!=null) {
             imageView.setImageBitmap(bitmap);
 
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
-            byte[] bytes = baos.toByteArray();
-            String encodedString = Base64.encodeToString(bytes, Base64.DEFAULT);
-            Log.d("siuijll",encodedString);
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+//            byte[] bytes = baos.toByteArray();
+//            String encodedString = Base64.encodeToString(bytes, Base64.DEFAULT);
+//            Log.d("siuijll",encodedString);
         }
         else
         {
@@ -125,7 +125,7 @@ public class ImageLoader {
 
             //decode with inSampleSize
             BitmapFactory.Options o2 = new BitmapFactory.Options();
-            o2.inSampleSize=scale;
+//            o2.inSampleSize=scale;
             return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
         } catch (FileNotFoundException e) {}
         return null;
