@@ -30,18 +30,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0"
-        android:id="@+id/editTextNoOfParticipants"
-        android:inputType="number"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/textViewSize"
-        android:layout_alignEnd="@+id/textViewSize" />
-
-
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerNoOfParticipants"
+                android:spinnerMode="dropdown"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@+id/textViewSize"
+                android:layout_toEndOf="@+id/textViewSize" />
 
     <TextView
         android:paddingTop="10dp"
@@ -51,18 +49,9 @@
         android:text="Enter the size of t-shirts:"
         android:visibility="invisible"
         android:id="@+id/textViewSize"
-        android:layout_below="@+id/buttonGo"
+        android:layout_below="@+id/spinnerNoOfParticipants"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Go"
-                android:id="@+id/buttonGo"
-                android:layout_below="@+id/editTextNoOfParticipants"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
 
 
     <LinearLayout
@@ -72,26 +61,30 @@
         android:id="@+id/linearLayoutTshirts"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/editTextNoOfParticipants"
-        android:layout_toStartOf="@+id/editTextNoOfParticipants"
+        android:layout_toLeftOf="@+id/spinnerNoOfParticipants"
+        android:layout_toStartOf="@+id/spinnerNoOfParticipants"
         android:fillViewport="false"
         android:layout_below="@+id/textViewSize">
     </LinearLayout>
 
+
+            <TextView
+                android:paddingTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:visibility="invisible"
+                android:id="@+id/textViewPayment"
+                android:layout_below="@+id/linearLayoutTshirts"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+
             </RelativeLayout>
     </ScrollView>
 
-    <TextView
-        android:paddingTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text=""
-        android:visibility="invisible"
-        android:id="@+id/textViewPayment"
-        android:layout_above="@+id/buttonPurchase"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+
 
 
     <Button

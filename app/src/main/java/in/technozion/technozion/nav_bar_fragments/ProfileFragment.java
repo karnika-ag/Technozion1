@@ -338,6 +338,8 @@ public class ProfileFragment extends Fragment {
             // image - ImageView
             imgLoader.DisplayImage(image_url, loader, image);
 
+//            Log.d()
+//            image.getDrawable();
 
 
         }
