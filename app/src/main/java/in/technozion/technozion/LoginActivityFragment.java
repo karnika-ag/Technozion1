@@ -1,13 +1,18 @@
 package in.technozion.technozion;
 
 import android.animation.Animator;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,11 +29,14 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
 import java.net.URI;
 import java.util.HashMap;
 
 import in.technozion.technozion.Data.URLS;
 import in.technozion.technozion.Data.Util;
+import in.technozion.technozion.nav_bar_fragments.ForgotDialog;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -84,12 +92,7 @@ public class LoginActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
-          /*      String url = URLS.FORGOTPWD;
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-           */
+                showDialog();
             }
         });
         //Logout
@@ -121,6 +124,11 @@ public class LoginActivityFragment extends Fragment {
         }
     }
 
+
+    public void showDialog() {
+        ForgotDialog newFragment = new ForgotDialog();
+        newFragment.show(getActivity().getFragmentManager(),"forgot")  ;
+    }
 
     public class LoginTask extends AsyncTask<String,Void,HashMap<String ,String>> {
 

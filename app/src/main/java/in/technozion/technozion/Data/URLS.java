@@ -36,4 +36,6 @@ public class URLS {
     public static final String WORKSHOP_REGISTER_CONFIRM_URL="http://technozion.in/workshops/registerteam_payment_mobile";
 
     public static final String T_SHIRT_URL="";
+
+    public static final String forgotLink="http://technozion.in/forgot_password/request_mobile";
 }
