@@ -154,7 +154,8 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             public void onMapLongClick(LatLng latLng) {
                 for (Marker marker : mList) {
                     if (Math.abs(marker.getPosition().latitude - latLng.latitude) < 0.0005 && Math.abs(marker.getPosition().longitude - latLng.longitude) < 0.0005) {
-                        Location mLastLocation = LocationServices.FusedLocationApi
+                        Location mLastLocation;
+                        mLastLocation = LocationServices.FusedLocationApi
                                 .getLastLocation(mGoogleApiClient);
 
                         if (mLastLocation != null) {
