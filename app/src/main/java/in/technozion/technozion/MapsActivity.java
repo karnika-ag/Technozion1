@@ -188,8 +188,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
                         if (mLastLocation != null) {
                             start = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-                            if(start==null)
-                                Log.d("maps","this is NULL");
+
                         }
                         end = marker.getPosition();
 
