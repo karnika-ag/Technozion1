@@ -26,7 +26,10 @@
     <color name="myPrimaryDarkColor">#171a20</color>
 
     <color name="myDrawerBackground">#FFF</color>
+
     <color name="myWindowBackground">#ffffff</color>
+
+
     <color name="myTextPrimaryColor">#212121</color>
     <color name="myNavigationColor">#000000</color>
 
@@ -35,6 +38,8 @@
     <color name="blur_white">#252739</color>
     <color name="login_panel">#151616</color>
 
+
+    <color name="primary_dark">#0097A7</color>
 
 
 </resources>
