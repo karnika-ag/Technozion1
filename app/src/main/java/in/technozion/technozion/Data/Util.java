@@ -50,7 +50,7 @@ public class Util {
                     data +="&"+key+"="+URLEncoder.encode(value,"UTF-8");
             }
 
-//            Log.d("checking_send_data",data);
+            Log.d("checking_send_data",data);
             OutputStreamWriter out = new OutputStreamWriter(httpURLConnection.getOutputStream());
             out.write(data);
             out.close();

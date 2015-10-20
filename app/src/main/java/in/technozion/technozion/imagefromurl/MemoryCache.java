@@ -3,11 +3,13 @@ package in.technozion.technozion.imagefromurl;
 /**
  * Created by karnika_ag on 10/16/2015.
  */
+
+import android.graphics.Bitmap;
+
 import java.lang.ref.SoftReference;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import android.graphics.Bitmap;
 
 public class MemoryCache {
     private Map<String, SoftReference<Bitmap>> cache=Collections.synchronizedMap(new HashMap<String, SoftReference<Bitmap>>());

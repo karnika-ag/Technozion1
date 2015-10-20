@@ -1,19 +1,18 @@
 package in.technozion.technozion;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.widget.Toolbar;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,17 +20,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import in.technozion.technozion.adapters.NavigationDrawerAdapter;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -143,10 +138,10 @@ public class NavigationDrawerFragment extends Fragment {
                 ,R.mipmap.ic_register
                 ,R.mipmap.ic_events,
                 R.mipmap.ic_workshops,
-                R.mipmap.ic_googlemaps
+                R.mipmap.ic_maps
                 ,R.mipmap.ic_tshirts
                 ,R.mipmap.ic_faq,
-                R.mipmap.ic_faq,
+                R.mipmap.ic_dev,
                 };
 
         List<HashMap<String, String>> listinfo = new ArrayList<HashMap<String, String>>();
@@ -176,20 +171,7 @@ public class NavigationDrawerFragment extends Fragment {
   */
 
     }
-    public List<NavigationItem> getMenu() {
-        List<NavigationItem> items = new ArrayList<NavigationItem>();
-    /*    items.add(new NavigationItem(getString(R.string.title_section1), getResources().getDrawable(R.mipmap.ic_tz)));
-        items.add(new NavigationItem(getString(R.string.nav_profile), getResources().getDrawable(R.mipmap.ic_profile)));
-        items.add(new NavigationItem(getString(R.string.nav_registration), getResources().getDrawable(R.mipmap.ic_register)));
-        items.add(new NavigationItem(getString(R.string.nav_events), getResources().getDrawable(R.mipmap.ic_events)));
-        items.add(new NavigationItem(getString(R.string.nav_workshops), getResources().getDrawable(R.mipmap.ic_workshops)));
-        items.add(new NavigationItem(getString(R.string.nav_map), getResources().getDrawable(R.mipmap.ic_googlemaps)));
-        items.add(new NavigationItem(getString(R.string.nav_t_shirts), getResources().getDrawable(R.mipmap.ic_tshirts)));
-        items.add(new NavigationItem(getString(R.string.nav_faq), getResources().getDrawable(R.mipmap.ic_faq)));
-        items.add(new NavigationItem(getString(R.string.nav_logout), getResources().getDrawable(R.mipmap.ic_logout)));
-*/
-        return items;
-    }
+
     public boolean isDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
     }

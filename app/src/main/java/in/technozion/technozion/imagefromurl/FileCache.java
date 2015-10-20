@@ -3,8 +3,10 @@ package in.technozion.technozion.imagefromurl;
 /**
  * Created by karnika_ag on 10/16/2015.
  */
-import java.io.File;
+
 import android.content.Context;
+
+import java.io.File;
 
 public class FileCache {
     private File cacheDir;
