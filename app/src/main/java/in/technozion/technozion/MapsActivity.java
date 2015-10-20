@@ -183,7 +183,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                         Map<Marker, String> MarkersMap = new WeakHashMap<Marker, String>();
                         MarkersMap.put(marker, "Event");
 
-
                         route();
                         break;
                     }
