@@ -54,7 +54,7 @@ public class MyDialog extends DialogFragment implements View.OnClickListener{
         spinner = (Spinner) v.findViewById(R.id.planets_spinner);
         spinner2=(Spinner)v.findViewById(R.id.second_spinner);
         adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.planets_array, android.R.layout.simple_spinner_dropdown_item);
+                R.array.events_array, android.R.layout.simple_spinner_dropdown_item);
         //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

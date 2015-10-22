@@ -2,7 +2,10 @@ package in.technozion.technozion.nav_bar_fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -15,27 +18,40 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import in.technozion.technozion.Data.ServerUtilities;
+
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import in.technozion.technozion.Data.ConnectionDetector;
 import in.technozion.technozion.Data.URLS;
 import in.technozion.technozion.Data.Util;
-import in.technozion.technozion.MainActivity;
-import in.technozion.technozion.R;
-import in.technozion.technozion.adapters.EventsAdapter;
-
 import in.technozion.technozion.MainActivity;
 import in.technozion.technozion.R;
 
 
 
 public class HomeFragment extends Fragment {
+
+
+    ConnectionDetector cd;
+    public static String name;
+    public static String email;
+    public static final String PROPERTY_REG_ID = "441783016674";
+    private static final String PROPERTY_APP_VERSION = "appVersion";
+    String SENDER_ID = "441783016674";
+    static final String TAGGCM = "GCMDemo";
+    GoogleCloudMessaging gcm;
+    Context context;
+    String regid;
     public static final String TAG = HomeFragment.class.getSimpleName();
 
     private static final String ARG_SECTION_NUMBER = "section_number";
@@ -50,7 +66,32 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+       View v= inflater.inflate(R.layout.fragment_home, container, false);
+
+        cd = new ConnectionDetector(getActivity().getApplicationContext());
+
+        if (!cd.isConnectingToInternet()) {
+            Toast.makeText(getActivity(),
+                    "Internet Connection Error",
+                    Toast.LENGTH_SHORT);
+            return v;
+        }
+        name="saiteja";
+        email="saitej3@gmail.com";
+        context = getActivity().getApplicationContext();
+        if (true) {
+
+            gcm = GoogleCloudMessaging.getInstance(getActivity());
+            regid = getRegistrationId(context);
+
+            if (regid.isEmpty()) {
+                registerInBackground();
+            }
+        } else {
+            Log.i(TAGGCM, "No valid Google Play Services APK found.");
+        }
+
+        return v;
     }
 
     @Override
@@ -152,6 +193,96 @@ public class HomeFragment extends Fragment {
                     }
                 }
             }
+        }
+    }
+
+
+
+    //gcm functions
+    private String getRegistrationId(Context context) {
+        final SharedPreferences prefs = getGCMPreferences(context);
+        String registrationId = prefs.getString(PROPERTY_REG_ID, "");
+        if (registrationId.isEmpty()) {
+            Log.i(TAGGCM, "Registration not found.");
+            return "";
+        }
+        int registeredVersion = prefs.getInt(PROPERTY_APP_VERSION, Integer.MIN_VALUE);
+        int currentVersion = getAppVersion(context);
+        if (registeredVersion != currentVersion) {
+            Log.i(TAGGCM, "App version changed.");
+            return "";
+        }
+        return registrationId;
+    }
+
+
+
+    private SharedPreferences getGCMPreferences(Context context) {
+
+        return getActivity().getSharedPreferences(MainActivity.class.getSimpleName(),
+                Context.MODE_PRIVATE);
+    }
+
+    private static int getAppVersion(Context context) {
+        try {
+            PackageInfo packageInfo = context.getPackageManager()
+                    .getPackageInfo(context.getPackageName(), 0);
+            return packageInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            // should never happen
+            throw new RuntimeException("Could not get package name: " + e);
+        }
+    }
+
+
+    private void registerInBackground() {
+        new Reg().execute(null,null,null);
+    }
+
+
+
+    private void sendRegistrationIdToBackend() {
+
+        ServerUtilities.register(getActivity(), name, email, regid);
+    }
+
+
+    private void storeRegistrationId(Context context, String regId) {
+        final SharedPreferences prefs = getGCMPreferences(context);
+        int appVersion = getAppVersion(context);
+        Log.i(TAGGCM, "Saving regId on app version " + appVersion);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(PROPERTY_REG_ID, regId);
+        editor.putInt(PROPERTY_APP_VERSION, appVersion);
+        editor.commit();
+    }
+
+
+    private class Reg extends AsyncTask<Void,Void,String>
+    {
+
+        protected String doInBackground(Void... params) {
+            String msg = "";
+            try {
+                if (gcm == null) {
+                    gcm = GoogleCloudMessaging.getInstance(context);
+                }
+                regid = gcm.register(SENDER_ID);
+                msg = "Device registered, registration ID=" + regid;
+
+
+                sendRegistrationIdToBackend();
+
+
+                storeRegistrationId(context, regid);
+            } catch (IOException ex) {
+                msg = "Error :" + ex.getMessage();
+            }
+            return msg;
+        }
+
+        protected void onPostExecute(String msg) {
+            Toast.makeText(getActivity(),"redid created",Toast.LENGTH_SHORT).show();
         }
     }
 

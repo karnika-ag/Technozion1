@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Technozion</string>
-    <!--<string name="hello_world">Hello world!</string>-->
     <string name="title_activity_main">MainActivity</string>
 
     <string name="title_section1">Home</string>
@@ -18,14 +17,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <!--<string name="action_example">Example action</string>-->
-
-    <!--<string name="placeholder_name">Ankit Chaurasia</string>-->
-    <!--<string name="placeholder_college_id">127106</string>-->
-    <!--<string name="placeholder_college">National Institute of Technology, Warangal</string>-->
-    <!--<string name="placeholder_tz_id">123456</string>-->
-    <!--<string name="placeholder_phone">8686411649</string>-->
-    <!--<string name="placeholder_email_id">sunank200@gmail.com</string>-->
 
     <!-- menu -->
     <string name="title_activity_web_view">Web View</string>
@@ -48,12 +39,13 @@
 
     <string name="gender">Gender</string>
 
-    <string-array name="planets_array">
+    <string-array name="events_array">
         <item>Events</item>
         <item>Workshops</item>
         <item>Talks</item>
         <item>Others</item>
     </string-array>
+
 
 
 </resources>
