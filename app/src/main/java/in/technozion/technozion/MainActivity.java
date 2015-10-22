@@ -95,7 +95,9 @@ public class MainActivity extends AppCompatActivity
                 fragment= WorkshopsFragment.newInstance(5);
                 break;
             case 5:
-                fragment= FAQFragment.newInstance(6);
+                startActivity(new Intent(this,MapsActivity.class));
+                fragment=null;
+//                fragment= FAQFragment.newInstance(6);
                 break;
             case 6:
                 fragment= TShirtsFragment.newInstance(7);
