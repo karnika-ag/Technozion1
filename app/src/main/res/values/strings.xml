@@ -47,4 +47,36 @@
     <string name="action_filter">Filter</string>
 
     <string name="gender">Gender</string>
+
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
+
+    <string-array name="death_array">
+        <item>Jeus</item>
+        <item>Hades</item>
+        <item>Cupid</item>
+        <item>Percy</item>
+        <item>Athena</item>
+        <item>Aphrodite</item>
+        <item>Poseidon</item>
+    </string-array>
+
+    <string-array name="prop_array">
+        <item>he</item>
+        <item>She</item>
+        <item>they</item>
+        <item>Us</item>
+        <item>Me</item>
+        <item>Them</item>
+        <item>That</item>
+        <item>People</item>
+    </string-array>
 </resources>

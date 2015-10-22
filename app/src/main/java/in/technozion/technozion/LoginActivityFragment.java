@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URI;
 import java.util.HashMap;
 
 import in.technozion.technozion.Data.URLS;
@@ -78,7 +80,18 @@ public class LoginActivityFragment extends Fragment {
             }
         });
 
+        getActivity().findViewById(R.id.buttonForgot).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+
+          /*      String url = URLS.FORGOTPWD;
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+           */
+            }
+        });
         //Logout
 //        SharedPreferences.Editor editor=sharedPreferences.edit();
 //        editor.putBoolean("logged_in",true);

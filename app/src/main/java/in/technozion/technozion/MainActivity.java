@@ -109,9 +109,11 @@ public class MainActivity extends AppCompatActivity
             default:
                 fragment= HomeFragment.newInstance(10);
         }
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .commit();
+        if(fragment!=null) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, fragment)
+                    .commit();
+        }
     }
 
     public void onSectionAttached(int number) {
