@@ -64,14 +64,16 @@ import java.util.WeakHashMap;
 
 
 
-public class MapsActivity extends AppCompatActivity implements RoutingListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks,MyDialog.Communicator{
+public class MapsActivity extends AppCompatActivity implements RoutingListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks,MyDialog.Communicator,PopDialog.Communicator{
     protected GoogleMap map;
+    final List<Marker> mList=new ArrayList<>(); ;
     protected LatLng start;
     protected LatLng end;
     private String LOG_TAG = "MyActivity";
     protected GoogleApiClient mGoogleApiClient;
     private ProgressDialog progressDialog;
     private Polyline polyline;
+    ArrayList<MarkerItem> arrayMain=null;
 
     //request location
     protected LocationManager locationManager;
@@ -97,14 +99,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                 .addApi(ActivityRecognition.API)
                 .addOnConnectionFailedListener(this)
                 .build();
-/*
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-        if (mLastLocation != null) {
-            Log.d("Loxation",String.valueOf(mLastLocation));
-        }
-        */
 
+
+        arrayMain=new ArrayList<MarkerItem>();
         buttonMarker();
         MapsInitializer.initialize(this);
         mGoogleApiClient.connect();
@@ -136,20 +133,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             @Override
             public void onClick(View v) {
                 //Creating the instance of PopupMenu
-                PopupMenu popup = new PopupMenu(MapsActivity.this, button1);
-                //Inflating the Popup using xml file
-                popup.getMenuInflater()
-                        .inflate(R.menu.popup_menu, popup.getMenu());
-                popup.setOnMenuItemClickListener((PopupMenu.OnMenuItemClickListener)v);
-                //registering popup with OnMenuItemClickListener
-               /* popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-
-                        return true;
-                    }
-                });*/
-
-                popup.show(); //showing popup menu
+               showDialog1(v);
             }
         });
     }
@@ -167,12 +151,12 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
     public void addMarkers()
     {
 
+        new FetchTaskCord().execute("");
         Marker marker=map.addMarker(new MarkerOptions()
                 .position(new LatLng(17.984055, 79.530788))
                 .title("Hover Mania").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
 
-        final List<Marker> mList=new ArrayList<>();
         mList.add(marker);
 
 
@@ -300,6 +284,41 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     }
 
+
+    public void showDialog1(View v)
+    {
+        FragmentManager fm=getFragmentManager();
+        PopDialog myDialog=new PopDialog();
+        myDialog.show(fm,"pop");
+
+    }
+
+    @Override
+    public void onDialogMessage(ArrayList<MarkerItem> items) {
+        if(items==null)
+        {
+            Log.d("arrayMian","array is null");
+            return;
+        }
+        arrayMain.addAll(items);
+        for(MarkerItem item:arrayMain)
+        {
+            Marker marker =map.addMarker(new MarkerOptions().position(new LatLng(item.getEventLat(),item.getEventLong())).title(item.getEventName()).snippet(item.getEventVenue()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+            mList.add(marker);
+        }
+    }
+
+    @Override
+    public void onDialogMessage1(String s) {
+        for(MarkerItem item:arrayMain)
+        {
+            if(item.getEventtype().equalsIgnoreCase(s))
+            {
+                arrayMain.remove(item);
+            }
+        }
+    }
+
     @Override
     public void onDialogMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
@@ -376,6 +395,73 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             double longitude=Double.parseDouble(hashMap.get("long"));
             end=new LatLng(latitude,longitude);
             route();
+        }
+    }
+
+
+    public class FetchTaskCord extends AsyncTask< String,Void,ArrayList<MarkerItem>> {
+
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog=new ProgressDialog(MapsActivity.this);
+            progressDialog.setMessage("Fetching Event Locations");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+
+        @Override
+        protected ArrayList<MarkerItem> doInBackground(String... strings) {
+
+            if(strings[0]==null) return null;
+            HashMap<String,String> data=new HashMap();
+            data.put("eventType", strings[0]);
+            String jsonstr= Util.getStringFromURL("http://technozion.org/tz15/home/events_json_mobile", data);
+
+            if (jsonstr!=null) {
+                Log.d("GOT FROM HTTP", jsonstr);
+                try {
+                    JSONObject json=new JSONObject(jsonstr);
+                    JSONArray jsonArr=json.getJSONArray("events");
+                    ArrayList<MarkerItem> arrNames=new ArrayList<MarkerItem>();
+                    Log.d("jsonArray",jsonArr.toString());
+                    for(int i=0;i<jsonArr.length();i++) {
+                        JSONObject feedObj = (JSONObject) jsonArr.get(i);
+                        MarkerItem markerItem = new MarkerItem();
+                        markerItem.setMarkerId(Integer.valueOf(feedObj.getString("id")));
+                        markerItem.setEventName(feedObj.getString("event_name"));
+                        markerItem.setEventVenue(feedObj.getString("event_place"));
+                        markerItem.setEventLat(Double.valueOf(feedObj.getString("latitude")));
+                        markerItem.setEventLong(Double.valueOf(feedObj.getString("longitude")));
+
+                        arrNames.add(markerItem);
+                    }
+                    return arrNames;
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void  onPostExecute(ArrayList<MarkerItem> arrNames) {
+            super.onPostExecute(arrNames);
+            if (progressDialog.isShowing()) {
+                progressDialog.cancel();
+            }
+
+            if(arrNames==null)
+                Log.d("tagreg","fucked");
+            for ( MarkerItem item:arrNames)
+            {
+                Marker marker =map.addMarker(new MarkerOptions().position(new LatLng(item.getEventLat(),item.getEventLong())).title(item.getEventName()).snippet(item.getEventVenue()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                mList.add(marker);
+            }
+
+            return;
         }
     }
 
