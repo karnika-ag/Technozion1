@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment=null;
+        Fragment fragment;
         switch(position){
             case 0:
                 fragment= HomeFragment.newInstance(1);
@@ -95,11 +95,12 @@ public class MainActivity extends AppCompatActivity
                 fragment= WorkshopsFragment.newInstance(5);
                 break;
             case 5:
-
                 startActivity(new Intent(this,MapsActivity.class));
+                fragment=null;
+//                fragment= FAQFragment.newInstance(6);
                 break;
             case 6:
-                //fragment=
+                fragment= TShirtsFragment.newInstance(7);
                 break;
             case 7:
                 fragment=FAQFragment.newInstance(8);
@@ -174,8 +175,6 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-
 
         //noinspection SimplifiableIfStatement
 //        if (id == R.id.action_settings) {

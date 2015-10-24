@@ -48,4 +48,28 @@
         <item>West Bengal</item>
     </string-array>
 
+    <string-array name="faq">
+        <item>What is technozion Id?</item>
+        <item>It is unique id generated for every person upon successful sign up in Technozion website.</item>
+        <item>How can I register for an event?</item>
+        <item>Every team member should have been registered in technozion website before team registration as the technozion id is required for successful team registration</item>
+        <item>When will my team registration be confirmed?</item>
+        <item>Upon successful team registration, each team member should pay money 400(registration fee) + 600(accommodation(optional)) via online. You can pay money here Technzoion.in>>registration Once each and every person pays the registration fee, the status of your team gets confirmed. Sometimes due to some lags your team status might be shown pending,but you need not worry about it. Once you pay money you can come over for Technozion.</item>
+        <item>Is there any specific event registration fee for any event?</item>
+        <item>There is no separate registration fee for any kind of event. There will technozion registration fee of 400/- (per person) with which you can participate in any number of events. If you want hospitality you need to pay 600/- in order to get hospitality.</item>
+        <item>What are all the ways to pay money to technozion?</item>
+        <item>You can transfer money through online to technozion. There are several means to do this.\nCredit card transfer\nDebit card transfer\nOnline internet banking.\nWE WONT ACCEPT ANY DEMAND DRAFTS.</item>
+        <item>My team is registered for an event. can I change the team members now?</item>
+        <item>No.once your team id is generated you wont be able to edit your team members. But if you still want to change your team members you have to cancel your team and register again as a new team.</item>
+        <item>My team registration is confirmed and we have paid technozion fee. Can I change the team members now?</item>
+        <item>No :(</item>
+        <item>When can we expect the team registration get confirmed?</item>
+        <item>Event registrations started on 14th September, 2014 and now your are able to transfer money to technozion in order to get your team confirmed. Once you pay registration fee, your slot is confirmed</item>
+        <item>Our team registration is confirmed and we have paid registration fee through online but we didn\'t apply for hospitality during that time,but we want hospitality now. what are we supposed to do now?</item>
+        <item>You can apply for hospitality here\ntechnozion.in>>accommodation.\nIt is advised you to apply for hospitality as soon as possible as accommodation slots are limited.</item>
+        <item>Is the participation in branch events restricted to branch in which i am studying?</item>
+        <item>No. You can participate in any event irrespective of the branch in which you are studying.\nEx : If you are from computer science and Engg you can still participate in any event other than those from your branch</item>
+        <item>Do all my teammates need to be from the same college as I am or can we be from different colleges?</item>
+        <item>You can form team consisting of people from different colleges even.</item>
+    </string-array>
 </resources>

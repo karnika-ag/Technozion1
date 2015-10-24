@@ -7,9 +7,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import in.technozion.technozion.MainActivity;
 import in.technozion.technozion.R;
+import in.technozion.technozion.adapters.FAQAdapter;
 
 public class FAQFragment extends Fragment {
     public static final String TAG = "FAQ";
@@ -39,6 +42,7 @@ public class FAQFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        ArrayAdapter<String> arrayAdapter=new FAQAdapter(getContext(),R.layout.faq_boxes,getActivity().getResources().getStringArray(R.array.faq));
+        ((ListView) getActivity().findViewById(R.id.listViewFAQ)).setAdapter(arrayAdapter);
     }
 }

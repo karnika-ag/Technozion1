@@ -155,13 +155,11 @@ public class MyDialog extends DialogFragment implements View.OnClickListener{
                 progressDialog.cancel();
             }
 
-            adapter2= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,arrNames);
-            adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner2.setAdapter(adapter2);
-
-            return;
-
-
+            if(arrNames!=null) {
+                adapter2 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, arrNames);
+                adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner2.setAdapter(adapter2);
+            }
         }
     }
 

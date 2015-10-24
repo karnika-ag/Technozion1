@@ -6,10 +6,15 @@ package in.technozion.technozion.imagefromurl;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.preference.PreferenceManager;
+import android.util.Base64;
+import android.util.Log;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,12 +33,14 @@ import in.technozion.technozion.R;
 
 public class ImageLoader {
 
+    private Context context;
     MemoryCache memoryCache=new MemoryCache();
     FileCache fileCache;
     private Map<ImageView, String> imageViews=Collections.synchronizedMap(new WeakHashMap<ImageView, String>());
     ExecutorService executorService;
 
     public ImageLoader(Context context){
+        this.context=context;
         fileCache=new FileCache(context);
         executorService=Executors.newFixedThreadPool(5);
     }
@@ -44,10 +51,18 @@ public class ImageLoader {
         stub_id = loader;
         imageViews.put(imageView, url);
         Bitmap bitmap=memoryCache.get(url);
-        if(bitmap!=null)
+        if(bitmap!=null) {
             imageView.setImageBitmap(bitmap);
+
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+//            byte[] bytes = baos.toByteArray();
+//            String encodedString = Base64.encodeToString(bytes, Base64.DEFAULT);
+//            Log.d("siuijll",encodedString);
+        }
         else
         {
+            Log.d("Imageloader","else");
             queuePhoto(url, imageView);
             imageView.setImageResource(loader);
         }
@@ -110,7 +125,7 @@ public class ImageLoader {
 
             //decode with inSampleSize
             BitmapFactory.Options o2 = new BitmapFactory.Options();
-            o2.inSampleSize=scale;
+//            o2.inSampleSize=scale;
             return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
         } catch (FileNotFoundException e) {}
         return null;
@@ -164,8 +179,20 @@ public class ImageLoader {
         {
             if(imageViewReused(photoToLoad))
                 return;
-            if(bitmap!=null)
+            if(bitmap!=null) {
                 photoToLoad.imageView.setImageBitmap(bitmap);
+                Log.d("ImageLoader", "not noll");
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+                byte[] bytes = baos.toByteArray();
+                String encodedString = Base64.encodeToString(bytes, Base64.DEFAULT);
+                Log.d("siuijll", encodedString);
+                SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(context);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putString("qr_code",encodedString);
+                editor.apply();
+            }
             else
                 photoToLoad.imageView.setImageResource(stub_id);
         }
