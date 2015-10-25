@@ -42,7 +42,7 @@
     <string-array name="events_array">
         <item>Events</item>
         <item>Workshops</item>
-        <item>Talks</item>
+        <item>Guest Lectures</item>
         <item>Others</item>
     </string-array>
 

@@ -61,7 +61,7 @@ public class MyDialog extends DialogFragment implements View.OnClickListener{
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    new FetchTask().execute("Events");
+                    new FetchTask().execute(String.valueOf(position));
             }
 
             @Override
@@ -128,8 +128,8 @@ public class MyDialog extends DialogFragment implements View.OnClickListener{
 
             if(strings[0]==null) return null;
             HashMap<String,String> data=new HashMap();
-            data.put("name", strings[0]);
-            String jsonstr= Util.getStringFromURL("http://androidconnect.16mb.com/sampleFetch.php", data);
+            data.put("num", strings[0]);
+            String jsonstr= Util.getStringFromURL("http://technozion.org/tz15/home/get_all_names_mobile", data);
 
             if (jsonstr!=null) {
                 Log.d("GOT FROM HTTP", jsonstr);

@@ -30,7 +30,7 @@
         android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceLargeInverse"
         android:id="@+id/textViewnextEvent"
         android:layout_above="@+id/textViewNextEventTime"
         android:layout_alignParentLeft="true"
@@ -40,7 +40,7 @@
         android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:id="@+id/textViewNextEventTime"
         android:layout_above="@+id/textViewNextEvent2"
         android:layout_alignParentLeft="true"
@@ -50,7 +50,7 @@
         android:layout_marginRight="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceLargeInverse"
         android:id="@+id/textViewNextEvent2"
         android:layout_above="@+id/textViewNextEvent2Time"
         android:layout_alignParentRight="true"
@@ -61,11 +61,21 @@
         android:layout_marginBottom="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:id="@+id/textViewNextEvent2Time"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:text="Your Next Events:"
+        android:id="@+id/textView4"
+        android:layout_above="@+id/textViewnextEvent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <!--<TextView-->
         <!--android:layout_margin="10dp"-->

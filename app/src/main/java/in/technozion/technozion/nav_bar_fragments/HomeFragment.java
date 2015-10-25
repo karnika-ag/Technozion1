@@ -67,7 +67,6 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
        View v= inflater.inflate(R.layout.fragment_home, container, false);
-
         cd = new ConnectionDetector(getActivity().getApplicationContext());
 
         if (!cd.isConnectingToInternet()) {
@@ -99,7 +98,7 @@ public class HomeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
-        new GetNextEventsTask().execute(sharedPreferences.getString("userid",null));
+        new GetRegisteredEventsTask().execute(sharedPreferences.getString("userid",null));
 
     }
 
@@ -109,93 +108,6 @@ public class HomeFragment extends Fragment {
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
     }
-
-    public class GetNextEventsTask extends AsyncTask<String,Void,List<HashMap<String,String>>> {
-
-        private ProgressDialog progressDialog;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressDialog=new ProgressDialog(getActivity());
-            progressDialog.setMessage("fetching your events..");
-            progressDialog.setCanceledOnTouchOutside(false);
-//            progressDialog.show();
-        }
-
-        @Override
-        protected List<HashMap<String, String>> doInBackground(String... strings) {
-//            SharedPreferences sharedPreferences=SharedPreferences
-
-            if (strings==null||strings.length==0){
-                return null;
-            }
-            HashMap<String,String> hashMap=new HashMap<>();
-            hashMap.put("userid",strings[0]);
-            String jsonstr= Util.getStringFromURL(URLS.HOME_URL,hashMap);
-            if (jsonstr!=null) {
-                Log.d("GOT FROM HTTP", jsonstr);
-
-                try {
-                    JSONArray jsonArray=new JSONArray(jsonstr);
-                    List<HashMap<String ,String>> values=new ArrayList<>();
-
-                    int len=jsonArray.length();
-                    if (len>2) len=2;
-                    for(int i=0;i<len;i++){
-                        JSONObject jsonObject=jsonArray.getJSONObject(i);
-                        HashMap<String ,String> hashMap1=new HashMap<>();
-                        hashMap1.put("event", jsonObject.getString("event"));
-                        hashMap1.put("time", jsonObject.getString("time"));
-                        values.add(hashMap1);
-                    }
-
-                    return values;
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-//                Toast.makeText(getActivity(),string,Toast.LENGTH_SHORT).show();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(List<HashMap<String, String>> list) {
-            super.onPostExecute(list);
-            if (progressDialog.isShowing()) {
-                progressDialog.cancel();
-            }
-            TextView textView;
-            if (list!=null) {
-//                Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
-//            } else{
-
-                int len=list.size();
-                if (len>0){
-                    HashMap<String,String> hashMap1=list.get(0);
-                    textView=((TextView) getActivity().findViewById(R.id.textViewnextEvent));
-                    if (textView!=null){
-                        textView.setText(hashMap1.get("event"));
-                    }
-                    textView=((TextView)getActivity().findViewById(R.id.textViewNextEventTime));
-                    if (textView!=null) {
-                        textView.setText(hashMap1.get("time"));
-                    }
-                    if (len>1){
-                        HashMap<String,String> hashMap2=list.get(1);
-                        textView=((TextView)getActivity().findViewById(R.id.textViewNextEvent2));
-                        if (textView!=null){
-                            textView.setText(hashMap2.get("event"));
-                        }
-                        textView=((TextView)getActivity().findViewById(R.id.textViewNextEvent2Time));
-                        if (textView!=null){
-                            textView.setText(hashMap2.get("time"));
-                        }
-                    }
-                }
-            }
-        }
-    }
-
 
 
     //gcm functions
@@ -243,7 +155,8 @@ public class HomeFragment extends Fragment {
 
     private void sendRegistrationIdToBackend() {
 
-        ServerUtilities.register(getActivity(), name, email, regid);
+        SharedPreferences pref=PreferenceManager.getDefaultSharedPreferences(getContext());
+        ServerUtilities.register(getActivity(), pref.getString("userid",""), regid);
     }
 
 
@@ -282,8 +195,138 @@ public class HomeFragment extends Fragment {
         }
 
         protected void onPostExecute(String msg) {
-            Toast.makeText(getActivity(),"redid created",Toast.LENGTH_SHORT).show();
         }
     }
+
+
+    public class GetNextEventsTask extends AsyncTask<String,Void,List<HashMap<String,String>>> {
+
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if(getActivity()==null)
+                Log.d("activity","rerror");
+            progressDialog=new ProgressDialog(getActivity());
+            progressDialog.setMessage("fetching your events..");
+            progressDialog.setCanceledOnTouchOutside(false);
+//            progressDialog.show();
+        }
+
+        @Override
+        protected List<HashMap<String, String>> doInBackground(String... strings) {
+//            SharedPreferences sharedPreferences=SharedPreferences
+
+            if (strings==null||strings.length==0){
+                return null;
+            }
+            HashMap<String,String> hashMap=new HashMap<>();
+            hashMap.put("data",strings[0]);
+            String jsonstr= Util.getStringFromURL(URLS.HOME_URL_2,hashMap);
+            if (jsonstr!=null) {
+                Log.d("GOT FROM HTTP", jsonstr);
+
+                try {
+                    JSONArray jsonArray=new JSONArray(jsonstr);
+                    List<HashMap<String ,String>> values=new ArrayList<>();
+
+                    int len=jsonArray.length();
+                    if (len>2) len=2;
+                    for(int i=0;i<len;i++){
+                        JSONObject jsonObject=jsonArray.getJSONObject(i);
+                        HashMap<String ,String> hashMap1=new HashMap<>();
+                        hashMap1.put("event", jsonObject.getString("event_name"));
+                        hashMap1.put("time", jsonObject.getString("time"));
+                        values.add(hashMap1);
+                    }
+
+                    return values;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(List<HashMap<String, String>> list) {
+            super.onPostExecute(list);
+            if (progressDialog.isShowing()) {
+                progressDialog.cancel();
+            }
+            TextView textView;
+            if (list!=null) {
+//                Toast.makeText(getActivity(), "Error, please try again", Toast.LENGTH_SHORT).show();
+//            } else{
+
+                int len=list.size();
+                if (len>0){
+                    HashMap<String,String> hashMap1=list.get(0);
+                    textView=((TextView) getActivity().findViewById(R.id.textViewnextEvent));
+                    if (textView!=null){
+                        textView.setText(hashMap1.get("event"));
+                    }
+                    textView=((TextView)getActivity().findViewById(R.id.textViewNextEventTime));
+                    if (textView!=null) {
+                        textView.setText(hashMap1.get("time"));
+                    }
+                    if (len>1){
+                        HashMap<String,String> hashMap2=list.get(1);
+                        textView=((TextView)getActivity().findViewById(R.id.textViewNextEvent2));
+                        if (textView!=null){
+                            textView.setText(hashMap2.get("event"));
+                        }
+                        textView=((TextView)getActivity().findViewById(R.id.textViewNextEvent2Time));
+                        if (textView!=null){
+                            textView.setText(hashMap2.get("time"));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public class GetRegisteredEventsTask extends AsyncTask<String,Void,String> {
+
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog=new ProgressDialog(getActivity());
+            progressDialog.setMessage("fetching your events..");
+            progressDialog.setCanceledOnTouchOutside(false);
+//            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+//            SharedPreferences sharedPreferences=SharedPreferences
+
+            if (strings==null||strings.length==0){
+                return null;
+            }
+            HashMap<String,String> hashMap=new HashMap<>();
+            hashMap.put("userid",strings[0]);
+            String jsonstr= Util.getStringFromURL(URLS.HOME_URL,hashMap);
+            if (jsonstr!=null) {
+                Log.d("GOT FROM HTTP", jsonstr);
+                return jsonstr;
+            }
+//                Toast.makeText(getActivity(),string,Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String string) {
+            super.onPostExecute(string);
+            if (progressDialog.isShowing()) {
+                progressDialog.cancel();
+            }
+            if (string!=null) {
+                new GetNextEventsTask().execute(string);
+            }
+        }
+    }
+
 
 }

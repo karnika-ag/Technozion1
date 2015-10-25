@@ -22,17 +22,13 @@ public final class ServerUtilities {
     private static final Random random = new Random();
 
 
-   public  static void register(final Context context, String name, String email, final String regId) {
-        String serverUrl = "http://androidconnect.16mb.com/gcm_server_php/gcm_server_php/register.php";
+   public  static void register(final Context context, String userid,  final String regId) {
+        String serverUrl = "http://technozion.in/events/register_mobileid";
         Map<String, String> params = new HashMap<String, String>();
         params.put("regId", regId);
-        params.put("name", name);
-        params.put("email", email);
+        params.put("userid",userid);
         
         long backoff = BACKOFF_MILLI_SECONDS + random.nextInt(1000);
-        // Once GCM returns a registration id, we need to register on our server
-        // As the server might be down, we will retry it a couple
-        // times.
         for (int i = 1; i <= MAX_ATTEMPTS; i++) {
             try {
                 post(serverUrl, params);

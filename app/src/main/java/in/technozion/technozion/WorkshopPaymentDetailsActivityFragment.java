@@ -34,8 +34,7 @@ import in.technozion.technozion.adapters.WorkshopsAdapter;
  */
 public class WorkshopPaymentDetailsActivityFragment extends Fragment {
 
-    //public static final String registerurl="http://192.168.87.50/tz-registration-master/workshops/registerteampayment_mobile";
-//    public static final String registerurl="http://172.30.132.78/tz-registration-master/workshops/make_payment";
+
     private String string;
     ListView listViewWorkshopDetailsConfirmation;
 

@@ -66,6 +66,7 @@ import java.util.WeakHashMap;
 
 public class MapsActivity extends AppCompatActivity implements RoutingListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks,MyDialog.Communicator,PopDialog.Communicator{
     protected GoogleMap map;
+    protected ArrayList<Marker> toDelete;
     final List<Marker> mList=new ArrayList<>(); ;
     protected LatLng start;
     protected LatLng end;
@@ -133,31 +134,18 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             @Override
             public void onClick(View v) {
                 //Creating the instance of PopupMenu
-               showDialog1(v);
+                showDialog1(v);
             }
         });
     }
 
-    public void func(int id)
-    {
-        Toast.makeText(this, String.valueOf(id) + "was clicked", Toast.LENGTH_SHORT).show();
-    }
-    public void func1(int id)
-    {
-        Toast.makeText(this, String.valueOf(id) + "was un clicked", Toast.LENGTH_SHORT).show();
-    }
+
 
 
     public void addMarkers()
     {
-
-        new FetchTaskCord().execute("");
-        Marker marker=map.addMarker(new MarkerOptions()
-                .position(new LatLng(17.984055, 79.530788))
-                .title("Hover Mania").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-
-
-        mList.add(marker);
+        Log.d("coming","here");
+        new FetchJsonLink().execute("4951310");
 
 
         map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
@@ -197,8 +185,10 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         if(mLastLocation!= null)
             start=new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
 
-        Log.d("lat cordinate", String.valueOf(start.latitude));
-        Log.d("long cordinate", String.valueOf(start.longitude));
+        Marker marker=map.addMarker(new MarkerOptions().position(start).title("You Are Here"));
+        mList.add(marker);
+        Log.d("lat cordinate", String.valueOf(end.latitude));
+        Log.d("long cordinate", String.valueOf(end.longitude));
             progressDialog = ProgressDialog.show(this, "Please wait.",
                     "Fetching  Information.", true);
             Routing routing = new Routing.Builder()
@@ -280,7 +270,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
     {
         FragmentManager fm=getFragmentManager();
         MyDialog myDialog=new MyDialog();
-        myDialog.show(fm,"select");
+        myDialog.show(fm, "select");
 
     }
 
@@ -289,7 +279,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
     {
         FragmentManager fm=getFragmentManager();
         PopDialog myDialog=new PopDialog();
-        myDialog.show(fm,"pop");
+        myDialog.show(fm, "pop");
 
     }
 
@@ -303,25 +293,49 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         arrayMain.addAll(items);
         for(MarkerItem item:arrayMain)
         {
-            Marker marker =map.addMarker(new MarkerOptions().position(new LatLng(item.getEventLat(),item.getEventLong())).title(item.getEventName()).snippet(item.getEventVenue()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+            Marker marker =map.addMarker(new MarkerOptions().position(new LatLng(item.getEventLat(), item.getEventLong())).title(item.getEventName()).snippet(item.getEventVenue()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
             mList.add(marker);
         }
     }
 
     @Override
     public void onDialogMessage1(String s) {
+        toDelete=new ArrayList<Marker>();
         for(MarkerItem item:arrayMain)
         {
-            if(item.getEventtype().equalsIgnoreCase(s))
+           for(Marker marker:mList)
+           {
+               if(item.getEventName().equals(marker.getTitle()))
+               {
+                   toDelete.add(marker);
+               }
+           }
+        }
+        for(Marker m:toDelete)
+        {
+            m.remove();
+            mList.remove(m);
+        }
+
+    }
+
+    public void removeMarker(MarkerItem item)
+    {
+        Marker toRemove=null;
+        LatLng latLng=new LatLng(item.getEventLat(),item.getEventLong());
+        for(Marker marker:mList)
+        {
+            if(marker.getPosition()==latLng)
             {
-                arrayMain.remove(item);
+                toRemove=marker;
+                marker.setVisible(false);
             }
         }
+        mList.remove(toRemove);
     }
 
     @Override
     public void onDialogMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         new Fetchc().execute(message);
 
     }
@@ -330,7 +344,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.one:
-                item.setChecked(!item.isChecked()); Toast.makeText(this, "one clicked", Toast.LENGTH_SHORT).show();    return true;
+                item.setChecked(!item.isChecked());    return true;
             case R.id.two:
                 item.setChecked(!item.isChecked());
                 return true;
@@ -359,17 +373,21 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                 return null;
 
             HashMap<String,String> hashMapPostData=new HashMap();
-            hashMapPostData.put("event", strings[0]);
+            hashMapPostData.put("eventname", strings[0]);
+            HashMap<String, String> hashMap;
+            hashMap = new HashMap<>();
+            hashMap.put("name",strings[0]);
 
-
-            String jsonstr= Util.getStringFromURL("http://androidconnect.16mb.com/sample1.php",hashMapPostData);
+            String jsonstr= Util.getStringFromURL("http://technozion.org/tz15/home/get_lat_long",hashMapPostData);
 
             if (jsonstr!=null) {
                 try {
-                    JSONObject jsonObject=new JSONObject(jsonstr);
-                        HashMap<String, String> hashMap = new HashMap<>();
-                        hashMap.put("lat", jsonObject.getString("lat"));
-                        hashMap.put("long", jsonObject.getString("long"));
+                    JSONArray jsonArray=new JSONArray(jsonstr);
+                    JSONObject jsonObject=jsonArray.getJSONObject(0);
+                    Log.d("tagme",jsonArray.toString());
+
+                    hashMap.put("lat", jsonObject.getString("latitude"));
+                        hashMap.put("long", jsonObject.getString("longitude"));
 
                         return hashMap;
 
@@ -387,17 +405,65 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                 progressDialog.cancel();
             }
             if (hashMap==null) {
-               Toast.makeText(MapsActivity.this,"Network problem",Toast.LENGTH_SHORT).show();
                 return;
             }
+
 
             double latitude=Double.parseDouble(hashMap.get("lat"));
             double longitude=Double.parseDouble(hashMap.get("long"));
             end=new LatLng(latitude,longitude);
+            Marker marker=map.addMarker(new MarkerOptions().position(end).title(hashMap.get("name")));
+            mList.add(marker);
             route();
         }
     }
 
+    public class FetchJsonLink extends AsyncTask<String,Void,String>{
+
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog=new ProgressDialog(MapsActivity.this);
+            progressDialog.setMessage("Fetching Event Locations");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            if(params[0]==null)
+                return null;
+            HashMap<String,String> data=new HashMap();
+            data.put("userid", params[0]);
+            Log.d("userid",params[0]);
+            String jsonstr= Util.getStringFromURL("http://technozion.in/events/get_registered_events_map", data);
+            if(jsonstr==null) {
+                Log.d("tname","json is null");
+                return null;
+            }
+            Log.d("link1", jsonstr);
+            return jsonstr;
+        }
+
+        protected void  onPostExecute(String json) {
+            super.onPostExecute(json);
+            if (progressDialog.isShowing()) {
+                progressDialog.cancel();
+            }
+            if(json==null)
+            {
+                Log.d("tagreg","not working");
+                return;
+            }
+
+            new FetchTaskCord().execute(json);
+
+            return;
+        }
+
+    }
 
     public class FetchTaskCord extends AsyncTask< String,Void,ArrayList<MarkerItem>> {
 
@@ -416,14 +482,14 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
             if(strings[0]==null) return null;
             HashMap<String,String> data=new HashMap();
-            data.put("eventType", strings[0]);
-            String jsonstr= Util.getStringFromURL("http://technozion.org/tz15/home/events_json_mobile", data);
+            data.put("data", strings[0]);
+            Log.d("tag me one",strings[0]);
+            String jsonstr= Util.getStringFromURL("http://technozion.org/tz15/home/get_userevents_schedule_mobile", data);
 
             if (jsonstr!=null) {
                 Log.d("GOT FROM HTTP", jsonstr);
                 try {
-                    JSONObject json=new JSONObject(jsonstr);
-                    JSONArray jsonArr=json.getJSONArray("events");
+                    JSONArray jsonArr= new JSONArray(jsonstr);
                     ArrayList<MarkerItem> arrNames=new ArrayList<MarkerItem>();
                     Log.d("jsonArray",jsonArr.toString());
                     for(int i=0;i<jsonArr.length();i++) {
@@ -431,7 +497,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                         MarkerItem markerItem = new MarkerItem();
                         markerItem.setMarkerId(Integer.valueOf(feedObj.getString("id")));
                         markerItem.setEventName(feedObj.getString("event_name"));
-                        markerItem.setEventVenue(feedObj.getString("event_place"));
+                        markerItem.setEventVenue(feedObj.getString("place_name"));
                         markerItem.setEventLat(Double.valueOf(feedObj.getString("latitude")));
                         markerItem.setEventLong(Double.valueOf(feedObj.getString("longitude")));
 

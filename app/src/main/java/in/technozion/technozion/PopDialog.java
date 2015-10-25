@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -183,23 +182,25 @@ public class PopDialog extends DialogFragment   {
             if(strings[0]==null) return null;
             HashMap<String,String> data=new HashMap();
             data.put("eventType", strings[0]);
-            String jsonstr= Util.getStringFromURL("", data);
+            String jsonstr= Util.getStringFromURL("http://technozion.org/tz15/home/get_events_schedule_mobile", data);
 
             if (jsonstr!=null) {
                 Log.d("GOT FROM HTTP", jsonstr);
+                JSONObject feedObj = null;
                 try {
-                    JSONObject jsonObject=new JSONObject(jsonstr);
-                    JSONArray jsonArr= jsonObject.getJSONArray("events");
+                    JSONArray jsonObject=new JSONArray(jsonstr);
+                    Log.d("error message",jsonstr.toString());
                     ArrayList<MarkerItem> arrNames=new ArrayList<MarkerItem>();
 
-                    for(int i=0;i<jsonArr.length();i++) {
-                        JSONObject feedObj = (JSONObject) jsonArr.get(i);
+                    for(int i=0;i<jsonObject.length();i++) {
+                         feedObj = (JSONObject) jsonObject.get(i);
                         MarkerItem markerItem = new MarkerItem();
-                        markerItem.setMarkerId(feedObj.getInt("eventId"));
-                        markerItem.setEventName(feedObj.getString("eventName"));
-                        markerItem.setEventVenue(feedObj.getString("eventVenue"));
-                        markerItem.setEventLat(Double.valueOf(feedObj.getString("lat")));
-                        markerItem.setEventLong(Double.valueOf(feedObj.getString("long")));
+                       // markerItem.setMarkerId(Integer.valueOf(feedObj.getString("id")));
+                        markerItem.setEventName(feedObj.getString("event_name"));
+                        String area=feedObj.getString("place_name")+" "+feedObj.getString("room");
+                        markerItem.setEventVenue(area);
+                        markerItem.setEventLat(Double.valueOf(feedObj.getString("latitude")));
+                        markerItem.setEventLong(Double.valueOf(feedObj.getString("longitude")));
                         markerItem.setEventtype(global);
                         arrNames.add(markerItem);
                     }
@@ -207,6 +208,10 @@ public class PopDialog extends DialogFragment   {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    {
+                        if(feedObj==null) return null;
+                    }
+                    Log.d("mesasge me",feedObj.toString());
                 }
             }
             return null;

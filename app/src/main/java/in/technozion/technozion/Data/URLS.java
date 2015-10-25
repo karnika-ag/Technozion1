@@ -17,7 +17,7 @@ public class URLS {
     public static final String REGISTER_URL="http://technozion.in/accounts/signup_mobile";
     public static final String FETCH_COLLEGES_URL="http://technozion.in/home/get_college_mobile";
 
-    public static final String HOME_URL="http://technozion.in/events/get_next_two_events_mobile";
+    public static final String HOME_URL="http://technozion.in/events/get_registered_events_map";
 
     public static final String PROFILE_URL="http://technozion.in/profile/index_mobile";
 
@@ -41,4 +41,5 @@ public class URLS {
     public static final String T_SHIRT_URL="";
 
     public static final String forgotLink="http://technozion.in/forgot_password/request_mobile";
+    public static final java.lang.String HOME_URL_2 ="http://technozion.org/tz15/home/get_next_two_events" ;
 }
